@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "398551271487",
+    "firebase_url": "https://regnumtollplaza.firebaseio.com",
+    "project_id": "regnumtollplaza",
+    "storage_bucket": "regnumtollplaza.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398551271487:android:8f31ee83e53f1ca018908a",
+        "android_client_info": {
+          "package_name": "com.example.toll_plaza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398551271487-pt0ofgruf0i21kbf6uodpk9sr35tsgqb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.toll_plaza",
+            "certificate_hash": "c4ee8a62c424e764febb672791782b2b3ba695bc"
+          }
+        },
+        {
+          "client_id": "398551271487-4rvqhd389155m7n3hbprfv8gsh172bt9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6mI3ZCE12zWDgWKlG1zAg-5boDmGlB2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398551271487-4rvqhd389155m7n3hbprfv8gsh172bt9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "398551271487-1fkarjodme9gbqm4s6sgt9vcnrdn6qc0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.regnumTollPlaza"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398551271487:android:567ea98f05f6beae",
+        "android_client_info": {
+          "package_name": "com.sepon.regnumtollplaza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398551271487-ulu826p281a5pds1ktuhegu56skt1n5p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sepon.regnumtollplaza",
+            "certificate_hash": "a4b0333a72513e937234d011b1aab94d1a110b58"
+          }
+        },
+        {
+          "client_id": "398551271487-4rvqhd389155m7n3hbprfv8gsh172bt9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6mI3ZCE12zWDgWKlG1zAg-5boDmGlB2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398551271487-4rvqhd389155m7n3hbprfv8gsh172bt9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "398551271487-1fkarjodme9gbqm4s6sgt9vcnrdn6qc0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.regnumTollPlaza"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

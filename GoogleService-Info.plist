@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>398551271487-v791nti02odd1umef0dj57g8dg9fk8r5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.398551271487-v791nti02odd1umef0dj57g8dg9fk8r5</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>398551271487-7cm7ea4j5hd8clcdspl591ee7bth8t8l.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAKqbKzkFENw0sU7GcI_WcwN_Q6yT0hDAA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>398551271487</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.tollPlaza</string>
+	<key>PROJECT_ID</key>
+	<string>regnumtollplaza</string>
+	<key>STORAGE_BUCKET</key>
+	<string>regnumtollplaza.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:398551271487:ios:f81c1e9ea564c2fb18908a</string>
+	<key>DATABASE_URL</key>
+	<string>https://regnumtollplaza.firebaseio.com</string>
+</dict>
+</plist>
