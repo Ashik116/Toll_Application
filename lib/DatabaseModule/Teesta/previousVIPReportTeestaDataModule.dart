@@ -10,7 +10,7 @@ class PreviousVIPReportTeestaDataModule extends ChangeNotifier {
 
   PreviousVIPReportTeestaDataModule({this.date, this.vehicles});
 
-  List<PreviousVIPReportTeestaDataModule> _dataList = List();
+  List<PreviousVIPReportTeestaDataModule> _dataList = [];
 
   List<PreviousVIPReportTeestaDataModule> get dataList => _dataList;
 
@@ -19,18 +19,19 @@ class PreviousVIPReportTeestaDataModule extends ChangeNotifier {
       DatabaseReference reference = FirebaseDatabase.instance.reference();
       reference.child("PreviousVip").onValue.listen((event) {
         var data = event.snapshot.value;
-        //print(data);
         dataList.clear();
         for (var i = 1; i <= 7; i++) {
-          weeklyDate = DateFormat("dd-MM-yyyy")
-              .format(DateTime.now().subtract(Duration(days: i)));
-          //print(data[weeklyDate]);
+          weeklyDate = DateFormat("dd-MM-yyyy").format(DateTime.now().subtract(Duration(days: i)));
           if (data[weeklyDate] != null)
             dataList.add(PreviousVIPReportTeestaDataModule(
-                date: weeklyDate, vehicles: data[weeklyDate]));
+                date: weeklyDate,
+                vehicles: data[weeklyDate]
+            ));
         }
       });
-    } catch (e) {}
+    } catch (e) {
+
+    }
     notifyListeners();
   }
 }

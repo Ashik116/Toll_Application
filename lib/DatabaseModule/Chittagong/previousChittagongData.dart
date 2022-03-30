@@ -6,31 +6,33 @@ import 'package:intl/intl.dart';
 import 'package:toll_plaza/DatabaseModule/Chittagong/winVehicleReportModule.dart';
 
 class PreviousReportChittagongDatabase extends ChangeNotifier {
-  List<ShortReportModel> previousDataListChittagong = List();
+  List<ShortReportModel> previousDataListChittagong = [];
 
-  getPreviousReport() async {
+  getPreviousReport() {
     try {
-
       previousDataListChittagong.clear();
+      DatabaseReference reference = FirebaseDatabase.instance.reference();
 
-        DatabaseReference reference = FirebaseDatabase.instance.reference();
-        reference.child("chittagong").onValue.listen((event)  {
-          var data = event.snapshot.value;
-          previousDataListChittagong.clear();
-          for(var i=1;i<=7;i++){
-            var weeklyDate = DateFormat("dd-MM-yyyy").format(DateTime.now().subtract(Duration(days: i)));
-            //print(data[now]);
-            if(data[weeklyDate] != null){
-              var dailyData = ShortReportModel.fromJson(data[weeklyDate]['short']);
+      reference.child("chittagong2").onValue.listen((event)  {
+        var data = event.snapshot.value;
+        previousDataListChittagong.clear();
+
+        for(var i = 1; i <= 7; i++){
+          var weeklyDate = DateFormat("dd-MM-yyyy").format(DateTime.now().subtract(Duration(days: i)));
+
+          if(data[weeklyDate] != null){
+            var dailyData = ShortReportModel.fromJson(data[weeklyDate]['short']);
             previousDataListChittagong.add(ShortReportModel(
                 total: dailyData.total,
                 regular: dailyData.regular,
                 ctrlR: dailyData.ctrlR,
+                notOverload: dailyData.notOverload,
                 date: weeklyDate));}
-          }
-        });
+        }
+      });
+    } catch (e) {
 
-    } catch (e) {}
+    }
     notifyListeners();
   }
 }

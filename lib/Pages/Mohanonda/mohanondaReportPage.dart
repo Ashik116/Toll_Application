@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:tab_indicator_styler/tab_indicator_styler.dart';
+import 'package:toll_plaza/Animation/loadingAnimation.dart';
 import 'package:toll_plaza/DatabaseModule/Mohanonda/previousReportMohanondaDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Mohanonda/previousVIPReportMohanondaDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Mohanonda/todayReportMohanondaDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Mohanonda/todayVipPassReportMohanondaDataModule.dart';
 import 'package:toll_plaza/Pages/Mohanonda/MohanondaReportSearch.dart';
-import 'package:toll_plaza/Pages/Mohanonda/previousReportMohanonda.dart';
+import 'package:toll_plaza/Pages/Mohanonda/previousReportMohanonda2.dart';
 import 'package:toll_plaza/Pages/Mohanonda/todayReportMohanonda.dart';
 import 'package:toll_plaza/Pages/Mohanonda/vipPassMohanonda.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
@@ -21,9 +22,6 @@ class MohanondaReportPage extends StatefulWidget {
 
 class _MohanondaReportPageState extends State<MohanondaReportPage> {
   bool isLoading = true;
-
-  double _height, _width;
-  double _pixelRatio;
   bool large;
   bool medium;
 
@@ -35,13 +33,11 @@ class _MohanondaReportPageState extends State<MohanondaReportPage> {
       //test
       await context
           .read<TodayReportMohanondaDataModule>()
-          .getYesterdayVehicleData(
-          "http://103.145.118.20/api/api/yesterday.php");
+          .getYesterdayVehicleData("http://103.145.118.20/api/api/yesterday.php");
 
       await context
           .read<TodayVipPassReportMohanondaDataModule>()
-          .getYesterdayReportData(
-          "http://103.145.118.20/api/api/yesterdayvippass.php");//test
+          .getYesterdayReportData("http://103.145.118.20/api/api/yesterdayvippass.php");//test
 
       int time = int.parse(DateFormat.H().format(DateTime.now()).toString());
 
@@ -52,8 +48,7 @@ class _MohanondaReportPageState extends State<MohanondaReportPage> {
             .getTodayReportData("http://103.145.118.20/api/api/yesterday.php");
         await context
             .read<TodayVipPassReportMohanondaDataModule>()
-            .getTodayReportData(
-                "http://103.145.118.20/api/api/yesterdayvippass.php");
+            .getTodayReportData("http://103.145.118.20/api/api/yesterdayvippass.php");
 
       } else {
         //------- data get to api 7 am to 12 am ------------
@@ -65,11 +60,12 @@ class _MohanondaReportPageState extends State<MohanondaReportPage> {
             .getTodayReportData("http://103.145.118.20/api/api/vippass.php");
       }
 
-      //print(context.read<TodayReportCharsindurDataModule>().totalYesterdayVehicle.toString());
       setState(() {
         isLoading = false;
       });
-    } catch (e) {}
+    } catch (e) {
+
+    }
   }
 
   @override
@@ -81,15 +77,12 @@ class _MohanondaReportPageState extends State<MohanondaReportPage> {
 
   @override
   Widget build(BuildContext context) {
-    _height = MediaQuery.of(context).size.height;
-    _width = MediaQuery.of(context).size.width;
-    _pixelRatio = MediaQuery.of(context).devicePixelRatio;
     final providerThemeAndColor = Provider.of<ThemeAndColorProvider>(context);
     if (isLoading) {
       return Container(
         color: providerThemeAndColor.backgroundColor,
         child: Center(
-          child: Lottie.asset('assets/json/loading.json'),
+          child: loadingAnimation(),
         ),
       );
     } else {
@@ -104,19 +97,18 @@ class _MohanondaReportPageState extends State<MohanondaReportPage> {
             flexibleSpace: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                    colors: [Colors.lightBlue[200], Colors.lightGreen[200]]
+                  colors: providerThemeAndColor.appBarColor,
                 ),
               ),
             ),
             title: Container(
-                width: _width,
+                width: MediaQuery.of(context).size.width,
                 child: Row(
                   children: [
                     Expanded(
                       child: Text(
-                        "Mohanonda Bridge Toll Report",
-                        style:
-                            TextStyle(color: providerThemeAndColor.textColor),
+                        "Mohanonda Toll Report",
+                        style: TextStyle(color: providerThemeAndColor.textColor),
                       ),
                     ),
                     IconButton(
@@ -128,23 +120,34 @@ class _MohanondaReportPageState extends State<MohanondaReportPage> {
                                   builder: (_) => MohanondaReportSearch()));
                         })
                   ],
-                )),
+                )
+            ),
             bottom: TabBar(
+              isScrollable: true,
+              indicator: RectangularIndicator(
+                  bottomLeftRadius: 100,
+                  bottomRightRadius: 100,
+                  topLeftRadius: 100,
+                  topRightRadius: 100,
+                  color:  Colors.black26,
+                  horizontalPadding: 5,
+                  verticalPadding: 5
+              ),
               labelStyle: TextStyle(color: providerThemeAndColor.textColor),
               indicatorColor: providerThemeAndColor.textColor,
               labelColor: providerThemeAndColor.textColor,
               tabs: [
-                Tab(text: "TODAY"),
-                Tab(text: "PREVIOUS"),
-                Tab(text: "GRAPH"),
-                Tab(text: "VIP PASS"),
+                Tab(child: Text('TODAY', style: TextStyle(fontWeight: FontWeight.bold),),),
+                Tab(child: Text('PREVIOUS', style: TextStyle(fontWeight: FontWeight.bold),),),
+                Tab(child: Text('GRAPH', style: TextStyle(fontWeight: FontWeight.bold),),),
+                Tab(child: Text('VIP PASS', style: TextStyle(fontWeight: FontWeight.bold),),),
               ],
             ),
           ),
           body: TabBarView(
             children: <Widget>[
               TodayReportMohanonda(),
-              PreviousReportMohanonda(),
+              PreviousReportMohanonda2(),
               GraphMohanonda(),
               VipPassMohanonda(),
             ],

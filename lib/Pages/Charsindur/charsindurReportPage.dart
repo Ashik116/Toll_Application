@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
+//import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:tab_indicator_styler/tab_indicator_styler.dart';
+import 'package:toll_plaza/Animation/loadingAnimation.dart';
 import 'package:toll_plaza/DatabaseModule/Charsindur/previousReportCharsindurDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Charsindur/previousVIPReportCharsindurDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Charsindur/todayReportCharsindurDataModule.dart';
@@ -68,7 +70,8 @@ class _CharsindurReportPageState extends State<CharsindurReportPage> {
       return Container(
         color: providerThemeAndColor.backgroundColor,
         child: Center(
-          child: Lottie.asset('assets/json/loading.json'),
+          child: loadingAnimation(),
+          //child: Lottie.asset('assets/json/loading.json'),
         ),
       );
     } else {
@@ -92,14 +95,23 @@ class _CharsindurReportPageState extends State<CharsindurReportPage> {
               style: TextStyle(color: providerThemeAndColor.textColor),
             ),
             bottom: TabBar(
+              isScrollable: true,
+              indicator: RectangularIndicator(
+                  bottomLeftRadius: 100,
+                  bottomRightRadius: 100,
+                  topLeftRadius: 100,
+                  topRightRadius: 100,
+                  color:  Colors.black26,
+                  horizontalPadding: 5, verticalPadding: 5
+              ),
               labelStyle: TextStyle(color: providerThemeAndColor.textColor),
               indicatorColor: providerThemeAndColor.textColor,
               labelColor: providerThemeAndColor.textColor,
               tabs: [
-                Tab(text: "TODAY"),
-                Tab(text: "PREVIOUS"),
-                Tab(text: "GRAPH"),
-                Tab(text: "VIP PASS"),
+                Tab(child: Text('TODAY', style: TextStyle(fontWeight: FontWeight.bold),),),
+                Tab(child: Text('PREVIOUS', style: TextStyle(fontWeight: FontWeight.bold),),),
+                Tab(child: Text('GRAPH', style: TextStyle(fontWeight: FontWeight.bold),),),
+                Tab(child: Text('VIP PASS', style: TextStyle(fontWeight: FontWeight.bold),),),
               ],
             ),
           ),

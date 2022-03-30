@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
 class passwordReset extends StatefulWidget {
   //const passwordReset({Key? key}) : super(key: key);
@@ -12,6 +14,7 @@ class _passwordResetState extends State<passwordReset> {
   var newuserName;
   final _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -19,9 +22,10 @@ class _passwordResetState extends State<passwordReset> {
   }
   @override
   Widget build(BuildContext context) {
+    final providerThemeAndColor = Provider.of<ThemeAndColorProvider>(context);
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Colors.black,
+      backgroundColor: providerThemeAndColor.backgroundColor,
       body: Container(
         child: Center(
           child: Padding(
@@ -32,26 +36,48 @@ class _passwordResetState extends State<passwordReset> {
                 Image.asset("assets/images/regnum.png", height: 150),
                 Form(
                   key: _formKey,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
+                  child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 16.0),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: Text("Email"),
-                            subtitle: TextFormField(
+                    clipBehavior: Clip.antiAlias,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        //borderRadius: BorderRadius.circular(15),
+                        color: Colors.white,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 16.0, left: 30, right: 30),
+                        child: Column(
+                          children: [
+                            SizedBox(height: 15,),
+                            Center(
+                              child: Text(
+                                'Reset Password',
+                                style: TextStyle(
+                                  color: Colors.green.shade800,
+                                  fontSize: 23,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 15,),
+                            TextFormField(
+                              key: Key('newuserName'),
                               onChanged: (value) {
                                 setState(() {
                                   newuserName = value;
                                 });
                               },
-                              key: Key('newuserName'),
                               decoration: InputDecoration(
-                                  hintText: "regnumit@gmail.com"),
+                                  labelText: 'Email',
+                                  hintText: 'example@gmail.com',
+                                  prefixIcon: Icon(Icons.email_rounded),
+                                  floatingLabelBehavior: FloatingLabelBehavior.auto,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30)
+                                  )
+                              ),
                               validator: (value) {
                                 if (value.isEmpty) {
                                   return "Enter Email";
@@ -64,34 +90,39 @@ class _passwordResetState extends State<passwordReset> {
                               },
                               keyboardType: TextInputType.emailAddress,
                             ),
-                            leading: Icon(
-                              Icons.email,
-                              size: 30,
+                            SizedBox(
+                              height: 15,
                             ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 16.0),
-                            child: RaisedButton(
-                              key: Key('submit'),
-                              color: Colors.blue,
-                              textColor: Colors.white,
-                              shape: BeveledRectangleBorder(
-                                  borderRadius: BorderRadius.circular(2)),
-                              onPressed: () {
-                                FocusScope.of(context).unfocus();
-                                // Validate returns true if the form is valid, or false
-                                // otherwise.
-                                if (_formKey.currentState.validate()) {
-                                  resetPassword();
-                                }
-                              },
-                              child: Text('SEND EMAIL'),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16.0),
+                              child: ElevatedButton(
+                                key: Key('submit'),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.lightGreen,
+                                  elevation: 10,
+                                  minimumSize: Size(double.infinity, 50),
+                                  textStyle: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                      fontSize: 20
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30)),
+                                ),
+                                onPressed: () {
+                                  FocusScope.of(context).unfocus();
+                                  // Validate returns true if the form is valid, or false
+                                  // otherwise.
+                                  if (_formKey.currentState.validate()) {
+                                    resetPassword();
+                                  }
+                                },
+                                child: Text('Reset Password'),
+                              ),
                             ),
-                          ),
-                         ],
+                            SizedBox(height: 10,),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -132,5 +163,4 @@ class _passwordResetState extends State<passwordReset> {
       }
     }
   }
-
 }

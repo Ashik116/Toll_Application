@@ -5,7 +5,7 @@ class SearchModel {
 
   SearchModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = new List<Data>();
+      data = <Data>[];
       json['data'].forEach((v) {
         data.add(new Data.fromJson(v));
       });
@@ -29,13 +29,14 @@ class Data {
   String dateTime;
   String userName;
 
-  Data(
-      {this.amount,
-      this.rickshawVan,
-      this.lan,
-      this.imagase,
-      this.dateTime,
-      this.userName});
+  Data({
+    this.amount,
+    this.rickshawVan,
+    this.lan,
+    this.imagase,
+    this.dateTime,
+    this.userName
+  });
 
   Data.fromJson(Map<String, dynamic> json) {
     amount = json['amount'];

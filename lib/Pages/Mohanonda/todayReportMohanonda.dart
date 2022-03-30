@@ -14,52 +14,48 @@ class _TodayReportMohanondaState extends State<TodayReportMohanonda> {
   @override
   Widget build(BuildContext context) {
     final providerThemeAndColor = Provider.of<ThemeAndColorProvider>(context);
-    final vehicleDataList =
-        Provider.of<TodayReportMohanondaDataModule>(context);
+    final vehicleDataList = Provider.of<TodayReportMohanondaDataModule>(context);
     return Scaffold(
+      backgroundColor: providerThemeAndColor.backgroundColor,
       body: RefreshIndicator(
         onRefresh: _onRefresh,
-        child: Column(children: [
-          SizedBox(
-            height: 2,
-          ),
-          Container(
-            width: double.infinity,
-            padding: EdgeInsets.all(10),
-            color: providerThemeAndColor.secondColor,
-            child: Text(
-              "Running Fund: " +
-                  vehicleDataList.total_amount.toString() +
-                  " tk",
-              style: TextStyle(
-                  color: providerThemeAndColor.secondTextColor,
-                  fontStyle: FontStyle.italic,
-                  fontSize: 18),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Expanded(
-            child: ListView.builder(
-                itemCount: vehicleDataList.vehicleReportList.length,
-                itemBuilder: (context, index) {
-                  var vehicle = vehicleDataList.vehicleReportList[index];
-                  return VehicleReportViewingDesign(
-                    vehicleName: vehicle.vehicleName.toString(),
-                    vehicleImage: vehicle.vehicleImage.toString(),
-                    secondRowTitle: "Total Count",
-                    totalVehicle: vehicle.totalVehicle.toString(),
-                    perVehicleRate: vehicle.perVehicleRate.toString(),
-                    triadRowTitle: "Total Payment",
-                    totalPayment:
-                        (vehicle.totalVehicle * vehicle.perVehicleRate)
-                            .toString(),
-                  );
-                }),
-          ),
-        ]),
+        child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(10),
+                color: providerThemeAndColor.barColor,
+                child: Text(
+                  'Running Fund: ${vehicleDataList.totalAmount.toString()} tk',
+                  style: TextStyle(
+                      color: providerThemeAndColor.secondTextColor,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Expanded(
+                child: ListView.builder(
+                    itemCount: vehicleDataList.vehicleReportList.length,
+                    itemBuilder: (context, index) {
+                      var vehicle = vehicleDataList.vehicleReportList[index];
+                      return VehicleReportViewingDesign(
+                        vehicleName: vehicle.vehicleName.toString(),
+                        vehicleImage: vehicle.vehicleImage.toString(),
+                        secondRowTitle: "Total Count",
+                        totalVehicle: vehicle.totalVehicle.toString(),
+                        perVehicleRate: vehicle.perVehicleRate.toString(),
+                        triadRowTitle: "Total Payment",
+                        totalPayment: (vehicle.totalVehicle * vehicle.perVehicleRate).toString(),
+                      );
+                    }),
+              ),
+            ]),
       ),
     );
   }

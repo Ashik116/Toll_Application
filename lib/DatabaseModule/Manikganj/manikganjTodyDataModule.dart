@@ -2,8 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import
-'package:intl/intl.dart';
+import 'package:intl/intl.dart';
 import 'package:toll_plaza/DatabaseModule/Manikganj/winVehicleReportModule.dart';
 
 class TodayReportManikganjDatabase with ChangeNotifier {
@@ -17,43 +16,62 @@ class TodayReportManikganjDatabase with ChangeNotifier {
   var regular;
   var ctrlR;
   var total;
-  List<TodayReportManikganjDatabase> dataList = List();
-  List<WinVehicleReportModule> vehicleDataList = List();
-  TodayReportManikganjDatabase(
-      {this.axel2, this.axel3, this.axel4, this.axel5, this.axel6, this.axel7});
+
+  List<TodayReportManikganjDatabase> dataList = [];
+  List<WinVehicleReportModule> vehicleDataList = [];
+
+  TodayReportManikganjDatabase({
+    this.axel2,
+    this.axel3,
+    this.axel4,
+    this.axel5,
+    this.axel6,
+    this.axel7
+  });
 
   void getShortReport() {
-      try{
-        DatabaseReference reference = FirebaseDatabase.instance.reference();
-        var today = DateFormat("dd-MM-yyyy").format(DateTime.now());
-        reference.child("manikganj").child(today).onValue.listen((event) async {
-          var data = event.snapshot.value;
-          if (data != null) {
-            if (data['short'] != null) {
-              var todayShortReport = ShortReportModel.fromJson(data['short']);
-              regular = todayShortReport.regular;
-              total = todayShortReport.total;
-              ctrlR = todayShortReport.ctrlR;
-              //print("ctrlR"+ ctrlR.toString());
-            }
-          }
-        });
-      }catch(e){}
-      notifyListeners();
-  }
-
-  void getReport() {
-      //print("ok");
     try{
       DatabaseReference reference = FirebaseDatabase.instance.reference();
       var today = DateFormat("dd-MM-yyyy").format(DateTime.now());
-      reference.child("manikganj").child(today).onValue.listen((event) async{
+
+      reference.child("manikganj").child(today).onValue.listen((event) async {
         var data = event.snapshot.value;
+
+        if (data != null) {
+          if (data['short'] != null) {
+            var todayShortReport = ShortReportModel.fromJson(data['short']);
+            regular = todayShortReport.regular;
+            total = todayShortReport.total;
+            ctrlR = todayShortReport.ctrlR;
+          }
+        }
+      });
+    } catch(e) {
+
+    }
+    notifyListeners();
+  }
+
+  void getReport() {
+    try{
+      DatabaseReference reference = FirebaseDatabase.instance.reference();
+      var today = DateFormat("dd-MM-yyyy").format(DateTime.now());
+
+      reference.child("manikganj").child(today).onValue.listen((event) async {
+        var data = event.snapshot.value;
+
         if (data != null) {
           dataList.clear();
           dataList.add(TodayReportManikganjDatabase(
-              axel2: 0, axel3: 0, axel4: 0, axel5: 0, axel6: 0, axel7: 0));
-          if(data['ctrlReport'] != null){
+              axel2: 0,
+              axel3: 0,
+              axel4: 0,
+              axel5: 0,
+              axel6: 0,
+              axel7: 0
+          ));
+
+          if(data['ctrlReport'] != null) {
             for (var v in data['ctrlReport']) {
               if (v['e'] == 'Truck 2 Axle') {
                 dataList[0].axel2 = dataList[0].axel2 + 1;
@@ -71,42 +89,54 @@ class TodayReportManikganjDatabase with ChangeNotifier {
             }
           }
           vehicleDataList.clear();
-          var vehicleData =
-          TodayReportManikganjDatabase.fromJson(data["RegularReport"]);
+
+          var vehicleData = TodayReportManikganjDatabase.fromJson(data["RegularReport"]);
           vehicleDataList.add(WinVehicleReportModule(
               vehicleName: "Axle 2",
               regular: vehicleData.axel2,
               ctrlR: dataList[0].axel2.toString(),
-              image: "assets/images/mini_truck.png"));
+              image: "assets/images/mini_truck.png"
+          ));
+
           vehicleDataList.add(WinVehicleReportModule(
               vehicleName: "Axle 3",
               regular: vehicleData.axel3,
               ctrlR: dataList[0].axel3.toString(),
-              image: "assets/images/axel3.jpg"));
+              image: "assets/images/axel3.jpg"
+          ));
+
           vehicleDataList.add(WinVehicleReportModule(
               vehicleName: "Axle 4",
               regular: vehicleData.axel4,
               ctrlR: dataList[0].axel4.toString(),
-              image: "assets/images/heavy_truck.png"));
+              image: "assets/images/heavy_truck.png"
+          ));
+
           vehicleDataList.add(WinVehicleReportModule(
               vehicleName: "Axle 5",
               regular: vehicleData.axel5,
               ctrlR: dataList[0].axel5.toString(),
-              image: "assets/images/axel5.jpg"));
+              image: "assets/images/axel5.jpg"
+          ));
+
           vehicleDataList.add(WinVehicleReportModule(
               vehicleName: "Axle 6",
               regular: vehicleData.axel6,
               ctrlR: dataList[0].axel6.toString(),
-              image: "assets/images/trailer_long.png"));
+              image: "assets/images/trailer_long.png"
+          ));
+
           vehicleDataList.add(WinVehicleReportModule(
               vehicleName: "Axle 7",
               regular: vehicleData.axel7,
               ctrlR: dataList[0].axel7.toString(),
-              image: "assets/images/trailer_long.png"));
+              image: "assets/images/trailer_long.png"
+          ));
         }
-        //print(data);
       });
-    }catch(e){}
+    }catch(e){
+
+    }
     notifyListeners();
   }
 
@@ -129,5 +159,4 @@ class TodayReportManikganjDatabase with ChangeNotifier {
     data['axel7'] = this.axel7;
     return data;
   }
-
 }

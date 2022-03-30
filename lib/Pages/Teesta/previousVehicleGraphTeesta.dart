@@ -2,25 +2,20 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toll_plaza/DatabaseModule/Teesta/previousReportTeestaDataModule.dart';
-import 'package:toll_plaza/Provider/getData.dart';
 
 class PreviousVehicleGraphTeesta extends StatefulWidget {
   @override
-  _PreviousVehicleGraphTeestaState createState() =>
-      _PreviousVehicleGraphTeestaState();
+  _PreviousVehicleGraphTeestaState createState() => _PreviousVehicleGraphTeestaState();
 }
 
-class _PreviousVehicleGraphTeestaState
-    extends State<PreviousVehicleGraphTeesta> {
+class _PreviousVehicleGraphTeestaState extends State<PreviousVehicleGraphTeesta> {
   List<charts.Series<VehicleModel, String>> seriesList;
 
   bool animate = true;
+  String pointerValue;
 
   _createSampleData() {
     List<VehicleModel> data = [];
-
-   // var fetch_data = Provider.of<GetData>(context, listen: false);//***//
-    //fetch_data.get_previosreportteesta();//***//
 
     for (var v in context.read<PreviousReportTeestaDataModule>().dataList2) {
       data.add(VehicleModel(
@@ -41,7 +36,7 @@ class _PreviousVehicleGraphTeestaState
     // TODO: implement initState
 
     super.initState();
-    seriesList = List<charts.Series<VehicleModel, String>>();
+    seriesList = <charts.Series<VehicleModel, String>>[];
     _createSampleData();
   }
 
@@ -53,8 +48,21 @@ class _PreviousVehicleGraphTeestaState
         child: charts.BarChart(
           seriesList,
           animate: animate,
-          barRendererDecorator: charts.BarLabelDecorator<String>(),
-          domainAxis: new charts.OrdinalAxisSpec(),
+          primaryMeasureAxis: new charts.NumericAxisSpec(
+              tickProviderSpec: new charts.BasicNumericTickProviderSpec(desiredTickCount: 10)
+          ),
+          barRendererDecorator: charts.BarLabelDecorator<String>(
+            labelPosition: charts.BarLabelPosition.inside,
+          ),
+          domainAxis: charts.OrdinalAxisSpec(),
+          behaviors: [
+            charts.ChartTitle(pointerValue,
+                titleStyleSpec: charts.TextStyleSpec(
+                    color: charts.MaterialPalette.green.shadeDefault),
+                behaviorPosition: charts.BehaviorPosition.top,
+                titleOutsideJustification:
+                charts.OutsideJustification.middleDrawArea),
+          ],
         ),
       ),
     );

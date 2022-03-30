@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toll_plaza/DatabaseModule/Mohanonda/todayReportMohanondaDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Mohanonda/todayVipPassReportMohanondaDataModule.dart';
-import 'package:toll_plaza/DesignModule/indicatore.dart';
+import 'package:toll_plaza/DesignModule/indicator.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
 class TodayVehicleGraphMohanonda extends StatefulWidget {
   @override
-  _TodayVehicleGraphMohanondaState createState() =>
-      _TodayVehicleGraphMohanondaState();
+  _TodayVehicleGraphMohanondaState createState() => _TodayVehicleGraphMohanondaState();
 }
 
 class _TodayVehicleGraphMohanondaState
@@ -30,7 +29,6 @@ class _TodayVehicleGraphMohanondaState
     Color(0xff0072B5),
     Color(0xffFDAC53),
     Color(0xff0da000),
-    //Color(0xff66096B),
   ];
 
   @override
@@ -48,8 +46,7 @@ class _TodayVehicleGraphMohanondaState
               height: 280,
               child: PieChart(
                 PieChartData(
-                    pieTouchData:
-                        PieTouchData(touchCallback: (pieTouchResponse) {
+                    pieTouchData: PieTouchData(touchCallback: (pieTouchResponse) {
                       setState(() {
                         if (pieTouchResponse.touchInput is FlLongPressEnd ||
                             pieTouchResponse.touchInput is FlPanEnd) {
@@ -104,14 +101,10 @@ class _TodayVehicleGraphMohanondaState
       String title;
       if (i == 13) {
         title = "VIP Pass";
-        value = (dataVip.totalVehicle /
-                (data.totalVehicle + dataVip.totalVehicle)) *
-            100;
+        value = (dataVip.totalVehicle / (data.totalVehicle + dataVip.totalVehicle)) * 100;
       } else {
         title = data.vehicleReportList[i].vehicleName;
-        value = (data.vehicleReportList[i].totalVehicle /
-                (data.totalVehicle + dataVip.totalVehicle)) *
-            100;
+        value = (data.vehicleReportList[i].totalVehicle / (data.totalVehicle + dataVip.totalVehicle)) * 100;
       }
       final isTouched = i == touchedIndex;
       final double fontSize = isTouched ? 20 : 0;
@@ -125,7 +118,8 @@ class _TodayVehicleGraphMohanondaState
         titleStyle: TextStyle(
             fontSize: fontSize,
             fontWeight: FontWeight.bold,
-            color: context.watch<ThemeAndColorProvider>().secondTextColor),
+            color: context.watch<ThemeAndColorProvider>().secondTextColor
+        ),
       );
     });
   }

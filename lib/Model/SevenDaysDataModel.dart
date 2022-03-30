@@ -5,7 +5,7 @@ class SevenDaysDataModel {
 
   SevenDaysDataModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = new List<Data>();
+      data = <Data>[];
       json['data'].forEach((v) {
         data.add(new Data.fromJson(v));
       });
@@ -38,22 +38,23 @@ class Data {
   int heavy_truck;
   int trailer_long;
 
-  Data(
-      {this.date,
-        this.total_amount,
-        this.rickshawvan,
-        this.motorcycle,
-        this.threefourwheeler,
-        this.sedancar,
-        this.four_wheeler,
-        this.microbus,
-        this.minibus,
-        this.agrouse,
-        this.minitruck,
-        this.bigbus,
-        this.medium_truck,
-        this.heavy_truck,
-        this.trailer_long});
+  Data({
+    this.date,
+    this.total_amount,
+    this.rickshawvan,
+    this.motorcycle,
+    this.threefourwheeler,
+    this.sedancar,
+    this.four_wheeler,
+    this.microbus,
+    this.minibus,
+    this.agrouse,
+    this.minitruck,
+    this.bigbus,
+    this.medium_truck,
+    this.heavy_truck,
+    this.trailer_long
+  });
 
   Data.fromJson(Map<String, dynamic> json) {
     date = json['Date'];

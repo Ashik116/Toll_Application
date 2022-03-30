@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 import 'package:toll_plaza/Pages/Chittagong/TodayGraphChittagong.dart';
 import 'package:toll_plaza/Pages/Chittagong/previousGraphChittagong.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
@@ -14,6 +15,7 @@ class GraphChittagong extends StatefulWidget {
 
 class _GraphChittagongState extends State<GraphChittagong> {
   bool _todayOrPreviousSelected = true;
+  int initialIndex = 0;
 
   @override
   void initState() {
@@ -27,48 +29,33 @@ class _GraphChittagongState extends State<GraphChittagong> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            RaisedButton(
-              onPressed: (){
-                setState(() {
-                  _todayOrPreviousSelected = true;
-
-                });
-              },
-              child: Text("Today"),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: EdgeInsets.all(8),
-              elevation: 10,
-              textColor: providerThemeAndColor.textColor,
-              color: _todayOrPreviousSelected ? providerThemeAndColor.mainColor : providerThemeAndColor.secondColor,
-              animationDuration: Duration(milliseconds: 500),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            RaisedButton(
-              onPressed: (){
-                setState(() {
-                  _todayOrPreviousSelected = false;
-                });
-              },
-              child: Text("Previous"),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: EdgeInsets.all(8),
-              elevation: 10,
-              textColor: providerThemeAndColor.textColor,
-              color: _todayOrPreviousSelected ? providerThemeAndColor.secondColor : providerThemeAndColor.mainColor,
-              animationDuration: Duration(milliseconds: 500),
-            ),
-          ],
+        SizedBox(height: 10,),
+        ToggleSwitch(
+          minWidth: MediaQuery.of(context).size.width * 0.7,
+          fontSize: 16.0,
+          initialLabelIndex: initialIndex,
+          cornerRadius: 20.0,
+          activeBgColor: [providerThemeAndColor.toggleActiveColor],
+          activeFgColor: Colors.white,
+          inactiveBgColor: providerThemeAndColor.toggleInactiveColor,
+          inactiveFgColor: Colors.white,
+          totalSwitches: 2,
+          //radiusStyle: true,
+          animate: true,
+          curve: Curves.decelerate,
+          labels: ['Today', 'Previous'],
+          onToggle: (index) {
+            setState(() {
+              initialIndex = index;
+              if (index == 0) {
+                _todayOrPreviousSelected = true;
+              } else {
+                _todayOrPreviousSelected = false;
+              }
+            });
+          },
         ),
+        SizedBox(height: 10,),
         Expanded(
           child: setPage(),
         )
@@ -77,12 +64,10 @@ class _GraphChittagongState extends State<GraphChittagong> {
   }
 
   Widget setPage() {
-    if(_todayOrPreviousSelected){
+    if (_todayOrPreviousSelected) {
       return TodayGraphChittagong();
-    }else{
+    } else {
       return PreviousGraphChittagong();
     }
-
   }
-
 }

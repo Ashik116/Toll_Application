@@ -16,24 +16,23 @@ class _TodayReportTeestaState extends State<TodayReportTeesta> {
     final providerThemeAndColor = Provider.of<ThemeAndColorProvider>(context);
     final vehicleDataList = Provider.of<TodayReportTeestaDataModule>(context);
     return Scaffold(
+        backgroundColor: providerThemeAndColor.backgroundColor,
         body: RefreshIndicator(
           onRefresh: _onRefresh,
           child: Column(children: [
-            SizedBox(
-              height: 2,
-            ),
             Container(
               width: double.infinity,
               padding: EdgeInsets.all(10),
-              color: providerThemeAndColor.secondColor,
+              color: providerThemeAndColor.barColor,
               child: Text(
-
-                "Running Fund: " + vehicleDataList.total_amount.toString() + " tk",
-                //"Running Fund: " + vehicleDataList.totalRevenue.toString() + " tk",
+                'Running Fund: ${vehicleDataList.totalAmount.toString()} tk',
                 style: TextStyle(
                     color: providerThemeAndColor.secondTextColor,
                     fontStyle: FontStyle.italic,
-                    fontSize: 18),textAlign: TextAlign.center,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20
+                ),
+                textAlign: TextAlign.center,
               ),
             ),
             SizedBox(
@@ -52,11 +51,12 @@ class _TodayReportTeestaState extends State<TodayReportTeesta> {
                       perVehicleRate: vehicle.perVehicleRate.toString(),
                       triadRowTitle: "Total Payment",
                       totalPayment: (vehicle.totalVehicle * vehicle.perVehicleRate).toString(),
-                );
-              }),
-        ),
-      ]),
-    ));
+                    );
+                  }),
+            ),
+          ]),
+        )
+    );
   }
 
   Future<void> _onRefresh() async {
@@ -67,12 +67,12 @@ class _TodayReportTeestaState extends State<TodayReportTeesta> {
       //------- data get to api 12 am to 7 am ------------
       await context
           .read<TodayReportTeestaDataModule>()
-          .getTodayReportData("http://103.150.65.66/api/api/yesterday.php");
+          .getTodayReportData("http://103.150.65.122/api/api/yesterday.php");
     } else {
       //------- data get to api 7 am to 12 am ------------
       await context
           .read<TodayReportTeestaDataModule>()
-          .getTodayReportData("http://103.150.65.66/api/api/today.php");
+          .getTodayReportData("http://103.150.65.122/api/api/today.php");
     }
     setState(() {
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toll_plaza/DatabaseModule/Charsindur/todayReportCharsindurDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Charsindur/todayVipPassReportCharsindurDataModule.dart';
-import 'package:toll_plaza/DesignModule/indicatore.dart';
+import 'package:toll_plaza/DesignModule/indicator.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
 

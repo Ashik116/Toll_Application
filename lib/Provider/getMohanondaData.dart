@@ -1,8 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:toll_plaza/Model/SevenDaysDataModelMohanonda.dart';
 import 'package:toll_plaza/Model/mohanondaReportModel.dart';
 import 'package:toll_plaza/Model/previousDayReportModel.dart';
 import 'package:toll_plaza/Model/searchModel.dart';
@@ -13,29 +13,27 @@ class GetMohanondaData extends ChangeNotifier {
   SearchModel searchModel;
   PreviousDayModel previousDayModel;
   VipPreviousReport vipPreviousReport;
+  SevenDaysDataModelMohanonda sevenDaysData, sevenDaysVipPass;
 
   Future<List> get_dateReport() async {
-    final response = await http.get(
-        "http://103.145.118.20/api/api/previousDay.php?start_date=2021-06-10&end_date=2021-06-14");
+    final response = await http.get("http://103.145.118.20/api/api/previousDay.php?start_date=2021-06-10&end_date=2021-06-14");
     var data = json.decode(response.body.toString());
 
-    print(data);
+    //print(data);
     mohanondaReportModel = MohanondaReportModel.fromJson(data);
 
     notifyListeners();
   }
 
-  Future<List> search_report(
-      String sDate, String eDate, String _class, String cat) async {
+  Future<List> search_report(String sDate, String eDate, String _class, String cat) async {
     /* if (searchModel.data != null) {
       searchModel.data.clear();
     }*/
 
-    final response = await http.get(
-        "http://103.145.118.20/api/api/search.php?start_date=${sDate}&end_date=${eDate}&class=${_class}&type=${cat}");
+    final response = await http.get("http://103.145.118.20/api/api/search.php?start_date=${sDate}&end_date=${eDate}&class=${_class}&type=${cat}");
     var data = json.decode(response.body.toString());
 
-    print(data);
+    //print(data);
     searchModel = SearchModel.fromJson(data);
 
     notifyListeners();
@@ -46,18 +44,37 @@ class GetMohanondaData extends ChangeNotifier {
         await http.get("http://103.145.118.20/api/api/previousdays.php");
     var data = json.decode(response.body.toString());
 
-    print(data);
+    //print(data);
     previousDayModel = PreviousDayModel.fromJson(data);
     notifyListeners();
   }
 
   Future<List> get_vippreviosreportmohanonda() async {
-    final response =
-        await http.get("http://103.145.118.20/api/api/previousvippass.php");
+    final response = await http.get("http://103.145.118.20/api/api/previousvippass.php");
     var data = json.decode(response.body.toString());
 
-    print(data);
+    //print(data);
     vipPreviousReport = VipPreviousReport.fromJson(data);
+    notifyListeners();
+  }
+
+  Future<List> get_sevenDaysDataMohanonda() async {
+    final response = await http.get("http://103.145.118.20/api/api/sevendaysdatavehicledetails.php");
+    var data = json.decode(response.body.toString());
+
+    //print(data);
+    sevenDaysData = SevenDaysDataModelMohanonda.fromJson(data);
+
+    notifyListeners();
+  }
+
+  Future<List> get_sevenDaysVipPass() async {
+    final response = await http.get("http://103.145.118.20/api/api/sevendaysdatavehicledetailsvippass.php");
+    var data = json.decode(response.body.toString());
+
+    //print(data);
+    sevenDaysVipPass = SevenDaysDataModelMohanonda.fromJson(data);
+
     notifyListeners();
   }
 }

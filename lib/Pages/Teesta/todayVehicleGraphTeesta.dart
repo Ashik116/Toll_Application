@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toll_plaza/DatabaseModule/Teesta/todayReportTeestaDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Teesta/todayVipPassReportTeestaDataModule.dart';
-import 'package:toll_plaza/DesignModule/indicatore.dart';
+import 'package:toll_plaza/DesignModule/indicator.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
 class TodayVehicleGraphTeesta extends StatefulWidget {
   @override
-  _TodayVehicleGraphTeestaState createState() =>
-      _TodayVehicleGraphTeestaState();
+  _TodayVehicleGraphTeestaState createState() => _TodayVehicleGraphTeestaState();
 }
 
 class _TodayVehicleGraphTeestaState extends State<TodayVehicleGraphTeesta> {
@@ -47,11 +46,9 @@ class _TodayVehicleGraphTeestaState extends State<TodayVehicleGraphTeesta> {
               height: 280,
               child: PieChart(
                 PieChartData(
-                    pieTouchData:
-                        PieTouchData(touchCallback: (pieTouchResponse) {
+                    pieTouchData: PieTouchData(touchCallback: (pieTouchResponse) {
                       setState(() {
-                        if (pieTouchResponse.touchInput is FlLongPressEnd ||
-                            pieTouchResponse.touchInput is FlPanEnd) {
+                        if (pieTouchResponse.touchInput is FlLongPressEnd || pieTouchResponse.touchInput is FlPanEnd) {
                           // touchedIndex = -1;
                         } else {
                           touchedIndex = pieTouchResponse.touchedSectionIndex;
@@ -103,14 +100,10 @@ class _TodayVehicleGraphTeestaState extends State<TodayVehicleGraphTeesta> {
       String title;
       if (i == 13) {
         title = "VIP Pass";
-        value = (dataVip.totalVehicle /
-                (data.totalVehicle + dataVip.totalYesterdayVehicle)) *
-            100;
+        value = (dataVip.totalVehicle / (data.totalVehicle + dataVip.totalYesterdayVehicle)) * 100;
       } else {
         title = data.vehicleReportList[i].vehicleName;
-        value = (data.vehicleReportList[i].totalVehicle /
-                (data.totalVehicle + dataVip.totalVehicle)) *
-            100;
+        value = (data.vehicleReportList[i].totalVehicle / (data.totalVehicle + dataVip.totalVehicle)) * 100;
       }
       final isTouched = i == touchedIndex;
       final double fontSize = isTouched ? 20 : 0;

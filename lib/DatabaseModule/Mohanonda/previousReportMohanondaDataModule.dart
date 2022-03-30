@@ -8,29 +8,35 @@ class PreviousReportMohanondaDataModule extends ChangeNotifier {
   var dailyTotalAmount;
   var vehicles;
 
-  PreviousReportMohanondaDataModule(
-      {this.date, this.vehicles, this.dailyTotalAmount});
+  PreviousReportMohanondaDataModule({
+    this.date,
+    this.vehicles,
+    this.dailyTotalAmount
+  });
 
-  List<PreviousReportMohanondaDataModule> _dataList = List();
+  List<PreviousReportMohanondaDataModule> _dataList = [];
 
   List<PreviousReportMohanondaDataModule> get dataList => _dataList;
 
   getReport() {
     try {
       DatabaseReference reference = FirebaseDatabase.instance.reference();
+
       reference.child("Mohanonda").onValue.listen((event) {
         var data = event.snapshot.value;
         dataList.clear();
+
         for (var i = 1; i <= 7; i++) {
-          var weeklyDate = DateFormat("dd-MM-yyyy")
-              .format(DateTime.now().subtract(Duration(days: i)));
-          //print(data[now]);
-          if (data[weeklyDate] != null)
-            dataList.add(
-                PreviousReportMohanondaDataModule.fromJson(data[weeklyDate]));
+          var weeklyDate = DateFormat("dd-MM-yyyy").format(DateTime.now().subtract(Duration(days: i)));
+
+          if (data[weeklyDate] != null) {
+            dataList.add(PreviousReportMohanondaDataModule.fromJson(data[weeklyDate]));
+          }
         }
       });
-    } catch (e) {}
+    } catch (e) {
+
+    }
     notifyListeners();
   }
 

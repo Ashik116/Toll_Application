@@ -5,7 +5,7 @@ class TeestaReportModel {
 
   TeestaReportModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = new List<Data>();
+      data = <Data>[];
       json['data'].forEach((v) {
         data.add(new Data.fromJson(v));
       });
@@ -36,20 +36,20 @@ class Data {
   String heavyTruck;
   String trailerLong;
 
-  Data(
-      {this.rickshawVan,
-      this.motorCycle,
-      this.threeFourWheeler,
-      this.sedanCar,
-      this.s4Wheeler,
-      this.microBus,
-      this.miniBus,
-      this.agroUse,
-      this.miniTruck,
-      this.bigBus,
-      this.mediumTruck,
-      this.heavyTruck,
-      this.trailerLong});
+  Data({
+    this.rickshawVan,
+    this.motorCycle,
+    this.sedanCar,
+    this.s4Wheeler,
+    this.microBus,
+    this.miniBus,
+    this.agroUse,
+    this.miniTruck,
+    this.bigBus,
+    this.mediumTruck,
+    this.heavyTruck,
+    this.trailerLong
+  });
 
   Data.fromJson(Map<String, dynamic> json) {
     rickshawVan = json['Rickshaw_Van'];

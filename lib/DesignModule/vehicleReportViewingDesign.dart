@@ -13,33 +13,28 @@ class VehicleReportViewingDesign extends StatefulWidget {
   final String regular;
   final String ctrlR;
 
-  VehicleReportViewingDesign(
-      {Key key,
-      @required this.vehicleName,
-      @required this.vehicleImage,
-      this.totalVehicle,
-      this.totalPayment,
-      this.perVehicleRate,
-      this.secondRowTitle,
-      this.triadRowTitle,
-      this.regular,
-      this.ctrlR});
+  VehicleReportViewingDesign({
+    Key key,
+    @required this.vehicleName,
+    @required this.vehicleImage,
+    this.totalVehicle,
+    this.totalPayment,
+    this.perVehicleRate,
+    this.secondRowTitle,
+    this.triadRowTitle,
+    this.regular,
+    this.ctrlR
+  });
   @override
-  _VehicleReportViewingDesignState createState() =>
-      _VehicleReportViewingDesignState();
+  _VehicleReportViewingDesignState createState() => _VehicleReportViewingDesignState();
 }
 
-class _VehicleReportViewingDesignState
-    extends State<VehicleReportViewingDesign> {
-  double _height, _width;
-  double _pixelRatio;
+class _VehicleReportViewingDesignState extends State<VehicleReportViewingDesign> {
   bool large;
   bool medium;
+
   @override
   Widget build(BuildContext context) {
-    _height = MediaQuery.of(context).size.height;
-    _width = MediaQuery.of(context).size.width;
-    _pixelRatio = MediaQuery.of(context).devicePixelRatio;
     final providerThemeAndColor = Provider.of<ThemeAndColorProvider>(context);
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -76,67 +71,71 @@ class _VehicleReportViewingDesignState
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: providerThemeAndColor.thirdTextColor,
-                                fontSize: 18),
+                                fontSize: 18
+                            ),
                           ),
                           flex: 3,
                         ),
-                        widget.perVehicleRate == null
-                            ? Container()
-                            : Expanded(
-                                child: Text(
-                                  widget.perVehicleRate + " tk",
-                                  textAlign: TextAlign.end,
-                                  style: TextStyle(
-                                      color: providerThemeAndColor.secondTextColor,
-                                      fontSize: 14),
-                                ),
-                                flex: 1,
-                              )
+                        widget.perVehicleRate == null ? Container() :
+                        Expanded(
+                          child: Text(
+                            widget.perVehicleRate + " tk",
+                            textAlign: TextAlign.end,
+                            style: TextStyle(
+                                color: providerThemeAndColor.secondTextColor,
+                                fontSize: 14
+                            ),
+                          ),
+                          flex: 1,
+                        )
                       ],
                     ),
-                    widget.secondRowTitle == null
-                        ? Container()
-                        : Row(
-                            children: [
-                              Expanded(
-                                  child: Text(
-                                    widget.secondRowTitle,
-                                    style: TextStyle(
-                                        color: providerThemeAndColor.secondTextColor,
-                                        fontSize: 16),
-                                  )),
-                              Expanded(
-                                  child: Text(
-                                    widget.totalVehicle != null
-                                        ? widget.totalVehicle
-                                        : widget.regular,
-                                    style: TextStyle(
-                                        color: Colors.green,
-                                        fontSize: 16),
-                                  ))
-                            ],
+                    widget.secondRowTitle == null ? Container() :
+                    Row(
+                      children: [
+                        Expanded(
+                            child: Text(
+                              widget.secondRowTitle,
+                              style: TextStyle(
+                                  color: providerThemeAndColor.secondTextColor,
+                                  fontSize: 16
+                              ),
+                            )
+                        ),
+                        Expanded(
+                            child: Text(
+                              widget.totalVehicle != null ? widget.totalVehicle : widget.regular,
+                              style: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 16
+                              ),
+                            )
+                        )
+                      ],
                     ),
-                    widget.triadRowTitle == null
-                        ? Container()
-                        : Row(
-                            children: [
-                              Expanded(
-                                  child: Text(
-                                widget.triadRowTitle,
-                                style: TextStyle(
-                                    color:
-                                        providerThemeAndColor.secondTextColor,
-                                    fontSize: 16),
-                              )),
-                              Expanded(
-                                  child: Text(
-                                    widget.totalPayment != null
-                                        ? widget.totalPayment + " tk"
-                                        : widget.ctrlR,
-                                    style: TextStyle(color: Colors.red, fontSize: 16),
-                              ))
-                            ],
-                          ),
+                    widget.triadRowTitle == null ? Container() :
+                    Row(
+                      children: [
+                        Expanded(
+                            child: Text(
+                              widget.triadRowTitle,
+                              style: TextStyle(
+                                  color: providerThemeAndColor.secondTextColor,
+                                  fontSize: 16
+                              ),
+                            )
+                        ),
+                        Expanded(
+                            child: Text(
+                              widget.totalPayment != null ? "${widget.totalPayment} tk" : widget.ctrlR,
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 16
+                              ),
+                            )
+                        )
+                      ],
+                    ),
                   ],
                 ),
               ),

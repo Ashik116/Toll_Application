@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -14,16 +13,14 @@ class GetData extends ChangeNotifier {
   SearchModel searchModel;
   PreviousDayModel previousDayModel;
   VipPreviousReport vipPreviousReport;
-  SevenDaysDataModel sevenDaysData;
+  SevenDaysDataModel sevenDaysData, sevenDaysVipPass;
 
   Future<List> get_dateReport() async {
     final response = await http.get(
-        "http://103.150.65.66/api/api/previousDay.php?start_date=2021-06-10&end_date=2021-06-14");
+        "http://103.182.219.34/api/api/previousDay.php?start_date=2021-06-10&end_date=2021-06-14");
     var data = json.decode(response.body.toString());
 
-    print(data);
     teestaReportModel = TeestaReportModel.fromJson(data);
-
     notifyListeners();
   }
 
@@ -34,10 +31,10 @@ class GetData extends ChangeNotifier {
     }*/
 
     final response = await http.get(
-        "http://103.150.65.66/api/api/search.php?start_date=${sDate}&end_date=${eDate}&class=${_class}&type=${cat}");
+        "http://103.182.219.34/api/api/search.php?start_date=${sDate}&end_date=${eDate}&class=${_class}&type=${cat}");
     var data = json.decode(response.body.toString());
 
-    print(data);
+    //print(data);
     searchModel = SearchModel.fromJson(data);
 
     notifyListeners();
@@ -45,10 +42,10 @@ class GetData extends ChangeNotifier {
 
   Future<List> get_previosreportteesta() async {
     final response =
-        await http.get("http://103.150.65.66/api/api/previousdays.php");
+        await http.get("http://103.182.219.34/api/api/previousdays.php");
     var data = json.decode(response.body.toString());
 
-    print(data);
+    //print(data);
     previousDayModel = PreviousDayModel.fromJson(data);
 
     notifyListeners();
@@ -56,10 +53,10 @@ class GetData extends ChangeNotifier {
 
   Future<List> get_vippreviosreportteesta() async {
     final response =
-        await http.get("http://103.150.65.66/api/api/previousvippass.php");
+        await http.get("http://103.182.219.34/api/api/previousvippass.php");
     var data = json.decode(response.body.toString());
 
-    print(data);
+    //print(data);
     vipPreviousReport = VipPreviousReport.fromJson(data);
 
     notifyListeners();
@@ -67,11 +64,22 @@ class GetData extends ChangeNotifier {
 
   Future<List> get_sevenDaysData() async {
     final response = await http
-        .get("http://103.150.65.66/api/api/sevendaysdatavehicledetails.php");
+        .get("http://103.182.219.34/api/api/sevendaysdatavehicledetails.php");
     var data = json.decode(response.body.toString());
 
-    print(data);
+    //print(data);
     sevenDaysData = SevenDaysDataModel.fromJson(data);
+
+    notifyListeners();
+  }
+
+  Future<List> get_sevenDaysVipPass() async {
+    final response = await http.get(
+        "http://103.182.219.34/api/api/sevendaysdatavehicledetailsvippass.php");
+    var data = json.decode(response.body.toString());
+
+    // print(data);
+    sevenDaysVipPass = SevenDaysDataModel.fromJson(data);
 
     notifyListeners();
   }

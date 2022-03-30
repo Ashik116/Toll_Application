@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 import 'package:toll_plaza/Animation/loadingAnimation.dart';
 import 'package:toll_plaza/Pages/Chittagong/GraphChittagong.dart';
 import 'package:toll_plaza/Pages/Chittagong/previousReportChittagong.dart';
@@ -14,62 +15,103 @@ class ChittagongReportPage extends StatefulWidget {
 class _ChittagongReportPageState extends State<ChittagongReportPage> {
   bool isLoading = true;
 
+  // getData() {
+  //   try{
+  //     context.read<TodayReportChittagongDatabase>().getShortReport();
+  //     context.read<TodayReportChittagongDatabase>().getReport();
+  //     context.read<PreviousReportChittagongDatabase>().getPreviousReport();
+  //
+  //     // setState(() {
+  //     //   isLoading = false;
+  //     // });
+  //   }catch(e){
+  //     return true;
+  //   }
+  // }
+
   @override
   void initState() {
     // TODO: implement initState
-
     super.initState();
-    Future.delayed(Duration(seconds: 1)).then((value) => {
-          setState(() {
-            isLoading = false;
-          })
-        });
+    //getData();
+    Future.delayed(Duration(seconds: 5)).then((value) => {
+      setState(() {
+        isLoading = false;
+      })
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final providerThemeAndColor = Provider.of<ThemeAndColorProvider>(context);
-    return isLoading
-        ? loadingAnimation()
-        : DefaultTabController(
-            length: 3,
-            child: Scaffold(
-              backgroundColor: providerThemeAndColor.backgroundColor,
-              appBar: AppBar(
-                actions: [],
-                iconTheme:
-                    IconThemeData(color: providerThemeAndColor.iconColor),
-                backgroundColor: providerThemeAndColor.mainColor,
-                flexibleSpace: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        colors: [Colors.lightBlue[200], Colors.lightGreen[200]]
-                    ),
-                  ),
-                ),
-                title: Text(
-                  "Chittagong Report",
-                  style: TextStyle(color: providerThemeAndColor.textColor),
-                ),
-                bottom: TabBar(
-                  labelStyle: TextStyle(color: providerThemeAndColor.textColor),
-                  indicatorColor: providerThemeAndColor.textColor,
-                  labelColor: providerThemeAndColor.textColor,
-                  tabs: <Widget>[
-                    Tab(text: "TODAY"),
-                    Tab(text: "THIS WEEK"),
-                    Tab(text: "GRAPH"),
-                  ],
-                ),
-              ),
-              body: TabBarView(
-                children: <Widget>[
-                  TodayReportChittagong(),
-                  PreviousReportChittagong(),
-                  GraphChittagong(),
-                ],
+    //bool isDark = providerThemeAndColor.darkTheme;
+    return isLoading ? loadingAnimation() :
+    DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        backgroundColor: providerThemeAndColor.backgroundColor,
+        appBar: AppBar(
+          actions: [],
+          iconTheme:
+          IconThemeData(color: providerThemeAndColor.iconColor),
+          backgroundColor: providerThemeAndColor.mainColor,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: providerThemeAndColor.appBarColor,
               ),
             ),
-          );
+          ),
+          title: Text(
+            "Chittagong Toll Report",
+            style: TextStyle(color: providerThemeAndColor.textColor),
+          ),
+          bottom: TabBar(
+            indicator: RectangularIndicator(
+                bottomLeftRadius: 100,
+                bottomRightRadius: 100,
+                topLeftRadius: 100,
+                topRightRadius: 100,
+                color: providerThemeAndColor.indicatorColor,
+                horizontalPadding: 5,
+                verticalPadding: 5,
+            ),
+            labelStyle: TextStyle(color: providerThemeAndColor.textColor),
+            indicatorColor: providerThemeAndColor.textColor,
+            labelColor: providerThemeAndColor.textColor,
+            tabs: <Widget>[
+              Tab(child: Text(
+                'TODAY',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+              ),
+              Tab(child: Text(
+                'THIS WEEK',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+              ),
+              Tab(child: Text(
+                'GRAPH',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+              ),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: <Widget>[
+            TodayReportChittagong(),
+            PreviousReportChittagong(),
+            GraphChittagong(),
+          ],
+        ),
+      ),
+    );
   }
 }

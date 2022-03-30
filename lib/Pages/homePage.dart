@@ -1,20 +1,23 @@
+
+import 'package:auto_animated/auto_animated.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
-import 'package:toll_plaza/Animation/itemClickAnimation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toll_plaza/DatabaseModule/Chittagong/chittagongTodyDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Chittagong/previousChittagongData.dart';
 import 'package:toll_plaza/DatabaseModule/Manikganj/manikganjTodyDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Manikganj/previousManikganjData.dart';
+import 'package:toll_plaza/DatabaseModule/Netrokona/netrokonaTodayDataModule.dart';
+import 'package:toll_plaza/DatabaseModule/Netrokona/previousNetrokonaData.dart';
+import 'package:toll_plaza/DesignModule/Navigation_drawer.dart';
+import 'package:toll_plaza/Pages/Charsindur/charsindurReportPage.dart';
 import 'package:toll_plaza/Pages/Chittagong/chittagongReportPage.dart';
 import 'package:toll_plaza/Pages/Manikganj/manikganjReportPage.dart';
 import 'package:toll_plaza/Pages/Mohanonda/mohanondaReportPage.dart';
+import 'package:toll_plaza/Pages/Netrokona/netrokonaReportPage.dart';
 import 'package:toll_plaza/Pages/Teesta/teestaReportPage.dart';
-import 'package:toll_plaza/Pages/Users/Users.dart';
-import 'package:toll_plaza/Pages/loginPage.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
 
@@ -25,123 +28,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool isRestricted = false;
+  List itemGridList;
+  List itemList;
 
- /*final dbRef = FirebaseDatabase.instance.reference();
-  var currentUser = FirebaseAuth.instance.currentUser.uid.toString();
-  var userEmail = FirebaseAuth.instance.currentUser.email;*/
-  var userEmail;
 
-  final _formKey = GlobalKey<FormState>();
+  SharedPreferences sharedPreferences;
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  void handlePopupMenu(int value) {
-    switch (value) {
-      case 1:
-        setState(() {
-          bool isDark =
-          context.read<ThemeAndColorProvider>().darkTheme ? false : true;
-          context.read<ThemeAndColorProvider>().setDarkTheme(isDark);
-        });
-        break;
-      case 2:
-        FirebaseAuth.instance.signOut();
-        Navigator.pushAndRemoveUntil(
-            context, MaterialPageRoute(builder: (context) => LogInPage()),
-            (route) => false);
-        break;
-      case 3:
-        //getadmin();
-        //var user = FirebaseAuth.instance.currentUser.email.toString();
-        if(userEmail == "sakif@rocketmail.com"){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>Users()),);
-          //MaterialPageRoute(builder: (context)=>LogInPage());
-        }else{
-          snackBarMsg("You don't have permission to control Users!");
-        }
-        break;
-    }
-  }
-
-  Widget popupMenuAppBar() {
-    return PopupMenuButton(
-      color: context.watch<ThemeAndColorProvider>().secondColor,
-      elevation: 5,
-      onSelected: (value) {
-        handlePopupMenu(value);
-      },
-      icon: Icon(
-        Icons.more_vert,
-        color: context.watch<ThemeAndColorProvider>().iconColor,
-      ),
-      padding: EdgeInsets.all(0),
-      itemBuilder: (context) => [
-        PopupMenuItem(
-          value: 1,
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Dark",
-                style: TextStyle(
-                    color:
-                        context.read<ThemeAndColorProvider>().secondTextColor),
-              ),
-              Switch(
-                inactiveThumbColor:
-                    context.read<ThemeAndColorProvider>().iconColor,
-                activeTrackColor:
-                    context.read<ThemeAndColorProvider>().mainColor,
-                activeColor: context.read<ThemeAndColorProvider>().iconColor,
-                value: context.read<ThemeAndColorProvider>().darkTheme,
-                onChanged: (value) {
-                  setState(() {
-                    context.read<ThemeAndColorProvider>().setDarkTheme(value);
-                    Navigator.pop(context);
-                  });
-                },
-              ),
-            ],
-          ),
-        ),
-        PopupMenuItem(
-          value: 3,
-          child: Text(
-            "Users",
-            style: TextStyle(
-                color: context.read<ThemeAndColorProvider>().secondTextColor),
-          ),
-        ),
-
-
-        PopupMenuItem(
-          value: 2,
-          child: Text(
-            "Logout",
-            style: TextStyle(
-                color: context.read<ThemeAndColorProvider>().secondTextColor),
-          ),
-        ),
-      ],
-    );
-  }
 
   getData() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+
     try {
-      /*FirebaseAuth.instance.authStateChanges().listen((User user) {
-        if (user != null) {
-          if (user.email == "mamuntushi@gmail.com") {
-            if (this.mounted) {
-              // check whether the state object is in tree
-              setState(() {
-                isRestricted = true;
-              });
-            }
-          }
-        }
-      });*/
-      //fetch data from firebase
-
-
       context.read<TodayReportChittagongDatabase>().getShortReport();
       context.read<TodayReportChittagongDatabase>().getReport();
       context.read<PreviousReportChittagongDatabase>().getPreviousReport();
@@ -150,140 +48,228 @@ class _HomePageState extends State<HomePage> {
       context.read<TodayReportManikganjDatabase>().getReport();
       context.read<PreviousReportManikganjDatabase>().getPreviousReport();
 
-      //context.read<PreviousReportManikganjDatabase>().previousDataListManikganj;
-      //print(context.read<TodayReportChittagongDatabase>().ctrlR);
-      userEmail = FirebaseAuth.instance.currentUser.email;//test
-      setState(() {});
-    } catch (e) {}
+      context.read<TodayReportNetrokonaDatabase>().getShortReport();
+      context.read<TodayReportNetrokonaDatabase>().getReport();
+      context.read<PreviousReportNetrokonaDatabase>().getPreviousReport();
+
+      setState(() {
+
+      });
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   @override
   void initState() {
     // TODO: implement initState
-
     super.initState();
-   // declare();
     getData();
-
   }
 
   @override
   Widget build(BuildContext context) {
-    final providerColorAndTheme = Provider.of<ThemeAndColorProvider>(context);
-    return Scaffold(
-      key: _scaffoldKey,
-      backgroundColor: providerColorAndTheme.backgroundColor,
-      appBar: AppBar(
-          backgroundColor: providerColorAndTheme.mainColor,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.lightBlue[200], Colors.lightGreen[200]]
-              ),
-            ),
+    final providerThemeAndColor = Provider.of<ThemeAndColorProvider>(context);
+    bool isDark = providerThemeAndColor.darkTheme;
+
+    Widget items(text, image, isDark, permission, route) {
+      return InkWell(
+        onTap: () {
+          if (permission) {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => route));
+          } else {
+            snackBarMsg('Permission Denied!');
+          }
+        },
+        child: Card(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20)
           ),
-          title: Text(
-            "Dashboard",
-            style: TextStyle(color: providerColorAndTheme.textColor),
-          ),
-          actions: [popupMenuAppBar()],),
-
-
-      body: AnimatedContainer(
-        duration: Duration(seconds: 1),
-        color: providerColorAndTheme.backgroundColor,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: StaggeredGridView.count(
-            crossAxisCount: 2,
-            children: [
-              //-------------Dashboard Items-----------------
-              ItemClickAnimation(
-                //  password: "regnum@466",
-                //route: isRestricted ? null : CharsindurReportPage(),
-
-                scaleValue: .95,
-                child: items(
-                    "Charsindur", "assets/images/charshindo_logo-min.jpg"),
+          clipBehavior: Clip.antiAlias,
+          elevation: 5,
+          child: Container(
+              height: MediaQuery.of(context).size.height * 0.3,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(image),
+                  fit: BoxFit.fill,
+                ),
+                gradient: isDark ? LinearGradient(colors: [Colors.grey.shade900, Colors.grey.shade900]) : LinearGradient(colors: [Colors.lightBlue.shade200, Colors.lightGreen.shade200]),
               ),
-              ItemClickAnimation(
-                password: "regnum@322",
-                route: ChittagongReportPage(),
-                scaleValue: 0.95,
-                child: items(
-                    "Chittagong", "assets/images/chittagong_logo-min.png"),
-              ),
-              ItemClickAnimation(
-                password: "regnum@203",
-                route: ManikganjReportPage(),
-                scaleValue: .95,
-                child: items("Manikganj", "assets/images/manikganj.jpg"),
-              ),
-              ItemClickAnimation(
-                 password: "regnum@456",
-                route: TeestaReportPage(),
-                scaleValue: .95,
-                child: items("Teesta", "assets/images/teesta.jpg"),
-              ),
-              ItemClickAnimation(
-                  password: "regnum@124",
-                route: MohanondaReportPage(),
-                scaleValue: .95,
-                child: items("Mohanonda", "assets/images/mohanonda.jpg"),
-              ),
-            ],
-            staggeredTiles: [
-              //-----------Dashboard Item Size------------------
-              StaggeredTile.extent(1, 200),
-              StaggeredTile.extent(1, 200),
-              StaggeredTile.extent(1, 200),
-              StaggeredTile.extent(1, 200),
-              StaggeredTile.extent(2, 200),
-            ],
+              child: isDark ? Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(10),
+                  color: Colors.black54,
+                  child: Text(
+                    text,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: context.watch<ThemeAndColorProvider>().textColor,
+                    ),
+                  ),
+                ),
+              ) :
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient:LinearGradient(colors: [Colors.lightBlue.shade200.withOpacity(0.8), Colors.lightGreen.shade200.withOpacity(0.8)]),
+                  ),
+                  width: double.infinity,
+                  padding: EdgeInsets.all(10),
+                  //color: Colors.black54,
+                  child: Text(
+                    text,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: context.watch<ThemeAndColorProvider>().textColor,
+                    ),
+                  ),
+                ),
+              )
           ),
         ),
+      );
+    }
+    itemGridList = [
+      items(
+        'Charsindur',
+        'assets/images/charsindur.jpg',
+        isDark,
+        false,
+        null,
+        //sharedPreferences.getBool('isAdmin') || sharedPreferences.getBool('isCharsindur'),
+        //CharsindurReportPage(),
+      ),
+      items(
+        'Chittagong',
+        'assets/images/chittagong_logo-min.png',
+        isDark,
+        sharedPreferences.getBool('isAdmin') || sharedPreferences.getBool('isChittagong'),
+        ChittagongReportPage(),
+      ),
+      items(
+        'Manikganj',
+        'assets/images/manikganj.jpg',
+        isDark,
+        sharedPreferences.getBool('isAdmin') || sharedPreferences.getBool('isManikganj'),
+        ManikganjReportPage(),
+      ),
+      items(
+        'Netrokona',
+        'assets/images/netrokona.jpg',
+        isDark,
+        true,
+        //sharedPreferences.getBool('isAdmin') || sharedPreferences.getBool('isManikganj'),
+        NetrokonaReportPage(),
+      ),
+      items(
+        'Teesta',
+        'assets/images/teesta.jpg',
+        isDark,
+        sharedPreferences.getBool('isAdmin') || sharedPreferences.getBool('isTeesta'),
+        TeestaReportPage(),
+      ),
+      items(
+        'Mohanonda',
+        'assets/images/mohanonda.jpg',
+        isDark,
+        sharedPreferences.getBool('isAdmin') || sharedPreferences.getBool('isMohanonda'),
+        MohanondaReportPage(),
+      ),
+    ];
+    final _scrollController = ScrollController();
+
+    return Scaffold(
+      key: _scaffoldKey,
+      backgroundColor: providerThemeAndColor.backgroundColor,
+      drawer: NavigationDrawer(darkSwitch, snackBarMsg, context),
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: providerThemeAndColor.iconColor),
+        backgroundColor: providerThemeAndColor.mainColor,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: providerThemeAndColor.appBarColor,
+            ),
+          ),
+        ),
+        title: Text(
+          "Toll Plaza",
+          style: TextStyle(color: providerThemeAndColor.textColor),
+        ),
+      ),
+
+
+      body: Container(
+          color: providerThemeAndColor.backgroundColor,
+          padding: const EdgeInsets.only(top: 8.0),
+          child: CustomScrollView(
+            controller: _scrollController,
+            slivers: <Widget>[
+              LiveSliverGrid(
+                controller: _scrollController,
+                showItemInterval: Duration(milliseconds: 100),
+                showItemDuration: Duration(milliseconds: 200) ,
+                itemCount: itemGridList.length,
+                itemBuilder: buildAnimatedItemGrid,
+                reAnimateOnVisibility: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+              ),
+            ],
+          )
       ),
     );
   }
 
-  //---------------Dashboard Item Design-------------
-  Widget items(text, image) {
-    return Card(
-      margin: EdgeInsets.all(8),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15)
+  void darkSwitch() {
+    setState(() {
+      bool isDark = !context.read<ThemeAndColorProvider>().darkTheme;
+      context.read<ThemeAndColorProvider>().setDarkTheme(isDark);
+    });
+  }
+
+  Widget buildAnimatedItemGrid(BuildContext context, int index, Animation<double> animation) {
+    return FadeTransition(
+      opacity: Tween<double>(
+        begin: 0,
+        end: 1,
+      ).animate(animation),
+      // And slide transition
+      child: SlideTransition(
+        position: Tween<Offset>(
+          begin: Offset(0, -0.1),
+          end: Offset.zero,
+        ).animate(animation),
+        // Paste you Widget
+        child: itemGridList[index],
       ),
-      clipBehavior: Clip.antiAlias,
-      //color: context.watch<ThemeAndColorProvider>().mainColor,
-      elevation: 5,
-      child: Container(
-        decoration: BoxDecoration(
-          //borderRadius: BorderRadius.circular(20),
-          gradient: LinearGradient(colors: [Colors.lightBlue[200], Colors.lightGreen[200]]),
-        ),
-        child: Column(
-          children: [
-            Container(
-              height: 140,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
-                  image: DecorationImage(
-                      image: AssetImage(image), fit: BoxFit.cover)),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(
-                text,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: context.watch<ThemeAndColorProvider>().textColor,
-                ),
-              ),
-            )
-          ],
-        ),
+    );
+  }
+  Widget buildAnimatedItemList(BuildContext context, int index, Animation<double> animation) {
+    return FadeTransition(
+      opacity: Tween<double>(
+        begin: 0,
+        end: 1,
+      ).animate(animation),
+      // And slide transition
+      child: SlideTransition(
+        position: Tween<Offset>(
+          begin: Offset(0, -0.1),
+          end: Offset.zero,
+        ).animate(animation),
+        // Paste you Widget
+        child: itemList.first,
       ),
     );
   }
@@ -296,40 +282,12 @@ class _HomePageState extends State<HomePage> {
 
   void snackBarMsg(String loginErrorMessage) {
     final snackBar = SnackBar(
+      duration: Duration(seconds: 2),
       content: Text(
         loginErrorMessage.toString(),
         style: TextStyle(color: Colors.red),
       ),
-      action: SnackBarAction(
-        label: 'Undo',
-        onPressed: () {
-          // Some code to undo the change.
-        },
-      ),
     );
-    _scaffoldKey.currentState.showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
-
-  void declare() async{
-    //final dbRef = FirebaseDatabase.instance.reference();
-   // var currentUser = FirebaseAuth.instance.currentUser.uid.toString();
-    userEmail = FirebaseAuth.instance.currentUser.email;
-  }
-
-  /*void getadmin() {
-    String st = "Admin";
-    try{
-      dbRef.child("Users").child(st).child(currentUser).once().then((DataSnapshot snapshot) {
-
-        if(snapshot.value.toString()==userEmail){
-          //return snapshot.value[currentUser].toString();
-          setState(() {
-            print("test: "+snapshot.value);
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>Users()),);
-          });
-        }
-      });}catch(e){
-      snackBarMsg("Please wait! Checking credentials.");
-    }
-  }*/
 }

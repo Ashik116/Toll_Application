@@ -2,13 +2,12 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toll_plaza/DatabaseModule/Teesta/todayReportTeestaDataModule.dart';
-import 'package:toll_plaza/DesignModule/indicatore.dart';
+import 'package:toll_plaza/DesignModule/indicator.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
 class TodayRevenueGraphTeesta extends StatefulWidget {
   @override
-  _TodayRevenueGraphTeestaState createState() =>
-      _TodayRevenueGraphTeestaState();
+  _TodayRevenueGraphTeestaState createState() => _TodayRevenueGraphTeestaState();
 }
 
 class _TodayRevenueGraphTeestaState extends State<TodayRevenueGraphTeesta> {
@@ -45,8 +44,7 @@ class _TodayRevenueGraphTeestaState extends State<TodayRevenueGraphTeesta> {
               height: 280,
               child: PieChart(
                 PieChartData(
-                    pieTouchData:
-                        PieTouchData(touchCallback: (pieTouchResponse) {
+                    pieTouchData: PieTouchData(touchCallback: (pieTouchResponse) {
                       setState(() {
                         if (pieTouchResponse.touchInput is FlLongPressEnd ||
                             pieTouchResponse.touchInput is FlPanEnd) {
@@ -100,7 +98,7 @@ class _TodayRevenueGraphTeestaState extends State<TodayRevenueGraphTeesta> {
           data.vehicleReportList[i].perVehicleRate;
       /*int perVehicleRevenue = data.yesterdayVehicleReportList[i].totalVehicle *
           data.yesterdayVehicleReportList[i].perVehicleRate;*/
-      double value = (perVehicleRevenue / data.total_amount) * 100;
+      double value = (perVehicleRevenue / data.totalAmount) * 100;
       String title = data.vehicleReportList[i].vehicleName;
       /*double value = (perVehicleRevenue / data.totalYesterdayRevenue) * 100;
       String title = data.yesterdayVehicleReportList[i].vehicleName;*/
@@ -112,7 +110,8 @@ class _TodayRevenueGraphTeestaState extends State<TodayRevenueGraphTeesta> {
         titleStyle: TextStyle(
             fontSize: fontSize,
             fontWeight: FontWeight.bold,
-            color: context.watch<ThemeAndColorProvider>().secondTextColor),
+            color: context.watch<ThemeAndColorProvider>().thirdTextColor
+        ),
       );
     });
   }

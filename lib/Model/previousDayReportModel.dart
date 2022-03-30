@@ -5,10 +5,13 @@ class PreviousDayModel {
 
   PreviousDayModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = new List<Data>();
+      data = <Data>[];
       json['data'].forEach((v) {
         data.add(new Data.fromJson(v));
       });
+    }
+    if(data.length > 7) {
+      data.remove(data.last);
     }
   }
 
@@ -17,7 +20,6 @@ class PreviousDayModel {
     if (this.data != null) {
       data['data'] = this.data.map((v) => v.toJson()).toList();
     }
-    return data;
   }
 }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
+//import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:toll_plaza/DatabaseModule/Charsindur/previousReportCharsindurDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Charsindur/previousVIPReportCharsindurDataModule.dart';
@@ -77,7 +77,7 @@ class _DemoTeestaState extends State<DemoTeesta> {
       return Container(
         color: providerThemeAndColor.backgroundColor,
         child: Center(
-          child: Lottie.asset('assets/json/loading.json'),
+          //child: Lottie.asset('assets/json/loading.json'),
         ),
       );
     } else {

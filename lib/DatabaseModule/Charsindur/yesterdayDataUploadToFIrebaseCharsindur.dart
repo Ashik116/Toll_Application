@@ -29,8 +29,6 @@ class YesterdayDataUploadToFirebaseCharsindur {
       yesterdayVehicle[11].vehicleName.toString() : (yesterdayVehicle[11].totalVehicle*yesterdayVehicle[11].perVehicleRate).toString(),
       yesterdayVehicle[12].vehicleName.toString() : (yesterdayVehicle[12].totalVehicle*yesterdayVehicle[12].perVehicleRate).toString(),
     });
-
-    //print(date);
   }
   uploadVIP(TodayVipPassReportCharsindurDataModule yesterdayData) async {
 
@@ -39,7 +37,5 @@ class YesterdayDataUploadToFirebaseCharsindur {
     databaseReference.child('PreviousVip').update({
       date.toString() : yesterdayData.totalYesterdayVehicle.toString(),
     });
-
-    //print(date);
   }
 }

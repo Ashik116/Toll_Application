@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:tab_indicator_styler/tab_indicator_styler.dart';
+import 'package:toll_plaza/Animation/loadingAnimation.dart';
 import 'package:toll_plaza/DatabaseModule/Manikganj/manikganjTodyDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Manikganj/previousManikganjData.dart';
-import 'package:toll_plaza/Pages/Manikganj/GrapManikganj.dart';
+import 'package:toll_plaza/Pages/Manikganj/GraphManikganj.dart';
 import 'package:toll_plaza/Pages/Manikganj/previousReportManikganj.dart';
 import 'package:toll_plaza/Pages/Manikganj/todayReportManikganj.dart';
-import 'package:toll_plaza/Pages/Teesta/reportSearch.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
 class ManikganjReportPage extends StatefulWidget {
@@ -16,61 +16,41 @@ class ManikganjReportPage extends StatefulWidget {
 
 class _ManikganjReportPageState extends State<ManikganjReportPage> {
   bool isLoading = true;
-  double _height, _width;
-  double _pixelRatio;
 
   getData() async {
     try{
-
-     // await Future.delayed(Duration(seconds: 5));
-      await context.read<TodayReportManikganjDatabase>().getShortReport();
-      await context.read<TodayReportManikganjDatabase>().getReport();
-
-      await context.read<PreviousReportManikganjDatabase>().getPreviousReport();
-
-      await context.read<PreviousReportManikganjDatabase>().previousDataListManikganj;
-
-    /*await context
-          .read<TodayReportTeestaDataModule>()
-          .getYesterdayVehicleData(
-          "http://103.150.65.66/api/api/yesterday.php");//test
-      await context
-          .read<TodayVipPassReportTeestaDataModule>()
-          .getYesterdayReportData(
-          "http://103.150.65.66/api/api/yesterdayvippass.php");//test
-      await context
-          .read<TodayReportTeestaDataModule>()
-          .getTodayReportData("http://103.150.65.66/api/api/today.php");*/
+      context.read<TodayReportManikganjDatabase>().getShortReport();
+      context.read<TodayReportManikganjDatabase>().getReport();
+      context.read<PreviousReportManikganjDatabase>().getPreviousReport();
 
       setState(() {
         isLoading = false;
       });
-    }catch(e){}
+    }catch(e){
+
+    }
   }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     //getData();
-    Future.delayed(Duration(seconds: 1)).then((value) => {
-          setState(() {
-            isLoading = false;
-          })
-        });
+
+    Future.delayed(Duration(seconds: 5)).then((value) => {
+      setState(() {
+        isLoading = false;
+      })
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-
-    _height = MediaQuery.of(context).size.height;
-    _width = MediaQuery.of(context).size.width;
-    _pixelRatio = MediaQuery.of(context).devicePixelRatio;
     final providerThemeAndColor = Provider.of<ThemeAndColorProvider>(context);
     if(isLoading){
       return Container(
         color: providerThemeAndColor.backgroundColor,
         child: Center(
-          child: Lottie.asset('assets/json/loading.json'),
+          child: loadingAnimation(),
         ),
       );
     }else{
@@ -85,38 +65,39 @@ class _ManikganjReportPageState extends State<ManikganjReportPage> {
             flexibleSpace: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                    colors: [Colors.lightBlue[200], Colors.lightGreen[200]]
+                  colors: providerThemeAndColor.appBarColor,
                 ),
               ),
             ),
             title: Container(
-                width: _width,
+                width: MediaQuery.of(context).size.width,
                 child: Row(
                   children: [
                     Expanded(
                       child: Text(
-                        "Manikganj Report",
+                        "Manikganj Wim Report",
                         style: TextStyle(color: providerThemeAndColor.textColor),
                       ),
                     ),
-                    IconButton(
-                        icon: Icon(Icons.search),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => ReportSearch()));
-                        })
                   ],
-                )),
+                )
+            ),
             bottom: TabBar(
+              indicator: RectangularIndicator(
+                  bottomLeftRadius: 100,
+                  bottomRightRadius: 100,
+                  topLeftRadius: 100,
+                  topRightRadius: 100,
+                  color: providerThemeAndColor.indicatorColor,
+                  horizontalPadding: 5, verticalPadding: 5
+              ),
               labelStyle: TextStyle(color: providerThemeAndColor.textColor),
               indicatorColor: providerThemeAndColor.textColor,
               labelColor: providerThemeAndColor.textColor,
               tabs: [
-                Tab(text: "TODAY"),
-                Tab(text: "THIS WEEK"),
-                Tab(text: "GRAPH"),
+                Tab(child: Text('TODAY', style: TextStyle(fontWeight: FontWeight.bold),),),
+                Tab(child: Text('THIS WEEK', style: TextStyle(fontWeight: FontWeight.bold),),),
+                Tab(child: Text('GRAPH', style: TextStyle(fontWeight: FontWeight.bold),),),
               ],
             ),
           ),
@@ -130,6 +111,5 @@ class _ManikganjReportPageState extends State<ManikganjReportPage> {
         ),
       );
     }
-
   }
 }

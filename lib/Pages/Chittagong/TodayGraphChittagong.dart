@@ -2,7 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toll_plaza/DatabaseModule/Chittagong/chittagongTodyDataModule.dart';
-import 'package:toll_plaza/DesignModule/indicatore.dart';
+import 'package:toll_plaza/DesignModule/indicator.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
 class TodayGraphChittagong extends StatefulWidget {
@@ -13,7 +13,6 @@ class TodayGraphChittagong extends StatefulWidget {
 class _TodayGraphChittagongState extends State<TodayGraphChittagong> {
   int touchedIndex;
   var colorList = [
-
     Color(0xffBC243C),
     Color(0xff0072B5),
     Color(0xff5B5EA6),
@@ -29,15 +28,25 @@ class _TodayGraphChittagongState extends State<TodayGraphChittagong> {
     Color(0xff0da000),
     Color(0xff9B2335),
     Color(0xFFC3447A),
-    //Color(0xff66096B),
   ];
 
   @override
   Widget build(BuildContext context) {
     var data = Provider.of<TodayReportChittagongDatabase>(context);
-    return Card(
-      margin: EdgeInsets.all(0),
-      color: context.watch<ThemeAndColorProvider>().backgroundColor,
+    final providerThemeAndData = Provider.of<ThemeAndColorProvider>(context);
+    bool isDark = providerThemeAndData.darkTheme;
+
+    return data.vehicleDataList.isEmpty ?
+    Center(
+      child: Text('Data not found',
+        style: TextStyle(
+          color: isDark ? Colors.white : Colors.black,
+          fontSize: 20,
+        ),
+      ),
+    ) :
+    Card(
+      color: providerThemeAndData.backgroundColor,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ListView(
@@ -48,8 +57,7 @@ class _TodayGraphChittagongState extends State<TodayGraphChittagong> {
                 PieChartData(
                     pieTouchData: PieTouchData(touchCallback: (pieTouchResponse) {
                       setState(() {
-                        if (pieTouchResponse.touchInput is FlLongPressEnd ||
-                            pieTouchResponse.touchInput is FlPanEnd) {
+                        if (pieTouchResponse.touchInput is FlLongPressEnd || pieTouchResponse.touchInput is FlPanEnd) {
                           //touchedIndex = -1;
                         } else {
                           touchedIndex = pieTouchResponse.touchedSectionIndex;
@@ -69,13 +77,12 @@ class _TodayGraphChittagongState extends State<TodayGraphChittagong> {
               primary: false,
               itemCount: data.vehicleDataList.length,
               itemBuilder: (context, index) {
-                  return Indicator(
-                    color: colorList[index],
-                    text: data.vehicleDataList[index].vehicleName,
-                    value:
-                    data.vehicleDataList[index].ctrlR.toString(),
-                    isSquare: true,
-                  );
+                return Indicator(
+                  color: colorList[index],
+                  text: data.vehicleDataList[index].vehicleName,
+                  value: data.vehicleDataList[index].ctrlR.toString(),
+                  isSquare: true,
+                );
               },
             ),
           ],

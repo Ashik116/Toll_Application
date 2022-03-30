@@ -11,7 +11,7 @@ class PreviousVIPReportCharsindurDataModule extends ChangeNotifier{
 
   PreviousVIPReportCharsindurDataModule({this.date,this.vehicles});
 
-  List<PreviousVIPReportCharsindurDataModule> _dataList = List();
+  List<PreviousVIPReportCharsindurDataModule> _dataList = <PreviousVIPReportCharsindurDataModule>[];
 
   List<PreviousVIPReportCharsindurDataModule> get dataList => _dataList;
 
@@ -20,13 +20,16 @@ class PreviousVIPReportCharsindurDataModule extends ChangeNotifier{
       DatabaseReference reference = FirebaseDatabase.instance.reference();
       reference.child("PreviousVip").onValue.listen((event)  {
         var data = event.snapshot.value;
-        //print(data);
         dataList.clear();
-        for(var i=1;i<=7;i++){
+
+        for(var i = 1; i <= 7; i++) {
           weeklyDate = DateFormat("dd-MM-yyyy").format(DateTime.now().subtract(Duration(days: i)));
-          //print(data[weeklyDate]);
-          if(data[weeklyDate] != null)
-            dataList.add(PreviousVIPReportCharsindurDataModule(date: weeklyDate,vehicles: data[weeklyDate]));
+          if(data[weeklyDate] != null) {
+            dataList.add(PreviousVIPReportCharsindurDataModule(
+                date: weeklyDate,
+                vehicles: data[weeklyDate])
+            );
+          }
         }
       });
 
@@ -36,6 +39,4 @@ class PreviousVIPReportCharsindurDataModule extends ChangeNotifier{
     }
     notifyListeners();
   }
-
-
 }

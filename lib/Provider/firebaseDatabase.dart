@@ -5,10 +5,10 @@ class FireDatabaseMethod {
   final firebaseUser = FirebaseAuth.instance.currentUser;
 
   getUserInfo(String email) async {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection("users")
         .where("userEmail", isEqualTo: email)
-        .getDocuments()
+        .get()
         .catchError((e) {
       print(e.toString());
     });

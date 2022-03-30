@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:toll_plaza/Pages/Charsindur/todayVipPassCharsindur.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 import 'package:toll_plaza/Pages/Teesta/previousVipPassTeesta.dart';
 import 'package:toll_plaza/Pages/Teesta/todayVipPassTeesta.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
+import 'PreviousVipClassTeesta.dart';
 
 class VipPassTeesta extends StatefulWidget {
   @override
@@ -13,6 +14,8 @@ class VipPassTeesta extends StatefulWidget {
 class _VipPassTeestaState extends State<VipPassTeesta> {
   bool _todayButtonSelected;
   bool _previousButtonSelected;
+  bool _previousVIPSelected;
+  int initialIndex = 0;
 
   @override
   void initState() {
@@ -20,6 +23,7 @@ class _VipPassTeestaState extends State<VipPassTeesta> {
     super.initState();
     _todayButtonSelected = true;
     _previousButtonSelected = false;
+    _previousVIPSelected = false;
   }
 
   @override
@@ -28,57 +32,47 @@ class _VipPassTeestaState extends State<VipPassTeesta> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            RaisedButton(
-              onPressed: () {
-                setState(() {
-                  _todayButtonSelected = true;
-                  _previousButtonSelected = false;
-                });
-              },
-              child: Text("Today"),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: EdgeInsets.all(8),
-              elevation: 10,
-              textColor: providerThemeAndColor.textColor,
-              color: _todayButtonSelected
-                  ? providerThemeAndColor.mainColor
-                  : providerThemeAndColor.secondColor,
-              animationDuration: Duration(milliseconds: 500),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            RaisedButton(
-              onPressed: () {
-                setState(() {
-                  _todayButtonSelected = false;
-                  _previousButtonSelected = true;
-                });
-              },
-              child: Text("Previous"),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: EdgeInsets.all(8),
-              elevation: 10,
-              textColor: providerThemeAndColor.textColor,
-              color: _previousButtonSelected
-                  ? providerThemeAndColor.mainColor
-                  : providerThemeAndColor.secondColor,
-              animationDuration: Duration(milliseconds: 500),
-            ),
-          ],
+        SizedBox(height: 10,),
+        ToggleSwitch(
+          minWidth: MediaQuery.of(context).size.width * 0.7,
+          fontSize: 16.0,
+          initialLabelIndex: initialIndex,
+          cornerRadius: 20.0,
+          activeBgColor: [providerThemeAndColor.toggleActiveColor],
+          activeFgColor: Colors.white,
+          inactiveBgColor: providerThemeAndColor.toggleInactiveColor,
+          inactiveFgColor: Colors.white,
+          totalSwitches: 3,
+          //radiusStyle: true,
+          animate: true,
+          curve: Curves.decelerate,
+          labels: ['Total', 'Previous', 'Vehicle Class'],
+          onToggle: (index) {
+            setState(() {
+              initialIndex = index;
+              if (index == 0) {
+                _todayButtonSelected = true;
+                _previousButtonSelected = false;
+                _previousVIPSelected = false;
+              } else if (index == 1) {
+                _todayButtonSelected = false;
+                _previousButtonSelected = true;
+                _previousVIPSelected = false;
+              } else {
+                _todayButtonSelected = false;
+                _previousButtonSelected = false;
+                _previousVIPSelected = true;
+              }
+            });
+          },
         ),
+        SizedBox(height: 10,),
         Expanded(
           child: _todayButtonSelected
               ? TodayVipPassTeesta()
-              : PreviousVipPassTeesta(),
+              : _previousVIPSelected
+              ? PreviousVipClassTeesta()
+              :PreviousVipPassTeesta(),
         )
       ],
     );

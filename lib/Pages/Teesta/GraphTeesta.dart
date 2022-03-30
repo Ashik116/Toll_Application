@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 import 'package:toll_plaza/Pages/Teesta/previousRevenueGraphTeesta.dart';
 import 'package:toll_plaza/Pages/Teesta/previousVehicleGraphTeesta.dart';
 import 'package:toll_plaza/Pages/Teesta/todayRevenueGraphTeesta.dart';
@@ -14,10 +15,11 @@ class GraphTeesta extends StatefulWidget {
 class _GraphTeestaState extends State<GraphTeesta> {
   bool _todayOrPreviousSelected = true;
   bool _vehicleOrRevenueSelected = true;
+  int initialIndex1 = 0;
+  int initialIndex2 = 0;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -27,101 +29,57 @@ class _GraphTeestaState extends State<GraphTeesta> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Card(
-          color: providerThemeAndColor.backgroundColor,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: RaisedButton(
-                  onPressed: () {
-                    setState(() {
-                      _vehicleOrRevenueSelected = true;
-                    });
-                  },
-                  child: Text("Vehicle"),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: EdgeInsets.all(8),
-                  elevation: 10,
-                  textColor: providerThemeAndColor.textColor,
-                  color: _vehicleOrRevenueSelected
-                      ? providerThemeAndColor.mainColor
-                      : providerThemeAndColor.secondColor,
-                  animationDuration: Duration(milliseconds: 500),
-                ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: RaisedButton(
-                  onPressed: () {
-                    setState(() {
-                      _vehicleOrRevenueSelected = false;
-                    });
-                  },
-                  child: Text("Revenue"),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: EdgeInsets.all(8),
-                  elevation: 10,
-                  textColor: providerThemeAndColor.textColor,
-                  color: _vehicleOrRevenueSelected
-                      ? providerThemeAndColor.secondColor
-                      : providerThemeAndColor.mainColor,
-                  animationDuration: Duration(milliseconds: 500),
-                ),
-              ),
-            ],
-          ),
+        SizedBox(height: 10,),
+        ToggleSwitch(
+          minWidth: MediaQuery.of(context).size.width * 0.7,
+          fontSize: 16.0,
+          initialLabelIndex: initialIndex1,
+          cornerRadius: 20.0,
+          activeBgColor: [providerThemeAndColor.toggleActiveColor],
+          activeFgColor: Colors.white,
+          inactiveBgColor: providerThemeAndColor.toggleInactiveColor,
+          inactiveFgColor: Colors.white,
+          totalSwitches: 2,
+          //radiusStyle: true,
+          animate: true,
+          curve: Curves.decelerate,
+          labels: ['Vehicle', 'Revenue'],
+          onToggle: (index) {
+            setState(() {
+              initialIndex1 = index;
+              if (index == 0) {
+                _vehicleOrRevenueSelected = true;
+              } else {
+                _vehicleOrRevenueSelected = false;
+              }
+            });
+          },
         ),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            RaisedButton(
-              onPressed: () {
-                setState(() {
-                  _todayOrPreviousSelected = true;
-                });
-              },
-              child: Text("Today"),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: EdgeInsets.all(8),
-              elevation: 10,
-              textColor: providerThemeAndColor.textColor,
-              color: _todayOrPreviousSelected
-                  ? providerThemeAndColor.mainColor
-                  : providerThemeAndColor.secondColor,
-              animationDuration: Duration(milliseconds: 500),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            RaisedButton(
-              onPressed: () {
-                setState(() {
-                  _todayOrPreviousSelected = false;
-                });
-              },
-              child: Text("Previous"),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: EdgeInsets.all(8),
-              elevation: 10,
-              textColor: providerThemeAndColor.textColor,
-              color: _todayOrPreviousSelected
-                  ? providerThemeAndColor.secondColor
-                  : providerThemeAndColor.mainColor,
-              animationDuration: Duration(milliseconds: 500),
-            ),
-          ],
+        SizedBox(height: 10,),
+        ToggleSwitch(
+          minWidth: MediaQuery.of(context).size.width * 0.25,
+          fontSize: 16.0,
+          initialLabelIndex: initialIndex2,
+          cornerRadius: 20.0,
+          activeBgColor: [providerThemeAndColor.toggleActiveColor],
+          activeFgColor: Colors.white,
+          inactiveBgColor: providerThemeAndColor.toggleInactiveColor,
+          inactiveFgColor: Colors.white,
+          totalSwitches: 2,
+          //radiusStyle: true,
+          animate: true,
+          curve: Curves.decelerate,
+          labels: ['Today', 'Previous'],
+          onToggle: (index) {
+            setState(() {
+              initialIndex2 = index;
+              if (index == 0) {
+                _todayOrPreviousSelected = true;
+              } else {
+                _todayOrPreviousSelected = false;
+              }
+            });
+          },
         ),
         Expanded(
           child: setPage(),

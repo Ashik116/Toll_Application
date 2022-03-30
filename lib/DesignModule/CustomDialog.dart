@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-class Customdialog extends StatelessWidget {
+class CustomDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -16,26 +16,16 @@ class Customdialog extends StatelessWidget {
             Positioned(
               child: Align(
                 alignment: Alignment.center,
-
                 child: Material(
                   color: Colors.white,
-
-                 /* child: Image.asset(
-                    'assets/loader.gif',
-                    height: 80,
-                    width: 80,
-                  ),*/
                   child: CircularProgressIndicator(),
                   shape: CircleBorder(),
                   clipBehavior: Clip.antiAlias,
                 ),
-
               ),
             ),
           ],
         )
     );
   }
-
-
 }

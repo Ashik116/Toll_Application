@@ -8,29 +8,34 @@ class PreviousVIPReportMohanondaDataModule extends ChangeNotifier {
   var vehicles;
   var weeklyDate;
 
-  PreviousVIPReportMohanondaDataModule({this.date, this.vehicles});
+  PreviousVIPReportMohanondaDataModule ({
+    this.date,
+    this.vehicles
+  });
 
-  List<PreviousVIPReportMohanondaDataModule> _dataList = List();
+  List<PreviousVIPReportMohanondaDataModule> _dataList = [];
 
   List<PreviousVIPReportMohanondaDataModule> get dataList => _dataList;
 
   getReport() {
     try {
       DatabaseReference reference = FirebaseDatabase.instance.reference();
+
       reference.child("PreviousVip").onValue.listen((event) {
         var data = event.snapshot.value;
-        //print(data);
         dataList.clear();
+
         for (var i = 1; i <= 7; i++) {
-          weeklyDate = DateFormat("dd-MM-yyyy")
-              .format(DateTime.now().subtract(Duration(days: i)));
-          //print(data[weeklyDate]);
-          if (data[weeklyDate] != null)
-            dataList.add(PreviousVIPReportMohanondaDataModule(
-                date: weeklyDate, vehicles: data[weeklyDate]));
+          weeklyDate = DateFormat("dd-MM-yyyy").format(DateTime.now().subtract(Duration(days: i)));
+
+          if (data[weeklyDate] != null) {
+            dataList.add(PreviousVIPReportMohanondaDataModule(date: weeklyDate, vehicles: data[weeklyDate]));
+          }
         }
       });
-    } catch (e) {}
+    } catch (e) {
+
+    }
     notifyListeners();
   }
 }

@@ -2,7 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toll_plaza/DatabaseModule/Manikganj/manikganjTodyDataModule.dart';
-import 'package:toll_plaza/DesignModule/indicatore.dart';
+import 'package:toll_plaza/DesignModule/indicator.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
 class TodayGraphManikganj extends StatefulWidget {
@@ -13,7 +13,6 @@ class TodayGraphManikganj extends StatefulWidget {
 class _TodayGraphManikganjState extends State<TodayGraphManikganj> {
   int touchedIndex;
   var colorList = [
-
     Color(0xffBC243C),
     Color(0xff0072B5),
     Color(0xff5B5EA6),
@@ -29,15 +28,27 @@ class _TodayGraphManikganjState extends State<TodayGraphManikganj> {
     Color(0xff0da000),
     Color(0xff9B2335),
     Color(0xFFC3447A),
-    //Color(0xff66096B),
   ];
 
   @override
   Widget build(BuildContext context) {
     var data = Provider.of<TodayReportManikganjDatabase>(context);
-    return Card(
+    final providerThemeAndData = Provider.of<ThemeAndColorProvider>(context);
+    bool isDark = providerThemeAndData.darkTheme;
+
+    return data.vehicleDataList.isEmpty ?
+    Center(
+      child: Text('Data not found',
+        style: TextStyle(
+          fontSize: 20,
+          color: isDark ? Colors.white : Colors.black,
+          //fontWeight: FontWeight.bold
+        ),
+      ),
+    ) :
+    Card(
       margin: EdgeInsets.all(0),
-      color: context.watch<ThemeAndColorProvider>().backgroundColor,
+      color: providerThemeAndData.backgroundColor,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ListView(
@@ -48,8 +59,7 @@ class _TodayGraphManikganjState extends State<TodayGraphManikganj> {
                 PieChartData(
                     pieTouchData: PieTouchData(touchCallback: (pieTouchResponse) {
                       setState(() {
-                        if (pieTouchResponse.touchInput is FlLongPressEnd ||
-                            pieTouchResponse.touchInput is FlPanEnd) {
+                        if (pieTouchResponse.touchInput is FlLongPressEnd || pieTouchResponse.touchInput is FlPanEnd) {
                           //touchedIndex = -1;
                         } else {
                           touchedIndex = pieTouchResponse.touchedSectionIndex;
@@ -61,7 +71,8 @@ class _TodayGraphManikganjState extends State<TodayGraphManikganj> {
                     ),
                     sectionsSpace: 0,
                     centerSpaceRadius: 50,
-                    sections: showingSections()),
+                    sections: showingSections()
+                ),
               ),
             ),
 
@@ -70,16 +81,13 @@ class _TodayGraphManikganjState extends State<TodayGraphManikganj> {
               primary: false,
               itemCount: data.vehicleDataList.length,
               itemBuilder: (context, index) {
-                  return Indicator(
-                    color: colorList[index],
-                    text: data.vehicleDataList[index].vehicleName,
-                    value:
-                    //data.vehicleDataList[index].regular.toString(),
-                    (int.parse(data.vehicleDataList[index].regular)
-                      -int.parse(data.vehicleDataList[index].ctrlR)).toString(),
-
-                    isSquare: true,
-                  );
+                return Indicator(
+                  color: colorList[index],
+                  text: data.vehicleDataList[index].vehicleName,
+                  value: (int.parse(data.vehicleDataList[index].regular) - int.parse(data.vehicleDataList[index].ctrlR)).toString(),
+                  //data.vehicleDataList[index].regular.toString(),
+                  isSquare: true,
+                );
               },
             ),
           ],
@@ -92,9 +100,7 @@ class _TodayGraphManikganjState extends State<TodayGraphManikganj> {
     var data = Provider.of<TodayReportManikganjDatabase>(context);
 
     return List.generate(data.vehicleDataList.length, (i) {
-      var value = (double.parse(data.vehicleDataList[i].regular)
-          -double.parse(data.vehicleDataList[i].ctrlR))
-          /(double.parse(data.regular )-double.parse(data.ctrlR ))* 100;
+      var value = (double.parse(data.vehicleDataList[i].regular) - double.parse(data.vehicleDataList[i].ctrlR)) / (double.parse(data.regular) - double.parse(data.ctrlR )) * 100;
       final isTouched = i == touchedIndex;
       final double fontSize = isTouched ? 25 : 0;
       final double radius = isTouched ? 70 : 50;

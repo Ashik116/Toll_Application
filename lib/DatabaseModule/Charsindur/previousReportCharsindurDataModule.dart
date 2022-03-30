@@ -11,7 +11,7 @@ class PreviousReportCharsindurDataModule extends ChangeNotifier{
 
   PreviousReportCharsindurDataModule({this.date,this.vehicles,this.dailyTotalAmount});
 
-  List<PreviousReportCharsindurDataModule> _dataList = List();
+  List<PreviousReportCharsindurDataModule> _dataList = <PreviousReportCharsindurDataModule>[];
 
   List<PreviousReportCharsindurDataModule> get dataList => _dataList;
 

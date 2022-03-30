@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:toll_plaza/DesignModule/vertical_divider.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
-
 import 'eachRowDesign.dart';
 
-class sevenDaysrowDesign extends StatefulWidget {
+class SevenDaysRowDesign extends StatefulWidget {
   String date;
-  String total_amount;
-  String rickshawvan;
+  String totalAmount;
+  String rickshawVan;
   String motorcycle;
-  String threefourwheeler;
-  String sedancar;
-  String four_wheeler;
-  String microbus;
+  String threeFourWheeler;
+  String sedanCar;
+  String fourWheeler;
+  String microBus;
   String minibus;
   String agrouse;
-  String minitruck;
-  String bigbus;
-  String medium_truck;
-  String heavy_truck;
-  String trailer_long;
+  String miniTruck;
+  String bigBus;
+  String mediumTruck;
+  String heavyTruck;
+  String trailerLong;
 
   final FontWeight fontWeight;
   final Color firstColumnFontColor;
@@ -28,49 +28,51 @@ class sevenDaysrowDesign extends StatefulWidget {
   final Color dividedColor;
   final Color backgroundColor;
 
-  sevenDaysrowDesign(
-      {Key key,
-        @required this.date,
-        @required this.total_amount,
-        this.rickshawvan,
-        this.motorcycle,
-        this.threefourwheeler,
-        this.sedancar,
-        this.four_wheeler,
-        this.microbus,
-        this.minibus,
-        this.agrouse,
-        this.minitruck,
-        this.bigbus,
-        this.medium_truck,
-        this.heavy_truck,
-        this.trailer_long,
-        this.fontWeight,
-        this.firstColumnFontColor,
-        this.backgroundColor,
-        this.secondColumnFontColor,
-        this.thirdColumnFontColor,
-        this.dividedColor});
+  SevenDaysRowDesign({
+    Key key,
+    @required this.date,
+    @required this.totalAmount,
+    this.rickshawVan,
+    this.motorcycle,
+    this.threeFourWheeler,
+    this.sedanCar,
+    this.fourWheeler,
+    this.microBus,
+    this.minibus,
+    this.agrouse,
+    this.miniTruck,
+    this.bigBus,
+    this.mediumTruck,
+    this.heavyTruck,
+    this.trailerLong,
+    this.fontWeight,
+    this.firstColumnFontColor,
+    this.backgroundColor,
+    this.secondColumnFontColor,
+    this.thirdColumnFontColor,
+    this.dividedColor
+  });
+
   @override
-  _sevenDaysrowDesignState createState() => _sevenDaysrowDesignState();
+  _SevenDaysRowDesignState createState() => _SevenDaysRowDesignState();
 }
 
-class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
+class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
   String date;
-  String total_amount;
-  String rickshawvan;
+  String totalAmount;
+  String rickshawVan;
   String motorcycle;
-  String threefourwheeler;
-  String sedancar;
-  String four_wheeler;
-  String microbus;
-  String minibus;
+  String threeFourWheeler;
+  String sedanCar;
+  String fourWheeler;
+  String microBus;
+  String miniBus;
   String agrouse;
-  String minitruck;
-  String bigbus;
-  String medium_truck;
-  String heavy_truck;
-  String trailer_long;
+  String miniTruck;
+  String bigBus;
+  String mediumTruck;
+  String heavyTruck;
+  String trailerLong;
 
   FontWeight _fontWeight;
   Color _firstColumnFontColor;
@@ -81,43 +83,32 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
 
   void setUp() {
     date = widget.date;
-    total_amount = widget.total_amount;
-    rickshawvan = widget.rickshawvan;
+    totalAmount = widget.totalAmount;
+    rickshawVan = widget.rickshawVan;
     motorcycle = widget.motorcycle;
-    threefourwheeler = widget.threefourwheeler;
-    sedancar = widget.sedancar;
-    four_wheeler = widget.four_wheeler;
-    four_wheeler = widget.four_wheeler;
-    microbus = widget.microbus;
-    minibus = widget.minibus;
+    threeFourWheeler = widget.threeFourWheeler;
+    sedanCar = widget.sedanCar;
+    fourWheeler = widget.fourWheeler;
+    fourWheeler = widget.fourWheeler;
+    microBus = widget.microBus;
+    miniBus = widget.minibus;
     agrouse = widget.agrouse;
-    minitruck = widget.minitruck;
-    bigbus = widget.bigbus;
-    medium_truck = widget.medium_truck;
-    heavy_truck = widget.heavy_truck;
-    trailer_long = widget.trailer_long;
+    miniTruck = widget.miniTruck;
+    bigBus = widget.bigBus;
+    mediumTruck = widget.mediumTruck;
+    heavyTruck = widget.heavyTruck;
+    trailerLong = widget.trailerLong;
 
-    _fontWeight =
-    widget.fontWeight != null ? widget.fontWeight : FontWeight.normal;
-    _firstColumnFontColor = widget.firstColumnFontColor != null
-        ? widget.firstColumnFontColor
-        : context.read<ThemeAndColorProvider>().textColor;
-    _secondColumnFontColor = widget.secondColumnFontColor != null
-        ? widget.secondColumnFontColor
-        : context.read<ThemeAndColorProvider>().textColor;
-    _thirdColumnFontColor = widget.thirdColumnFontColor != null
-        ? widget.thirdColumnFontColor
-        : context.read<ThemeAndColorProvider>().textColor;
-    _dividedColor =
-    widget.dividedColor != null ? widget.dividedColor : Colors.red;
-    _backgroundColor = widget.backgroundColor != null
-        ? widget.backgroundColor
-        : context.read<ThemeAndColorProvider>().backgroundColor;
+    _fontWeight = widget.fontWeight != null ? widget.fontWeight : FontWeight.normal;
+    _firstColumnFontColor = widget.firstColumnFontColor != null ? widget.firstColumnFontColor : context.read<ThemeAndColorProvider>().textColor;
+    _secondColumnFontColor = widget.secondColumnFontColor != null ? widget.secondColumnFontColor : context.read<ThemeAndColorProvider>().textColor;
+    _thirdColumnFontColor = widget.thirdColumnFontColor != null ? widget.thirdColumnFontColor : context.read<ThemeAndColorProvider>().textColor;
+    _dividedColor = widget.dividedColor != null ? widget.dividedColor : Colors.red;
+    _backgroundColor = widget.backgroundColor != null ? widget.backgroundColor : context.read<ThemeAndColorProvider>().backgroundColor;
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setUp();
   }
@@ -136,62 +127,69 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
           Row(
             children: [
               Expanded(
-                child: Text(date.toString(),
+                child: Text(
+                    date.toString(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 14,
                         color: themeAndColor.thirdTextColor,
                         fontWeight: FontWeight.bold,
-                        letterSpacing: .8)),
+                        letterSpacing: .8
+                    )
+                ),
                 flex: 3,
               ),
               Expanded(
                 flex: 8,
-                child: Card(
-                  color: themeAndColor.secondColor,
+                child: Container(
+                  color: themeAndColor.sevenDaysCardColor,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          "Total: " + total_amount.toString(),
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: themeAndColor.secondTextColor,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: .8),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 1.5,
+                      Container(
+                        //height: 40,
                         width: double.infinity,
-                        child: Container(
-                          color: themeAndColor.backgroundColor,
+                        color: providerThemeAndColor.barHighlighterColor,
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text(
+                              "Total: ${totalAmount.toString()}",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: themeAndColor.secondTextColor,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: .8
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
+                      Divider(
+                        thickness: 3,
+                        height: 1,
+                        color: themeAndColor.backgroundColor,
+                      ),
+                      Container(
+                        width: double.infinity,
                         child: EachRowDesign(
                           firstColumnData: "Class  ",
                           secondColumnData: "Count",
                           thirdColumnData: "Amount",
-                          firstColumnFontColor:
-                          providerThemeAndColor.secondTextColor,
-                          secondColumnFontColor:
-                          providerThemeAndColor.thirdTextColor,
-                          thirdColumnFontColor: Colors.black,
+                          firstColumnFontColor: themeAndColor.secondTextColor,
+                          secondColumnFontColor: themeAndColor.secondTextColor,
+                          thirdColumnFontColor: themeAndColor.secondTextColor,
                           fontWeight: FontWeight.bold,
-                          backgroundColor: providerThemeAndColor.secondColor,
+                          backgroundColor: providerThemeAndColor.barHighlighterColor,
+                          elevation: 0,
+                          dividerColor: Colors.red.shade700,
                         ),
                       ),
-                      SizedBox(
-                        height: 1.5,
-                        width: double.infinity,
-                        child: Container(
-                          color: themeAndColor.backgroundColor,
-                        ),
+                      Divider(
+                        thickness: 3,
+                        height: 1,
+                        color: themeAndColor.backgroundColor,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
@@ -207,54 +205,45 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
                                       letterSpacing: .8),
-                                )),
-                            //Expanded(child: Text("|",style: TextStyle(color: themeAndColor.backgroundColor),textAlign: TextAlign.center,)),
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  rickshawvan.toString(),
+                                  rickshawVan.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
                                       letterSpacing: .8),
-                                )),
-
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  (int.parse(rickshawvan) * 5).toString(),
+                                  (int.parse(rickshawVan) * 5).toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
                                       letterSpacing: .8),
-                                )),
+                                )
+                            ),
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 1.5,
-                        width: double.infinity,
-                        child: Container(
-                          color: themeAndColor.backgroundColor,
-                        ),
+                      Divider(
+                        thickness: 3,
+                        height: 1,
+                        color: themeAndColor.backgroundColor,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
@@ -269,15 +258,12 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8),
-                                )),
-                            //Expanded(child: Text("|",style: TextStyle(color: themeAndColor.backgroundColor),textAlign: TextAlign.center,)),
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
@@ -288,15 +274,12 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
-
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
@@ -307,17 +290,17 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 1.5,
-                        width: double.infinity,
-                        child: Container(
-                          color: themeAndColor.backgroundColor,
-                        ),
+                      Divider(
+                        thickness: 3,
+                        height: 1,
+                        color: themeAndColor.backgroundColor,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
@@ -332,56 +315,49 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8),
-                                )),
-                            //Expanded(child: Text("|",style: TextStyle(color: themeAndColor.backgroundColor),textAlign: TextAlign.center,)),
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
-                            ),
-                            Expanded(
-                                flex: 2,
-                                child: Text(
-                                  threefourwheeler.toString(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: themeAndColor.secondTextColor,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
+                                      letterSpacing: .8
+                                  ),
                                 )
                             ),
-
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  (int.parse(threefourwheeler) * 20).toString(),
+                                  threeFourWheeler.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
+                            ),
+                            Expanded(
+                                flex: 2,
+                                child: Text(
+                                  (int.parse(threeFourWheeler) * 20).toString(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      color: themeAndColor.secondTextColor,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 1.5,
-                        width: double.infinity,
-                        child: Container(
-                          color: themeAndColor.backgroundColor,
-                        ),
+                      Divider(
+                        thickness: 3,
+                        height: 1,
+                        color: themeAndColor.backgroundColor,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
@@ -396,55 +372,49 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8),
-                                )),
-                            //Expanded(child: Text("|",style: TextStyle(color: themeAndColor.backgroundColor),textAlign: TextAlign.center,)),
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  sedancar.toString(),
+                                  sedanCar.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
-
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  (int.parse(sedancar) * 40).toString(),
+                                  (int.parse(sedanCar) * 40).toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 1.5,
-                        width: double.infinity,
-                        child: Container(
-                          color: themeAndColor.backgroundColor,
-                        ),
+                      Divider(
+                        thickness: 3,
+                        height: 1,
+                        color: themeAndColor.backgroundColor,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
@@ -459,55 +429,49 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8),
-                                )),
-                            //Expanded(child: Text("|",style: TextStyle(color: themeAndColor.backgroundColor),textAlign: TextAlign.center,)),
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  four_wheeler.toString(),
+                                  fourWheeler.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
-
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  (int.parse(four_wheeler) * 60).toString(),
+                                  (int.parse(fourWheeler) * 60).toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 1.5,
-                        width: double.infinity,
-                        child: Container(
-                          color: themeAndColor.backgroundColor,
-                        ),
+                      Divider(
+                        thickness: 3,
+                        height: 1,
+                        color: themeAndColor.backgroundColor,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
@@ -522,55 +486,49 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8),
-                                )),
-                            //Expanded(child: Text("|",style: TextStyle(color: themeAndColor.backgroundColor),textAlign: TextAlign.center,)),
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  microbus.toString(),
+                                  microBus.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
-
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  (int.parse(microbus) * 80).toString(),
+                                  (int.parse(microBus) * 80).toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 1.5,
-                        width: double.infinity,
-                        child: Container(
-                          color: themeAndColor.backgroundColor,
-                        ),
+                      Divider(
+                        thickness: 3,
+                        height: 1,
+                        color: themeAndColor.backgroundColor,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
@@ -585,55 +543,49 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8),
-                                )),
-                            //Expanded(child: Text("|",style: TextStyle(color: themeAndColor.backgroundColor),textAlign: TextAlign.center,)),
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  minibus.toString(),
+                                  miniBus.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
-
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  (int.parse(minibus) * 80).toString(),
+                                  (int.parse(miniBus) * 80).toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 1.5,
-                        width: double.infinity,
-                        child: Container(
-                          color: themeAndColor.backgroundColor,
-                        ),
+                      Divider(
+                        thickness: 3,
+                        height: 1,
+                        color: themeAndColor.backgroundColor,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
@@ -648,15 +600,12 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8),
-                                )),
-                            //Expanded(child: Text("|",style: TextStyle(color: themeAndColor.backgroundColor),textAlign: TextAlign.center,)),
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
@@ -667,15 +616,12 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
-
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
@@ -686,17 +632,17 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 1.5,
-                        width: double.infinity,
-                        child: Container(
-                          color: themeAndColor.backgroundColor,
-                        ),
+                      Divider(
+                        thickness: 3,
+                        height: 1,
+                        color: themeAndColor.backgroundColor,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
@@ -711,55 +657,49 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8),
-                                )),
-                            //Expanded(child: Text("|",style: TextStyle(color: themeAndColor.backgroundColor),textAlign: TextAlign.center,)),
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  minitruck.toString(),
+                                  miniTruck.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
-
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  (int.parse(minitruck) * 170).toString(),
+                                  (int.parse(miniTruck) * 170).toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 1.5,
-                        width: double.infinity,
-                        child: Container(
-                          color: themeAndColor.backgroundColor,
-                        ),
+                      Divider(
+                        thickness: 3,
+                        height: 1,
+                        color: themeAndColor.backgroundColor,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
@@ -774,55 +714,49 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8),
-                                )),
-                            //Expanded(child: Text("|",style: TextStyle(color: themeAndColor.backgroundColor),textAlign: TextAlign.center,)),
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  bigbus.toString(),
+                                  bigBus.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
-
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  (int.parse(bigbus) * 150).toString(),
+                                  (int.parse(bigBus) * 150).toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 1.5,
-                        width: double.infinity,
-                        child: Container(
-                          color: themeAndColor.backgroundColor,
-                        ),
+                      Divider(
+                        thickness: 3,
+                        height: 1,
+                        color: themeAndColor.backgroundColor,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
@@ -837,55 +771,49 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8),
-                                )),
-                            //Expanded(child: Text("|",style: TextStyle(color: themeAndColor.backgroundColor),textAlign: TextAlign.center,)),
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  medium_truck.toString(),
+                                  mediumTruck.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
-
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  (int.parse(medium_truck) * 200).toString(),
+                                  (int.parse(mediumTruck) * 200).toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 1.5,
-                        width: double.infinity,
-                        child: Container(
-                          color: themeAndColor.backgroundColor,
-                        ),
+                      Divider(
+                        thickness: 3,
+                        height: 1,
+                        color: themeAndColor.backgroundColor,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
@@ -900,55 +828,49 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8),
-                                )),
-                            //Expanded(child: Text("|",style: TextStyle(color: themeAndColor.backgroundColor),textAlign: TextAlign.center,)),
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  heavy_truck.toString(),
+                                  heavyTruck.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
-
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  (int.parse(heavy_truck) * 260).toString(),
+                                  (int.parse(heavyTruck) * 260).toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 1.5,
-                        width: double.infinity,
-                        child: Container(
-                          color: themeAndColor.backgroundColor,
-                        ),
+                      Divider(
+                        thickness: 3,
+                        height: 1,
+                        color: themeAndColor.backgroundColor,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
@@ -963,46 +885,42 @@ class _sevenDaysrowDesignState extends State<sevenDaysrowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8),
-                                )),
-                            //Expanded(child: Text("|",style: TextStyle(color: themeAndColor.backgroundColor),textAlign: TextAlign.center,)),
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  trailer_long.toString(),
+                                  trailerLong.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
-
-                            SizedBox(
-                              width: 1.5,
-                              height: 30,
-                              child: Container(
-                                color: themeAndColor.backgroundColor,
-                              ),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
+                            CustomVerticalDivider(
+                              dividerColor: Colors.green.shade900,
                             ),
                             Expanded(
                                 flex: 2,
                                 child: Text(
-                                  (int.parse(trailer_long) * 565).toString(),
+                                  (int.parse(trailerLong) * 565).toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8),
-                                )),
+                                      letterSpacing: .8
+                                  ),
+                                )
+                            ),
                           ],
                         ),
                       ),

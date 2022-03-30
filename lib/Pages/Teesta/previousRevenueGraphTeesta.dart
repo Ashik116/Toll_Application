@@ -5,18 +5,15 @@ import 'package:toll_plaza/DatabaseModule/Teesta/previousReportTeestaDataModule.
 
 class PreviousRevenueGraphTeesta extends StatefulWidget {
   @override
-  _PreviousRevenueGraphTeestaState createState() =>
-      _PreviousRevenueGraphTeestaState();
+  _PreviousRevenueGraphTeestaState createState() => _PreviousRevenueGraphTeestaState();
 }
 
-class _PreviousRevenueGraphTeestaState
-    extends State<PreviousRevenueGraphTeesta> {
+class _PreviousRevenueGraphTeestaState extends State<PreviousRevenueGraphTeesta> {
   List<charts.Series<VehicleModel, String>> seriesList;
 
-  bool animate = true;
   String pointerValue;
 
-  _createSampleData() {
+  _createSampleData() async {
     List<VehicleModel> data = [];
 
     for (var v in context.read<PreviousReportTeestaDataModule>().dataList2) {
@@ -24,11 +21,7 @@ class _PreviousRevenueGraphTeestaState
           day: v.date.substring(8, 10),
           revenue: (int.parse(v.dailyTotalAmount))));
     }
-    /*for (var v in context.read<PreviousReportTeestaDataModule>().dataList) {
-      data.add(VehicleModel(
-          day: v.date.substring(0, 2),
-          revenue: (int.parse(v.dailyTotalAmount))));
-    }*/
+
     seriesList.add(charts.Series(
       data: data,
       colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
@@ -44,7 +37,7 @@ class _PreviousRevenueGraphTeestaState
   void initState() {
     // TODO: implement initState
     super.initState();
-    seriesList = List<charts.Series<VehicleModel, String>>();
+    seriesList = <charts.Series<VehicleModel, String>>[];
     _createSampleData();
   }
 
@@ -55,34 +48,35 @@ class _PreviousRevenueGraphTeestaState
         padding: const EdgeInsets.all(8.0),
         child: charts.BarChart(
           seriesList,
+          animate: true,
+
+          primaryMeasureAxis: new charts.NumericAxisSpec(
+              tickProviderSpec: new charts.BasicNumericTickProviderSpec(desiredTickCount: 10)
+          ),
+          barRendererDecorator: charts.BarLabelDecorator<String>(
+            labelPosition: charts.BarLabelPosition.inside,
+          ),
+          domainAxis: charts.OrdinalAxisSpec(),
           behaviors: [
-            charts.ChartTitle(pointerValue,
-                titleStyleSpec: charts.TextStyleSpec(
-                    color: charts.MaterialPalette.green.shadeDefault),
-                behaviorPosition: charts.BehaviorPosition.top,
-                titleOutsideJustification:
-                    charts.OutsideJustification.middleDrawArea),
+            charts.ChartTitle(
+              pointerValue,
+              titleStyleSpec: charts.TextStyleSpec(
+                  color: charts.MaterialPalette.green.shadeDefault
+              ),
+              behaviorPosition: charts.BehaviorPosition.top,
+              titleOutsideJustification: charts.OutsideJustification.middleDrawArea,
+            ),
           ],
 
           selectionModels: [
             charts.SelectionModelConfig(
                 changedListener: (charts.SelectionModel model) {
-              if (model.hasDatumSelection)
-                setState(() {
-                  pointerValue = "Date-" +
-                      model.selectedSeries[0]
-                          .domainFn(model.selectedDatum[0].index)
-                          .toString() +
-                      ": " +
-                      model.selectedSeries[0]
-                          .measureFn(model.selectedDatum[0].index)
-                          .toString() +
-                      " tk";
-                });
-            })
+                  if (model.hasDatumSelection)
+                    setState(() {
+                      pointerValue = "Date-${model.selectedSeries[0].domainFn(model.selectedDatum[0].index).toString()}: ${model.selectedSeries[0].measureFn(model.selectedDatum[0].index).toString()} tk";
+                    });
+                })
           ],
-
-          animate: animate,
           //vertical: false,
           // barRendererDecorator: charts.BarLabelDecorator<String>(
           //   insideLabelStyleSpec:  charts.TextStyleSpec(fontSize: 12),

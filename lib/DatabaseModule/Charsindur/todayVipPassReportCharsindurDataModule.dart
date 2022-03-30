@@ -11,15 +11,13 @@ class TodayVipPassReportCharsindurDataModule extends ChangeNotifier {
   int totalYesterdayRevenue;
   int totalYesterdayVehicle;
 
-  List<VehicleReportList> vehicleReportList = List();
-  List<VehicleReportList> yesterdayVehicleReportList = List();
-  List<TodayReportCharsindurDataModule> dataList = List();
+  List<VehicleReportList> vehicleReportList = <VehicleReportList>[];
+  List<VehicleReportList> yesterdayVehicleReportList = <VehicleReportList>[];
+  List<TodayReportCharsindurDataModule> dataList = <TodayReportCharsindurDataModule>[];
 
   fetchData(url) async {
     try {
       var response = await http.get(url);
-      //print(response.body);
-
       var data = json.decode(response.body);
       dataList.clear();
       dataList.insert(
@@ -69,9 +67,9 @@ class TodayVipPassReportCharsindurDataModule extends ChangeNotifier {
           dataList[0].trailerLong = dataList[0].trailerLong + 1;
         }
       }
-      //print(vehicleReportList[0]);
+    } catch (e) {
 
-    } catch (e) {}
+    }
   }
 
   getYesterdayReportData(String url) async {
@@ -229,9 +227,9 @@ class TodayVipPassReportCharsindurDataModule extends ChangeNotifier {
         totalRevenue = totalRevenue + v.totalVehicle * v.perVehicleRate;
         totalVehicle = totalVehicle + v.totalVehicle;
       }
-      //print(vehicleReportList[0]);
+    } catch (e) {
 
-    } catch (e) {}
+    }
     notifyListeners();
   }
 }

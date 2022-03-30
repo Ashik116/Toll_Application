@@ -38,14 +38,13 @@ class TodayReportCharsindurDataModule extends ChangeNotifier {
     this.trailerLong,
   });
 
-  List<VehicleReportList> vehicleReportList = List();
-  List<VehicleReportList> yesterdayVehicleReportList = List();
-  List<TodayReportCharsindurDataModule> dataList = List();
+  List<VehicleReportList> vehicleReportList = <VehicleReportList>[];
+  List<VehicleReportList> yesterdayVehicleReportList = <VehicleReportList>[];
+  List<TodayReportCharsindurDataModule> dataList = <TodayReportCharsindurDataModule>[];
   
   fetchData(url) async {
     try{
       var response = await http.get(url);
-      //print(response.body);
       var data = json.decode(response.body);
       dataList.clear();
       dataList.insert(
@@ -256,9 +255,9 @@ class TodayReportCharsindurDataModule extends ChangeNotifier {
         totalRevenue = totalRevenue + v.totalVehicle * v.perVehicleRate;
         totalVehicle = totalVehicle + v.totalVehicle;
       }
-      //print(vehicleReportList[0]);
+    } catch (e) {
 
-    } catch (e) {}
+    }
     notifyListeners();
   }
 
@@ -286,9 +285,10 @@ class VehicleReportList {
   var totalVehicle;
   var perVehicleRate;
 
-  VehicleReportList(
-      {this.vehicleName,
-      this.vehicleImage,
-      this.totalVehicle,
-      this.perVehicleRate});
+  VehicleReportList({
+    this.vehicleName,
+    this.vehicleImage,
+    this.totalVehicle,
+    this.perVehicleRate
+  });
 }
