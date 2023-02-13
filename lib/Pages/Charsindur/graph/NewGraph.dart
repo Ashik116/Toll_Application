@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-import 'package:toll_plaza/Pages/Teesta/previousRevenueGraphTeesta.dart';
-import 'package:toll_plaza/Pages/Teesta/previousVehicleGraphTeesta.dart';
-import 'package:toll_plaza/Pages/Teesta/todayRevenueGraphTeesta.dart';
-import 'package:toll_plaza/Pages/Teesta/todayVehicleGraphTeesta.dart';
+import 'package:toll_plaza/Pages/Charsindur/graph/previousGraphVchielCharsindur.dart';
+import 'package:toll_plaza/Pages/Charsindur/graph/previousRevenueGraph.dart';
+import 'package:toll_plaza/Pages/Charsindur/graph/todaVehicelgraph.dart';
+import 'package:toll_plaza/Pages/Charsindur/graph/todayRevenueGraph.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
-class GraphCharsindur extends StatefulWidget {
+class GraphCharsindur1 extends StatefulWidget {
   @override
-  _GraphCharsindurState createState() => _GraphCharsindurState();
+  _GraphCharsindur1State createState() => _GraphCharsindur1State();
 }
 
-class _GraphCharsindurState extends State<GraphCharsindur> {
+class _GraphCharsindur1State extends State<GraphCharsindur1> {
   bool _todayOrPreviousSelected = true;
   bool _vehicleOrRevenueSelected = true;
   int initialIndex1 = 0;
@@ -95,15 +95,15 @@ class _GraphCharsindurState extends State<GraphCharsindur> {
   Widget setPage() {
     if (_vehicleOrRevenueSelected) {
       if (_todayOrPreviousSelected) {
-        return TodayVehicleGraphTeesta(); //TodayVehicleGraphTeesta//PreviousVehicleGraphTeesta
+        return TodayVehicleGraphCharsindur1(); //TodayVehicleGraphTeesta//PreviousVehicleGraphTeesta
       } else {
-        return PreviousVehicleGraphTeesta();
+        return PreviousVehicleGraphCharsindur1();
       }
     } else {
       if (_todayOrPreviousSelected) {
-        return TodayRevenueGraphTeesta(); //TodayRevenueGraphTeesta
+        return TodayRevenueGraphCharsindur1(); //TodayRevenueGraphTeesta
       } else {
-        return PreviousRevenueGraphTeesta();
+        return PreviousRevenueGraphCharsindur1();
       }
     }
   }

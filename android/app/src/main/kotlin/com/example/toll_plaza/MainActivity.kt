@@ -1,4 +1,4 @@
-package com.example.toll_plaza
+package com.toll_plaza.regnum.it
 
 import io.flutter.embedding.android.FlutterActivity
 

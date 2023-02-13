@@ -11,6 +11,7 @@ import 'package:toll_plaza/Pages/Teesta/reportSearch.dart';
 import 'package:toll_plaza/Pages/Teesta/todayReportTeesta.dart';
 import 'package:toll_plaza/Pages/Teesta/vipPassTeesta.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
+
 import 'GraphTeesta.dart';
 import 'PreviousReportTeesta2.dart';
 
@@ -33,15 +34,12 @@ class _TeestaReportPageState extends State<TeestaReportPage> {
 
       await context.read<PreviousVIPReportTeestaDataModule>().getReport();
 
-      await context
-          .read<TodayReportTeestaDataModule>()
-          .getYesterdayVehicleData(
-          "http://103.150.65.122/api/api/yesterday.php");//test
+      await context.read<TodayReportTeestaDataModule>().getYesterdayVehicleData(
+          "http://103.182.219.34/api/api/yesterday.php"); //test
       await context
           .read<TodayVipPassReportTeestaDataModule>()
           .getYesterdayReportData(
-          "http://103.150.65.122/api/api/yesterdayvippass.php");//test
-
+              "http://103.182.219.34/api/api/yesterdayvippass.php"); //test
 
       int time = int.parse(DateFormat.H().format(DateTime.now()).toString());
 
@@ -49,26 +47,25 @@ class _TeestaReportPageState extends State<TeestaReportPage> {
         //------- data get to api 12 am to 7 am ------------
         await context
             .read<TodayReportTeestaDataModule>()
-            .getTodayReportData("http://103.150.65.122/api/api/yesterday.php");
+            .getTodayReportData("http://103.182.219.34/api/api/yesterday.php");
         await context
             .read<TodayVipPassReportTeestaDataModule>()
-            .getTodayReportData("http://103.150.65.122/api/api/yesterdayvippass.php");
+            .getTodayReportData(
+                "http://103.182.219.34/api/api/yesterdayvippass.php");
       } else {
         //------- data get to api 7 am to 12 am ------------
         await context
             .read<TodayReportTeestaDataModule>()
-            .getTodayReportData("http://103.150.65.122/api/api/today.php");
+            .getTodayReportData("http://103.182.219.34/api/api/today.php");
         await context
             .read<TodayVipPassReportTeestaDataModule>()
-            .getTodayReportData("http://103.150.65.122/api/api/vippass.php");
+            .getTodayReportData("http://103.182.219.34/api/api/vippass.php");
       }
 
       setState(() {
         isLoading = false;
       });
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
 
   @override
@@ -112,17 +109,20 @@ class _TeestaReportPageState extends State<TeestaReportPage> {
                     Expanded(
                       child: Text(
                         "Teesta Toll Report",
-                        style: TextStyle(color: providerThemeAndColor.textColor),
+                        style:
+                            TextStyle(color: providerThemeAndColor.textColor),
                       ),
                     ),
                     IconButton(
                         icon: Icon(Icons.search),
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (_) => ReportSearch()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => ReportSearch()));
                         })
                   ],
-                )
-            ),
+                )),
             bottom: TabBar(
               isScrollable: true,
               indicator: RectangularIndicator(
@@ -132,16 +132,35 @@ class _TeestaReportPageState extends State<TeestaReportPage> {
                   topRightRadius: 100,
                   color: providerThemeAndColor.indicatorColor,
                   horizontalPadding: 5,
-                  verticalPadding: 5
-              ),
+                  verticalPadding: 5),
               labelStyle: TextStyle(color: providerThemeAndColor.textColor),
               indicatorColor: providerThemeAndColor.textColor,
               labelColor: providerThemeAndColor.textColor,
               tabs: [
-                Tab(child: Text('TODAY', style: TextStyle(fontWeight: FontWeight.bold),),),
-                Tab(child: Text('PREVIOUS', style: TextStyle(fontWeight: FontWeight.bold),),),
-                Tab(child: Text('GRAPH', style: TextStyle(fontWeight: FontWeight.bold),),),
-                Tab(child: Text('VIP PASS', style: TextStyle(fontWeight: FontWeight.bold),),),
+                Tab(
+                  child: Text(
+                    'TODAY',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'PREVIOUS',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'GRAPH',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'VIP PASS',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
               ],
             ),
           ),

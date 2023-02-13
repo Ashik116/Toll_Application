@@ -1,16 +1,16 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:toll_plaza/DatabaseModule/Teesta/previousReportTeestaDataModule.dart';
+import 'package:toll_plaza/DatabaseModule/Charsindur/previousReportCharsindurDataModule.dart';
 
-class PreviousRevenueGraphTeesta extends StatefulWidget {
+class PreviousRevenueGraphCharsindur1 extends StatefulWidget {
   @override
-  _PreviousRevenueGraphTeestaState createState() =>
-      _PreviousRevenueGraphTeestaState();
+  _PreviousRevenueGraphCharsindur1State createState() =>
+      _PreviousRevenueGraphCharsindur1State();
 }
 
-class _PreviousRevenueGraphTeestaState
-    extends State<PreviousRevenueGraphTeesta> {
+class _PreviousRevenueGraphCharsindur1State
+    extends State<PreviousRevenueGraphCharsindur1> {
   List<charts.Series<VehicleModel, String>> seriesList;
 
   String pointerValue;
@@ -18,7 +18,8 @@ class _PreviousRevenueGraphTeestaState
   _createSampleData() async {
     List<VehicleModel> data = [];
 
-    for (var v in context.read<PreviousReportTeestaDataModule>().dataList2) {
+    for (var v
+        in context.read<PreviousReportDataModuleCharsindur>().dataList2) {
       data.add(VehicleModel(
           day: v.date.substring(8, 10),
           revenue: (int.parse(v.dailyTotalAmount))));

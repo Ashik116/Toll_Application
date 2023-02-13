@@ -91,13 +91,13 @@ class _GraphTeestaState extends State<GraphTeesta> {
   Widget setPage() {
     if (_vehicleOrRevenueSelected) {
       if (_todayOrPreviousSelected) {
-        return TodayVehicleGraphTeesta();
+        return TodayVehicleGraphTeesta();//TodayVehicleGraphTeesta//PreviousVehicleGraphTeesta
       } else {
         return PreviousVehicleGraphTeesta();
       }
     } else {
       if (_todayOrPreviousSelected) {
-        return TodayRevenueGraphTeesta();
+        return TodayRevenueGraphTeesta();//TodayRevenueGraphTeesta
       } else {
         return PreviousRevenueGraphTeesta();
       }

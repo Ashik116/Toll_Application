@@ -5,7 +5,6 @@ import 'package:toll_plaza/DatabaseModule/Charsindur/todayReportCharsindurDataMo
 import 'package:toll_plaza/DesignModule/indicator.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
-
 class TodayRevenueGraph extends StatefulWidget {
   @override
   _TodayRevenueGraphState createState() => _TodayRevenueGraphState();
@@ -32,7 +31,7 @@ class _TodayRevenueGraphState extends State<TodayRevenueGraph> {
 
   @override
   Widget build(BuildContext context) {
-    var data = Provider.of<TodayReportCharsindurDataModule>(context);
+    var data = Provider.of<TodayReportCharsindurDataModule1>(context);
     var themeAndColor = Provider.of<ThemeAndColorProvider>(context);
     return Card(
       margin: EdgeInsets.all(0),
@@ -45,8 +44,8 @@ class _TodayRevenueGraphState extends State<TodayRevenueGraph> {
               height: 280,
               child: PieChart(
                 PieChartData(
-
-                    pieTouchData: PieTouchData(touchCallback: (pieTouchResponse) {
+                    pieTouchData:
+                        PieTouchData(touchCallback: (pieTouchResponse) {
                       setState(() {
                         if (pieTouchResponse.touchInput is FlLongPressEnd ||
                             pieTouchResponse.touchInput is FlPanEnd) {
@@ -59,7 +58,6 @@ class _TodayRevenueGraphState extends State<TodayRevenueGraph> {
                     borderData: FlBorderData(
                       show: false,
                     ),
-
                     sectionsSpace: 0,
                     centerSpaceRadius: 70,
                     sections: showingSections()),
@@ -70,13 +68,15 @@ class _TodayRevenueGraphState extends State<TodayRevenueGraph> {
               primary: false,
               itemCount: 13,
               itemBuilder: (context, index) {
-                int perVehicleRevenue = data.yesterdayVehicleReportList[index].totalVehicle*data.yesterdayVehicleReportList[index].perVehicleRate;
-                  return Indicator(
-                    color: colorList[index],
-                    text: data.yesterdayVehicleReportList[index].vehicleName,
-                    value: perVehicleRevenue.toString()+" Tk",
-                    isSquare: true,
-                  );
+                int perVehicleRevenue =
+                    data.yesterdayVehicleReportList[index].totalVehicle *
+                        data.yesterdayVehicleReportList[index].perVehicleRate;
+                return Indicator(
+                  color: colorList[index],
+                  text: data.yesterdayVehicleReportList[index].vehicleName,
+                  value: perVehicleRevenue.toString() + " Tk",
+                  isSquare: true,
+                );
               },
             ),
           ],
@@ -90,15 +90,16 @@ class _TodayRevenueGraphState extends State<TodayRevenueGraph> {
       final isTouched = i == touchedIndex;
       final double fontSize = isTouched ? 20 : 0;
       final double radius = isTouched ? 60 : 50;
-      var data = Provider.of<TodayReportCharsindurDataModule>(context);
+      var data = Provider.of<TodayReportCharsindurDataModule1>(context);
 
-      int perVehicleRevenue = data.yesterdayVehicleReportList[i].totalVehicle*data.yesterdayVehicleReportList[i].perVehicleRate;
-      double value = (perVehicleRevenue/data.totalYesterdayRevenue)*100;
+      int perVehicleRevenue = data.yesterdayVehicleReportList[i].totalVehicle *
+          data.yesterdayVehicleReportList[i].perVehicleRate;
+      double value = (perVehicleRevenue / data.totalYesterdayRevenue) * 100;
       String title = data.yesterdayVehicleReportList[i].vehicleName;
       return PieChartSectionData(
         color: colorList[i],
         value: value,
-        title: title.toString()+": \n"+value.toStringAsFixed(1) + ' %',
+        title: title.toString() + ": \n" + value.toStringAsFixed(1) + ' %',
         radius: radius,
         titleStyle: TextStyle(
             fontSize: fontSize,

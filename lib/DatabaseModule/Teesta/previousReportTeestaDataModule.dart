@@ -1,36 +1,35 @@
 import 'dart:convert';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class PreviousReportTeestaDataModule extends ChangeNotifier {
   var date;
   var dailyTotalAmount;
   var vehicles;
 
-  PreviousReportTeestaDataModule({
-    this.date,
-    this.vehicles,
-    this.dailyTotalAmount
-  });
+  PreviousReportTeestaDataModule(
+      {this.date, this.vehicles, this.dailyTotalAmount});
 
   List<PreviousReportTeestaDataModule> _dataList = [];
   List<PreviousReportTeestaDataModule> get dataList => _dataList;
-
 
   List<PreviousReportTeestaDataModule> _dataList2 = [];
   List<PreviousReportTeestaDataModule> get dataList2 => _dataList2;
 
   getData2() async {
-    try{
-      var response =await http.get("http://103.150.65.122/api/api/previousdays.php");
+    try {
+      var response =
+          await http.get("http://103.182.219.34/api/api/previousdays.php");
       var jsonData = json.decode(response.body)["data"] as List;
       dataList2.clear();
       var i = 1;
       for (var json in jsonData) {
-        var weeklyDate = DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(Duration(days: i)));
+        var weeklyDate = DateFormat("yyyy-MM-dd")
+            .format(DateTime.now().subtract(Duration(days: i)));
         if (json != null) {
           dataList2.add(PreviousReportTeestaDataModule.fromJson2(json));
         }
@@ -39,9 +38,7 @@ class PreviousReportTeestaDataModule extends ChangeNotifier {
       if (dataList2.length > 7) {
         dataList2.remove(dataList2.last);
       }
-    } catch(e){
-
-    }
+    } catch (e) {}
   }
 
   getReport() {
@@ -51,15 +48,15 @@ class PreviousReportTeestaDataModule extends ChangeNotifier {
         var data = event.snapshot.value;
         dataList.clear();
         for (var i = 1; i <= 7; i++) {
-          var weeklyDate = DateFormat("dd-MM-yyyy").format(DateTime.now().subtract(Duration(days: i)));
+          var weeklyDate = DateFormat("dd-MM-yyyy")
+              .format(DateTime.now().subtract(Duration(days: i)));
           if (data[weeklyDate] != null) {
-            dataList.add(PreviousReportTeestaDataModule.fromJson(data[weeklyDate]));
+            dataList
+                .add(PreviousReportTeestaDataModule.fromJson(data[weeklyDate]));
           }
         }
       });
-    } catch (e) {
-
-    }
+    } catch (e) {}
     notifyListeners();
   }
 

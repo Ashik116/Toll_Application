@@ -6,15 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:toll_plaza/DesignModule/searchReportview.dart';
-import 'package:toll_plaza/Provider/getData.dart';
+import 'package:toll_plaza/Provider/getCharsindurData.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
-class ReportSearch extends StatefulWidget {
+class ReportSearchCharsindur extends StatefulWidget {
   @override
-  _ReportSearchState createState() => _ReportSearchState();
+  _ReportSearchCharsindurState createState() => _ReportSearchCharsindurState();
 }
 
-class _ReportSearchState extends State<ReportSearch> {
+class _ReportSearchCharsindurState extends State<ReportSearchCharsindur> {
   double _height, _width;
   bool large;
   bool medium;
@@ -93,7 +93,7 @@ class _ReportSearchState extends State<ReportSearch> {
       backgroundColor: providerThemeAndColor.backgroundColor,
       appBar: AppBar(
         title: Text(
-          " Teesta Report Search",
+          " Charsindur Report Search",
           style: TextStyle(
             color: providerThemeAndColor.textColor,
           ),
@@ -231,8 +231,9 @@ class _ReportSearchState extends State<ReportSearch> {
                         setState(() {
                           Select = newValue;
                           rateCalculation();
-                          var fetchData =
-                              Provider.of<GetData>(context, listen: false);
+                          var fetchData = Provider.of<GetDataCharsindur>(
+                              context,
+                              listen: false);
                           fetchData.search_report(
                               DateFormat('yyyy-MM-dd')
                                   .format(startTime)
@@ -310,8 +311,9 @@ class _ReportSearchState extends State<ReportSearch> {
                                   borderRadius: BorderRadius.circular(25)),
                             ),
                             onPressed: () {
-                              var fetchData =
-                                  Provider.of<GetData>(context, listen: false);
+                              var fetchData = Provider.of<GetDataCharsindur>(
+                                  context,
+                                  listen: false);
                               fetchData.search_report(
                                   DateFormat('yyyy-MM-dd')
                                       .format(startTime)
@@ -328,7 +330,7 @@ class _ReportSearchState extends State<ReportSearch> {
                 ],
               ),
             ),
-            Expanded(child: Consumer<GetData>(
+            Expanded(child: Consumer<GetDataCharsindur>(
               builder: (content, data, child) {
                 return data.searchModel != null
                     ? Container(
@@ -375,7 +377,7 @@ class _ReportSearchState extends State<ReportSearch> {
                                     //       arguments: data.searchModel.data[index].imagase);},
                                     child: Image(
                                       image: NetworkImage(
-                                        "http://103.182.219.34/image/${data.searchModel.data[index].imagase}",
+                                        "http://103.95.99.139/image/${data.searchModel.data[index].imagase}",
                                       ),
                                       fit: BoxFit.cover,
                                     ),

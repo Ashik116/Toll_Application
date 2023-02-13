@@ -1,41 +1,36 @@
-
-import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toll_plaza/DatabaseModule/Charsindur/previousReportCharsindurDataModule.dart';
 
-
 class PreviousVehicleGraphCharsindur extends StatefulWidget {
-
   @override
-  _PreviousVehicleGraphCharsindurState createState() => _PreviousVehicleGraphCharsindurState();
+  _PreviousVehicleGraphCharsindurState createState() =>
+      _PreviousVehicleGraphCharsindurState();
 }
 
-class _PreviousVehicleGraphCharsindurState extends State<PreviousVehicleGraphCharsindur> {
+class _PreviousVehicleGraphCharsindurState
+    extends State<PreviousVehicleGraphCharsindur> {
   List<charts.Series<VehicleModel, String>> seriesList;
 
   bool animate = true;
 
-
-
   _createSampleData() {
-
-
     List<VehicleModel> data = [];
 
-    for(var v in context.read<PreviousReportCharsindurDataModule>().dataList){
-      data.add(VehicleModel(day: v.date.substring(0,2), vehicle: (int.parse(v.vehicles))));
+    for (var v in context.read<PreviousReportDataModuleCharsindur>().dataList) {
+      data.add(VehicleModel(
+          day: v.date.substring(0, 2), vehicle: (int.parse(v.vehicles))));
     }
-    seriesList.add(
-      charts.Series(
-        data: data,
-        colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
-        domainFn: (VehicleModel vehicleModel, _) => vehicleModel.day,
-        measureFn: (VehicleModel vehicleModel, _) => vehicleModel.vehicle,
-        labelAccessorFn: (VehicleModel vehicleModel, _) => vehicleModel.vehicle.toString(),
-        id: 'Vehicle',
-      )
-    );
+    seriesList.add(charts.Series(
+      data: data,
+      colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+      domainFn: (VehicleModel vehicleModel, _) => vehicleModel.day,
+      measureFn: (VehicleModel vehicleModel, _) => vehicleModel.vehicle,
+      labelAccessorFn: (VehicleModel vehicleModel, _) =>
+          vehicleModel.vehicle.toString(),
+      id: 'Vehicle',
+    ));
   }
 
   @override
@@ -44,9 +39,7 @@ class _PreviousVehicleGraphCharsindurState extends State<PreviousVehicleGraphCha
     super.initState();
     seriesList = List<charts.Series<VehicleModel, String>>();
     _createSampleData();
-
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -56,14 +49,13 @@ class _PreviousVehicleGraphCharsindurState extends State<PreviousVehicleGraphCha
         child: charts.BarChart(
           seriesList,
           animate: animate,
-         barRendererDecorator: charts.BarLabelDecorator<String>(),
-         domainAxis: new charts.OrdinalAxisSpec(),
+          barRendererDecorator: charts.BarLabelDecorator<String>(),
+          domainAxis: new charts.OrdinalAxisSpec(),
         ),
       ),
     );
   }
 }
-
 
 class VehicleModel {
   final String day;

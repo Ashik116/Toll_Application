@@ -1,3 +1,5 @@
+import 'package:excel/excel.dart';
+import 'package:excel/excel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,12 +8,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toll_plaza/Pages/Users/Users.dart';
 import 'package:toll_plaza/Pages/loginPage.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class NavigationDrawer extends StatelessWidget {
+
+
+
+
   final Function darkSwitch;
   final Function snack;
   final BuildContext context;
   const NavigationDrawer(this.darkSwitch, this.snack, this.context);
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +35,25 @@ class NavigationDrawer extends StatelessWidget {
         color: providerThemeAndColor.drawerColor,
         child: ListView(
           children: [
-            Image.asset(
-                "assets/images/regnum.png",
-                height: 150
-            ),
+            Image.asset("assets/images/regnum.png", height: 150),
             SizedBox(
               height: 30,
             ),
-            Divider(thickness: 1, indent: 100, endIndent: 100,),
-            Divider(thickness: 1, indent: 60, endIndent: 60,),
-            Divider(thickness: 1, indent: 20, endIndent: 20,),
+            Divider(
+              thickness: 1,
+              indent: 100,
+              endIndent: 100,
+            ),
+            Divider(
+              thickness: 1,
+              indent: 60,
+              endIndent: 60,
+            ),
+            Divider(
+              thickness: 1,
+              indent: 20,
+              endIndent: 20,
+            ),
             ListTile(
               leading: Icon(
                 Icons.home_filled,
@@ -64,10 +85,14 @@ class NavigationDrawer extends StatelessWidget {
                 ),
               ),
               onTap: () async {
-                SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                SharedPreferences sharedPreferences =
+                    await SharedPreferences.getInstance();
                 Navigator.pop(context);
-                if(sharedPreferences.getBool('isAdmin')) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Users()),);
+                if (sharedPreferences.getBool('isAdmin')) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Users()),
+                  );
                 } else {
                   snack("Permission Denied!");
                 }
@@ -89,14 +114,20 @@ class NavigationDrawer extends StatelessWidget {
               ),
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
-                SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                SharedPreferences sharedPreferences =
+                    await SharedPreferences.getInstance();
                 sharedPreferences.clear();
                 Navigator.pushAndRemoveUntil(
-                    context, MaterialPageRoute(builder: (context) => LogInPage()),
-                        (route) => false);
+                    context,
+                    MaterialPageRoute(builder: (context) => LogInPage()),
+                    (route) => false);
               },
             ),
-            Divider(thickness: 1, indent: 20, endIndent: 20,),
+            Divider(
+              thickness: 1,
+              indent: 20,
+              endIndent: 20,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
               child: InkWell(
@@ -105,11 +136,13 @@ class NavigationDrawer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Icon(
-                      Icons.dark_mode_rounded,
+                      Icons.dark_mode,
                       size: 30,
                       color: providerThemeAndColor.textColor,
                     ),
-                    SizedBox(width: 23,),
+                    SizedBox(
+                      width: 23,
+                    ),
                     Text(
                       "Dark",
                       style: TextStyle(
@@ -118,7 +151,9 @@ class NavigationDrawer extends StatelessWidget {
                         color: providerThemeAndColor.textColor,
                       ),
                     ),
-                    SizedBox(width: 10,),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Switch(
                       inactiveThumbColor: providerThemeAndColor.iconColor,
                       activeTrackColor: providerThemeAndColor.mainColor,
@@ -132,10 +167,50 @@ class NavigationDrawer extends StatelessWidget {
                 ),
               ),
             ),
-            Divider(thickness: 1, indent: 20, endIndent: 20,),
-            Divider(thickness: 1, indent: 60, endIndent: 60,),
-            Divider(thickness: 1, indent: 100, endIndent: 100,),
-            SizedBox(height: 10,),
+            Divider(
+              thickness: 1,
+              indent: 20,
+              endIndent: 20,
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.account_box_outlined,
+                size: 30,
+                color: providerThemeAndColor.textColor,
+              ),
+              title: Text(
+                'About',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                  color: providerThemeAndColor.textColor,
+                ),
+              ),
+              onTap: () async {
+                String website ='https://regnum.com.bd/';
+                if(!await launch(website)){
+                  throw "not launch $website";
+                }
+              },
+            ),
+            Divider(
+              thickness: 1,
+              indent: 20,
+              endIndent: 20,
+            ),
+            Divider(
+              thickness: 1,
+              indent: 60,
+              endIndent: 60,
+            ),
+            Divider(
+              thickness: 1,
+              indent: 100,
+              endIndent: 100,
+            ),
+            SizedBox(
+              height: 10,
+            ),
             Text(
               'Version: 2.3.2',
               textAlign: TextAlign.center,
@@ -150,4 +225,3 @@ class NavigationDrawer extends StatelessWidget {
     );
   }
 }
-

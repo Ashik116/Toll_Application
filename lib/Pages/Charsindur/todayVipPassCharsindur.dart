@@ -10,28 +10,23 @@ class TodayVipPassCharsindur extends StatefulWidget {
 }
 
 class _TodayVipPassCharsindurState extends State<TodayVipPassCharsindur> {
-
-
-
   @override
   Widget build(BuildContext context) {
     final providerThemeAndColor = Provider.of<ThemeAndColorProvider>(context);
     final vehicleDataList =
-    Provider.of<TodayVipPassReportCharsindurDataModule>(context);
+        Provider.of<TodayVipPassCharsindurReportDataModule>(context);
     return Column(children: [
-      SizedBox(
-        height: 2,
-      ),
       Container(
         width: double.infinity,
         padding: EdgeInsets.all(10),
-        color: providerThemeAndColor.secondColor,
+        color: providerThemeAndColor.barColor,
         child: Text(
-          "Total VIP Pass: "+vehicleDataList.totalVehicle.toString(),
+          "Total VIP Pass: ${vehicleDataList.totalVehicle.toString()}",
           style: TextStyle(
               color: providerThemeAndColor.secondTextColor,
               fontStyle: FontStyle.italic,
-              fontSize: 18),
+              fontWeight: FontWeight.bold,
+              fontSize: 20),
           textAlign: TextAlign.center,
         ),
       ),
@@ -50,7 +45,7 @@ class _TodayVipPassCharsindurState extends State<TodayVipPassCharsindur> {
                 totalVehicle: vehicle.totalVehicle.toString(),
                 perVehicleRate: vehicle.perVehicleRate.toString(),
                 triadRowTitle: "Total Payment",
-                totalPayment: "0",
+                totalPayment: '0',
               );
             }),
       ),

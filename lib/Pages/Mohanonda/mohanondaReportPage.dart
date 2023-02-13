@@ -33,23 +33,25 @@ class _MohanondaReportPageState extends State<MohanondaReportPage> {
       //test
       await context
           .read<TodayReportMohanondaDataModule>()
-          .getYesterdayVehicleData("http://103.145.118.20/api/api/yesterday.php");
+          .getYesterdayVehicleData(
+              "http://103.145.118.20/api/api/yesterday.php");
 
       await context
           .read<TodayVipPassReportMohanondaDataModule>()
-          .getYesterdayReportData("http://103.145.118.20/api/api/yesterdayvippass.php");//test
+          .getYesterdayReportData(
+              "http://103.145.118.20/api/api/yesterdayvippass.php"); //test
 
       int time = int.parse(DateFormat.H().format(DateTime.now()).toString());
 
-      if (time < 7) {
+      if (time < 8) {
         //------- data get to api 12 am to 7 am ------------
         await context
             .read<TodayReportMohanondaDataModule>()
             .getTodayReportData("http://103.145.118.20/api/api/yesterday.php");
         await context
             .read<TodayVipPassReportMohanondaDataModule>()
-            .getTodayReportData("http://103.145.118.20/api/api/yesterdayvippass.php");
-
+            .getTodayReportData(
+                "http://103.145.118.20/api/api/yesterdayvippass.php");
       } else {
         //------- data get to api 7 am to 12 am ------------
         await context
@@ -63,9 +65,7 @@ class _MohanondaReportPageState extends State<MohanondaReportPage> {
       setState(() {
         isLoading = false;
       });
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
 
   @override
@@ -108,7 +108,8 @@ class _MohanondaReportPageState extends State<MohanondaReportPage> {
                     Expanded(
                       child: Text(
                         "Mohanonda Toll Report",
-                        style: TextStyle(color: providerThemeAndColor.textColor),
+                        style:
+                            TextStyle(color: providerThemeAndColor.textColor),
                       ),
                     ),
                     IconButton(
@@ -120,8 +121,7 @@ class _MohanondaReportPageState extends State<MohanondaReportPage> {
                                   builder: (_) => MohanondaReportSearch()));
                         })
                   ],
-                )
-            ),
+                )),
             bottom: TabBar(
               isScrollable: true,
               indicator: RectangularIndicator(
@@ -129,18 +129,37 @@ class _MohanondaReportPageState extends State<MohanondaReportPage> {
                   bottomRightRadius: 100,
                   topLeftRadius: 100,
                   topRightRadius: 100,
-                  color:  Colors.black26,
+                  color: Colors.black26,
                   horizontalPadding: 5,
-                  verticalPadding: 5
-              ),
+                  verticalPadding: 5),
               labelStyle: TextStyle(color: providerThemeAndColor.textColor),
               indicatorColor: providerThemeAndColor.textColor,
               labelColor: providerThemeAndColor.textColor,
               tabs: [
-                Tab(child: Text('TODAY', style: TextStyle(fontWeight: FontWeight.bold),),),
-                Tab(child: Text('PREVIOUS', style: TextStyle(fontWeight: FontWeight.bold),),),
-                Tab(child: Text('GRAPH', style: TextStyle(fontWeight: FontWeight.bold),),),
-                Tab(child: Text('VIP PASS', style: TextStyle(fontWeight: FontWeight.bold),),),
+                Tab(
+                  child: Text(
+                    'TODAY',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'PREVIOUS',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'GRAPH',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'VIP PASS',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
               ],
             ),
           ),

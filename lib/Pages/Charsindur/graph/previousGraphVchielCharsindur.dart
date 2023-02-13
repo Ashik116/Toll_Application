@@ -1,16 +1,16 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:toll_plaza/DatabaseModule/Teesta/previousReportTeestaDataModule.dart';
+import 'package:toll_plaza/DatabaseModule/Charsindur/previousReportCharsindurDataModule.dart';
 
-class PreviousVehicleGraphTeesta extends StatefulWidget {
+class PreviousVehicleGraphCharsindur1 extends StatefulWidget {
   @override
-  _PreviousVehicleGraphTeestaState createState() =>
-      _PreviousVehicleGraphTeestaState();
+  _PreviousVehicleGraphCharsindur1State createState() =>
+      _PreviousVehicleGraphCharsindur1State();
 }
 
-class _PreviousVehicleGraphTeestaState
-    extends State<PreviousVehicleGraphTeesta> {
+class _PreviousVehicleGraphCharsindur1State
+    extends State<PreviousVehicleGraphCharsindur1> {
   List<charts.Series<VehicleModel, String>> seriesList;
 
   bool animate = true;
@@ -19,7 +19,8 @@ class _PreviousVehicleGraphTeestaState
   _createSampleData() {
     List<VehicleModel> data = [];
 
-    for (var v in context.read<PreviousReportTeestaDataModule>().dataList2) {
+    for (var v
+        in context.read<PreviousReportDataModuleCharsindur>().dataList2) {
       data.add(VehicleModel(
           day: v.date.substring(8, 10),
           vehicle: (int.parse(v

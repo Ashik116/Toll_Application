@@ -13,9 +13,9 @@ class _TodayVipPassTeestaState extends State<TodayVipPassTeesta> {
   @override
   Widget build(BuildContext context) {
     final providerThemeAndColor = Provider.of<ThemeAndColorProvider>(context);
-    final vehicleDataList = Provider.of<TodayVipPassReportTeestaDataModule>(context);
+    final vehicleDataList =
+        Provider.of<TodayVipPassReportTeestaDataModule>(context);
     return Column(children: [
-
       Container(
         width: double.infinity,
         padding: EdgeInsets.all(10),
@@ -26,8 +26,7 @@ class _TodayVipPassTeestaState extends State<TodayVipPassTeesta> {
               color: providerThemeAndColor.secondTextColor,
               fontStyle: FontStyle.italic,
               fontWeight: FontWeight.bold,
-              fontSize: 20
-          ),
+              fontSize: 20),
           textAlign: TextAlign.center,
         ),
       ),

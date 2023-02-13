@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:398551271487:android:8f31ee83e53f1ca018908a",
         "android_client_info": {
-          "package_name": "com.example.toll_plaza"
+          "package_name": "com.toll_plaza.regnum.it"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "398551271487-pt0ofgruf0i21kbf6uodpk9sr35tsgqb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.toll_plaza",
+            "package_name": "com.toll_plaza.regnum.it",
             "certificate_hash": "c4ee8a62c424e764febb672791782b2b3ba695bc"
           }
         },

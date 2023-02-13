@@ -4,8 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:toll_plaza/checkLogin.dart';
-import 'package:toll_plaza/test.dart';
-
 
 class SplashScreenPage extends StatefulWidget {
   @override
@@ -19,7 +17,8 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   void getData() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
 
-    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
       try {
         Future.delayed(Duration(seconds: 2)).then((value) async {
           Future.delayed(Duration(seconds: 2)).whenComplete(() {
@@ -50,7 +49,8 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
           isSplashing = false;
           refresh();
           //-------data upload to firebase after 7 am to 12 am------------
-          int time = int.parse(DateFormat.H().format(DateTime.now()).toString());
+          int time =
+              int.parse(DateFormat.H().format(DateTime.now()).toString());
           if (time >= 7) {
             /*await YesterdayDataUploadToFirebaseTeesta()
                 .upload(context.read<TodayReportTeestaDataModule>());
@@ -65,9 +65,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                 context.read<TodayVipPassReportMohanondaDataModule>());*/
           }
         });
-      } catch (e) {
-
-      }
+      } catch (e) {}
     } else {
       snackBarMsg("Please check internet connection");
       getData();
@@ -83,66 +81,63 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
 
   @override
   Widget build(BuildContext context) {
-    return !isSplashing ?
-    CheckLogIn():
-    Scaffold(
-      key: _scaffoldKey,
-      body: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/images/splash.jpg"),
-                fit: BoxFit.fill
-            )
-        ),
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 100),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    FadeInLeft(
-                      duration: Duration(milliseconds: 800),
-                      child: Image.asset(
-                        "assets/images/logo.png",
-                        height: 150,
-                        width: 150,
+    return !isSplashing
+        ? CheckLogIn()
+        : Scaffold(
+            key: _scaffoldKey,
+            body: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/splash.jpg"),
+                      fit: BoxFit.fill)),
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 100),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          FadeInLeft(
+                            duration: Duration(milliseconds: 800),
+                            child: Image.asset(
+                              "assets/images/logo.png",
+                              height: 150,
+                              width: 150,
+                            ),
+                          ),
+                          FadeInRight(
+                            duration: Duration(milliseconds: 800),
+                            child: Text(
+                              "Regnum Toll Plaza",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1),
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                    FadeInRight(
-                      duration: Duration(milliseconds: 800),
-                      child: Text(
-                        "Regnum Toll Plaza",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1),
-                      ),
-                    )
-                  ],
-                ),
+                  ),
+                  SafeArea(
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: BounceInDown(
+                          duration: Duration(milliseconds: 800),
+                          child: Image.asset(
+                            "assets/images/regnum.png",
+                            height: 50,
+                            width: 100,
+                          )),
+                    ),
+                  )
+                ],
               ),
             ),
-            SafeArea(
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: BounceInDown(
-                    duration: Duration(milliseconds: 800),
-                    child: Image.asset(
-                      "assets/images/regnum.png",
-                      height: 50,
-                      width: 100,
-                    )
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
+          );
   }
 
   void snackBarMsg(loginErrorMessage) {
@@ -166,9 +161,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
 
   void refresh() {
     if (mounted) {
-      setState(() {
-
-      });
+      setState(() {});
     }
   }
 }

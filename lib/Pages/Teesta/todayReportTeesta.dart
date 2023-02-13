@@ -30,8 +30,7 @@ class _TodayReportTeestaState extends State<TodayReportTeesta> {
                     color: providerThemeAndColor.secondTextColor,
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.bold,
-                    fontSize: 20
-                ),
+                    fontSize: 20),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -50,13 +49,14 @@ class _TodayReportTeestaState extends State<TodayReportTeesta> {
                       totalVehicle: vehicle.totalVehicle.toString(),
                       perVehicleRate: vehicle.perVehicleRate.toString(),
                       triadRowTitle: "Total Payment",
-                      totalPayment: (vehicle.totalVehicle * vehicle.perVehicleRate).toString(),
+                      totalPayment:
+                          (vehicle.totalVehicle * vehicle.perVehicleRate)
+                              .toString(),
                     );
                   }),
             ),
           ]),
-        )
-    );
+        ));
   }
 
   Future<void> _onRefresh() async {
@@ -67,15 +67,13 @@ class _TodayReportTeestaState extends State<TodayReportTeesta> {
       //------- data get to api 12 am to 7 am ------------
       await context
           .read<TodayReportTeestaDataModule>()
-          .getTodayReportData("http://103.150.65.122/api/api/yesterday.php");
+          .getTodayReportData("http://103.182.219.34/api/api/yesterday.php");
     } else {
       //------- data get to api 7 am to 12 am ------------
       await context
           .read<TodayReportTeestaDataModule>()
-          .getTodayReportData("http://103.150.65.122/api/api/today.php");
+          .getTodayReportData("http://103.182.219.34/api/api/today.php");
     }
-    setState(() {
-
-    });
+    setState(() {});
   }
 }

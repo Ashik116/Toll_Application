@@ -27,6 +27,7 @@ class _AdminDashboardStateNew extends State<AdminDashboardNew> {
   int regular;
   int ctlR;
   int total;
+  int total1;
   int axle2;
   int axle3;
   int axle4;
@@ -253,7 +254,7 @@ class _AdminDashboardStateNew extends State<AdminDashboardNew> {
                         elevation: 20,
                         child: Center(
                           child: Text(
-                            '$regular',
+                            '$total1',
                             style: TextStyle(
                               fontSize: 20,
                               color: isDark ? Colors.green.shade900 : Colors.green.shade400,
@@ -431,13 +432,13 @@ class _AdminDashboardStateNew extends State<AdminDashboardNew> {
                   height: 15.0,
                 ),
                 ElevatedButton(
-                  onPressed: total == null ? null : () {
-                    if(total != null || total > 0){
+                  onPressed: total1 == null ? null : () {
+                    if(total1 != null || total1 > 0){
                       _firebaseUpload();
                       setState(() {
                         regular = null;
                         ctlR= null;
-                        total= null;
+                        total1= null;
                         axle2= null;
                         axle3= null;
                         axle4= null;
@@ -766,7 +767,7 @@ class _AdminDashboardStateNew extends State<AdminDashboardNew> {
       for (var table in excel.tables.keys) {
         for (var row in excel.tables[table].rows) {
           // print(row.toString());
-          if (row[8] == 'N/A') {
+          if (row[9] == 'N/A') {
             //print(row);
             // print();
             /*ctrlRList.add(Map.fromIterables([
@@ -790,23 +791,23 @@ class _AdminDashboardStateNew extends State<AdminDashboardNew> {
               'r'
             ], row.getRange(0, 18)));*/
 
-            if (row[3] == "Truck 2 Axle") {
+            if (row[4] == "Truck 2 Axle") {
               ctrl_axle2++;
-            } else if (row[3] == "Truck 3 Axle") {
+            } else if (row[4] == "Truck 3 Axle") {
               ctrl_axle3++;
-            } else if (row[3] == "Truck 4 Axle") {
+            } else if (row[4] == "Truck 4 Axle") {
               ctrl_axle4++;
-            } else if (row[3] == "Truck 5 Axle") {
+            } else if (row[4] == "Truck 5 Axle") {
               ctrl_axle5++;
-            } else if (row[3] == "Truck 6 Axle") {
+            } else if (row[4] == "Truck 6 Axle") {
               ctrl_axle6++;
-            } else if (row[3] == "Truck 7 Axle") {
+            } else if (row[4] == "Truck 7 Axle") {
               ctrl_axle7++;
             }
             ctlR++;
           }
           try {
-            if (double.parse((row[8])) <= (row[9] + 500)) {
+            if (double.parse((row[8])) <= (row[9]+500)) {
               overload.add(Map.fromIterables([
                 'a',
                 'b',
@@ -825,20 +826,21 @@ class _AdminDashboardStateNew extends State<AdminDashboardNew> {
                 'o',
                 'p',
                 'q',
-                'r'
+                'r',
+                'r',
               ], row.getRange(0, 18)));
 
-              if (row[3] == "Truck 2 Axle") {
+              if (row[4] == "Truck 2 Axle") {
                 ld_axle2++;
-              } else if (row[3] == "Truck 3 Axle") {
+              } else if (row[4] == "Truck 3 Axle") {
                 ld_axle3++;
-              } else if (row[3] == "Truck 4 Axle") {
+              } else if (row[4] == "Truck 4 Axle") {
                 ld_axle4++;
-              } else if (row[3] == "Truck 5 Axle") {
+              } else if (row[4] == "Truck 5 Axle") {
                 ld_axle5++;
-              } else if (row[3] == "Truck 6 Axle") {
+              } else if (row[4] == "Truck 6 Axle") {
                 ld_axle6++;
-              } else if (row[3] == "Truck 7 Axle") {
+              } else if (row[4] == "Truck 7 Axle") {
                 ld_axle7++;
               }
               overld++;
@@ -847,31 +849,31 @@ class _AdminDashboardStateNew extends State<AdminDashboardNew> {
 
           }
 
-          if (row[3] == "Truck 2 Axle") {
+          if (row[4] == "Truck 2 Axle") {
             total++;
             axle2++;
-          } else if (row[3] == "Truck 3 Axle") {
+          } else if (row[4] == "Truck 3 Axle") {
             total++;
             axle3++;
-          } else if (row[3] == "Truck 4 Axle") {
+          } else if (row[4] == "Truck 4 Axle") {
             total++;
             axle4++;
-          } else if (row[3] == "Truck 5 Axle") {
+          } else if (row[4] == "Truck 5 Axle") {
             total++;
             axle5++;
-          } else if (row[3] == "Truck 6 Axle") {
+          } else if (row[4] == "Truck 6 Axle") {
             total++;
             axle6++;
-          } else if (row[3] == "Truck 7 Axle") {
+          } else if (row[4] == "Truck 7 Axle") {
             total++;
             axle7++;
           }
-
-          //total++;
+          total1= total+3;
         }
       }
-      //print(ctrlRList);
-      regular = total - ctlR;
+      print(ctrlRList);
+
+      regular = total1-ctlR;
     }
   }
 
@@ -913,7 +915,7 @@ class _AdminDashboardStateNew extends State<AdminDashboardNew> {
           .update({
         "ctrlR": ctlR.toString(),
         "regular": regular.toString(),
-        "total": total.toString(),
+        "total": total1.toString(),
         "overld": overld.toString()
       });
       if(_selectedBtnText == "chittagong2") {

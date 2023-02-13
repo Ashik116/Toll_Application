@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
-class TodayReportCharsindurDataModule extends ChangeNotifier {
+class TodayReportCharsindurDataModule1 extends ChangeNotifier {
   int rickshawVan;
   int motorCycle;
   int threeFourWheeler;
@@ -19,10 +19,13 @@ class TodayReportCharsindurDataModule extends ChangeNotifier {
 
   int totalRevenue;
   int totalVehicle;
+
   int totalYesterdayRevenue;
   int totalYesterdayVehicle;
 
-  TodayReportCharsindurDataModule({
+  int totalAmount;
+
+  TodayReportCharsindurDataModule1({
     this.rickshawVan,
     this.motorCycle,
     this.threeFourWheeler,
@@ -38,18 +41,18 @@ class TodayReportCharsindurDataModule extends ChangeNotifier {
     this.trailerLong,
   });
 
-  List<VehicleReportList> vehicleReportList = <VehicleReportList>[];
-  List<VehicleReportList> yesterdayVehicleReportList = <VehicleReportList>[];
-  List<TodayReportCharsindurDataModule> dataList = <TodayReportCharsindurDataModule>[];
-  
+  List<VehicleReportList> vehicleReportList = [];
+  List<VehicleReportList> yesterdayVehicleReportList = [];
+  List<TodayReportCharsindurDataModule1> dataList = [];
+
   fetchData(url) async {
-    try{
+    try {
       var response = await http.get(url);
-      var data = json.decode(response.body);
+      var data = json.decode(response.body)['data'] as List;
       dataList.clear();
       dataList.insert(
           0,
-          TodayReportCharsindurDataModule(
+          TodayReportCharsindurDataModule1(
               rickshawVan: 0,
               motorCycle: 0,
               threeFourWheeler: 0,
@@ -62,10 +65,26 @@ class TodayReportCharsindurDataModule extends ChangeNotifier {
               bigBus: 0,
               mediumTruck: 0,
               heavyTruck: 0,
-              trailerLong: 0));
+              trailerLong: 0
+          ));
+      dataList[0].rickshawVan = data[0]['Rickshaw_Van'] ;
+      dataList[0].motorCycle =  data[0]['MotorCycle'];
+      dataList[0].threeFourWheeler = data[0]['three_four_Wheeler'] ;
+      dataList[0].sedanCar =  data[0]['Sedan_Car'];
+      dataList[0].s4Wheeler =  data[0]['4Wheeler'];
+      dataList[0].microBus =  data[0]['Micro_Bus'];
+      dataList[0].miniBus =  data[0]['Mini_Bus'];
+      dataList[0].agroUse =  data[0]['Agro_Use'];
+      dataList[0].miniTruck =  data[0]['Mini_Truck'];
+      dataList[0].bigBus =  data[0]['Big_Bus'];
+      dataList[0].mediumTruck =  data[0]['Medium_Truck'];
+      dataList[0].heavyTruck = data[0]['Heavy_Truck'];
+      dataList[0].trailerLong =  data[0]['Trailer_Long'];
 
-      for (var d in data) {
-        var value = TodayReportCharsindurDataModule.fromJson(d);
+      totalAmount = data[0]['Total_amount'];
+
+/* for (var d in data) {
+        var value = TodayReportTeestaDataModule.fromJson(d);
         if (value.rickshawVan == 1) {
           dataList[0].rickshawVan = dataList[0].rickshawVan + 1;
         } else if (value.motorCycle == 1) {
@@ -93,89 +112,104 @@ class TodayReportCharsindurDataModule extends ChangeNotifier {
         } else if (value.trailerLong == 1) {
           dataList[0].trailerLong = dataList[0].trailerLong + 1;
         }
-      }
-    }catch(e){
-      
+      }*/
+
+    } catch (e) {
+
     }
     notifyListeners();
   }
-  
+
   getYesterdayVehicleData(String url) async {
-    try{
+    try {
       await fetchData(url);
       yesterdayVehicleReportList.clear();
       yesterdayVehicleReportList.add(VehicleReportList(
           vehicleName: "Rickshaw Van",
           totalVehicle: dataList[0].rickshawVan,
           perVehicleRate: 5,
-          vehicleImage: "assets/images/rickshaw_van.png"));
+          vehicleImage: "assets/images/rickshaw_van.png"
+      ));
       yesterdayVehicleReportList.add(VehicleReportList(
           vehicleName: "Motor Cycle",
           totalVehicle: dataList[0].motorCycle,
           perVehicleRate: 10,
-          vehicleImage: "assets/images/motor_cycle.png"));
+          vehicleImage: "assets/images/motor_cycle.png"
+      ));
       yesterdayVehicleReportList.add(VehicleReportList(
           vehicleName: "ThreeFour Wheeler",
           totalVehicle: dataList[0].threeFourWheeler,
-          perVehicleRate: 20,
-          vehicleImage: "assets/images/three_four_wheeler.png"));
+          perVehicleRate: 15,
+          vehicleImage: "assets/images/three_four_wheeler.png"
+      ));
       yesterdayVehicleReportList.add(VehicleReportList(
           vehicleName: "Sedan Car",
           totalVehicle: dataList[0].sedanCar,
           perVehicleRate: 40,
-          vehicleImage: "assets/images/sedan_car.png"));
+          vehicleImage: "assets/images/sedan_car.png"
+      ));
       yesterdayVehicleReportList.add(VehicleReportList(
           vehicleName: "Four Wheeler",
           totalVehicle: dataList[0].s4Wheeler,
           perVehicleRate: 60,
-          vehicleImage: "assets/images/four_wheeler.png"));
+          vehicleImage: "assets/images/four_wheeler.png"
+      ));
       yesterdayVehicleReportList.add(VehicleReportList(
           vehicleName: "Micro Bus",
           totalVehicle: dataList[0].microBus,
-          perVehicleRate: 80,
-          vehicleImage: "assets/images/micro_bus.png"));
+          perVehicleRate: 60,
+          vehicleImage: "assets/images/micro_bus.png"
+      ));
       yesterdayVehicleReportList.add(VehicleReportList(
           vehicleName: "Mini Bus",
           totalVehicle: dataList[0].miniBus,
-          perVehicleRate: 80,
-          vehicleImage: "assets/images/mini_bus.png"));
+          perVehicleRate: 75,
+          vehicleImage: "assets/images/mini_bus.png"
+      ));
       yesterdayVehicleReportList.add(VehicleReportList(
           vehicleName: "Agro Use",
           totalVehicle: dataList[0].agroUse,
-          perVehicleRate: 135,
-          vehicleImage: "assets/images/agro_use.png"));
+          perVehicleRate: 90,
+          vehicleImage: "assets/images/agro_use.png"
+      ));
       yesterdayVehicleReportList.add(VehicleReportList(
           vehicleName: "Mini Truck",
           totalVehicle: dataList[0].miniTruck,
-          perVehicleRate: 170,
-          vehicleImage: "assets/images/mini_truck.png"));
+          perVehicleRate: 115,
+          vehicleImage: "assets/images/mini_truck.png"
+      ));
       yesterdayVehicleReportList.add(VehicleReportList(
           vehicleName: "Big Bus",
           totalVehicle: dataList[0].bigBus,
-          perVehicleRate: 150,
-          vehicleImage: "assets/images/big_bus.png"));
+          perVehicleRate: 135,
+          vehicleImage: "assets/images/big_bus.png"
+      ));
       yesterdayVehicleReportList.add(VehicleReportList(
           vehicleName: "Medium Truck",
           totalVehicle: dataList[0].mediumTruck,
-          perVehicleRate: 200,
-          vehicleImage: "assets/images/medium_truck.png"));
+          perVehicleRate: 150,
+          vehicleImage: "assets/images/medium_truck.png"
+      ));
       yesterdayVehicleReportList.add(VehicleReportList(
           vehicleName: "Heavy Truck",
           totalVehicle: dataList[0].heavyTruck,
-          perVehicleRate: 260,
-          vehicleImage: "assets/images/heavy_truck.png"));
+          perVehicleRate: 300,
+          vehicleImage: "assets/images/heavy_truck.png"
+      ));
       yesterdayVehicleReportList.add(VehicleReportList(
           vehicleName: "Trailer Long",
           totalVehicle: dataList[0].trailerLong,
-          perVehicleRate: 565,
-          vehicleImage: "assets/images/trailer_long.png"));
+          perVehicleRate: 375,
+          vehicleImage: "assets/images/trailer_long.png"
+      ));
       totalYesterdayRevenue = 0;
       totalYesterdayVehicle = 0;
       for (var v in yesterdayVehicleReportList) {
         totalYesterdayRevenue = totalYesterdayRevenue + v.totalVehicle * v.perVehicleRate;
         totalYesterdayVehicle = totalYesterdayVehicle + v.totalVehicle;
       }
-    }catch(e){
+    } catch (e) {
+
     }
     notifyListeners();
   }
@@ -188,67 +222,80 @@ class TodayReportCharsindurDataModule extends ChangeNotifier {
           vehicleName: "Rickshaw Van",
           totalVehicle: dataList[0].rickshawVan,
           perVehicleRate: 5,
-          vehicleImage: "assets/images/rickshaw_van.png"));
+          vehicleImage: "assets/images/rickshaw_van.png"
+      ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Motor Cycle",
           totalVehicle: dataList[0].motorCycle,
           perVehicleRate: 10,
-          vehicleImage: "assets/images/motor_cycle.png"));
+          vehicleImage: "assets/images/motor_cycle.png"
+      ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "ThreeFour Wheeler",
           totalVehicle: dataList[0].threeFourWheeler,
-          perVehicleRate: 20,
-          vehicleImage: "assets/images/three_four_wheeler.png"));
+          perVehicleRate: 20, //old 15
+          vehicleImage: "assets/images/three_four_wheeler.png"
+      ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Sedan Car",
           totalVehicle: dataList[0].sedanCar,
           perVehicleRate: 40,
-          vehicleImage: "assets/images/sedan_car.png"));
+          vehicleImage: "assets/images/sedan_car.png"
+      ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Four Wheeler",
           totalVehicle: dataList[0].s4Wheeler,
           perVehicleRate: 60,
-          vehicleImage: "assets/images/four_wheeler.png"));
+          vehicleImage: "assets/images/four_wheeler.png"
+      ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Micro Bus",
           totalVehicle: dataList[0].microBus,
-          perVehicleRate: 80,
-          vehicleImage: "assets/images/micro_bus.png"));
+          perVehicleRate: 80, //old 60
+          vehicleImage: "assets/images/micro_bus.png"
+      ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Mini Bus",
           totalVehicle: dataList[0].miniBus,
-          perVehicleRate: 80,
-          vehicleImage: "assets/images/mini_bus.png"));
+          perVehicleRate: 80, //old 75
+          vehicleImage: "assets/images/mini_bus.png"
+      ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Agro Use",
           totalVehicle: dataList[0].agroUse,
-          perVehicleRate: 135,
-          vehicleImage: "assets/images/agro_use.png"));
+          perVehicleRate: 135,//old 90
+          vehicleImage: "assets/images/agro_use.png"
+      ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Mini Truck",
           totalVehicle: dataList[0].miniTruck,
-          perVehicleRate: 170,
-          vehicleImage: "assets/images/mini_truck.png"));
+          perVehicleRate: 170,//old 115
+          vehicleImage: "assets/images/mini_truck.png"
+      ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Big Bus",
           totalVehicle: dataList[0].bigBus,
-          perVehicleRate: 150,
-          vehicleImage: "assets/images/big_bus.png"));
+          perVehicleRate: 150,//old 135
+          vehicleImage: "assets/images/big_bus.png"
+      ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Medium Truck",
           totalVehicle: dataList[0].mediumTruck,
-          perVehicleRate: 200,
-          vehicleImage: "assets/images/medium_truck.png"));
+          perVehicleRate: 200, //old 150
+          vehicleImage: "assets/images/medium_truck.png"
+      ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Heavy Truck",
           totalVehicle: dataList[0].heavyTruck,
-          perVehicleRate: 260,
-          vehicleImage: "assets/images/heavy_truck.png"));
+          perVehicleRate: 260,//old 300
+          vehicleImage: "assets/images/heavy_truck.png"
+      ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Trailer Long",
           totalVehicle: dataList[0].trailerLong,
-          perVehicleRate: 565,
-          vehicleImage: "assets/images/trailer_long.png"));
+          perVehicleRate: 565,//old 375
+          vehicleImage: "assets/images/trailer_long.png"
+      ));
       totalRevenue = 0;
       totalVehicle = 0;
       for (var v in vehicleReportList) {
@@ -261,8 +308,7 @@ class TodayReportCharsindurDataModule extends ChangeNotifier {
     notifyListeners();
   }
 
-
-  TodayReportCharsindurDataModule.fromJson(Map<String, dynamic> json) {
+  TodayReportCharsindurDataModule1.fromJson(Map<String, dynamic> json) {
     rickshawVan = int.parse(json['Rickshaw_Van']);
     motorCycle = int.parse(json['MotorCycle']);
     threeFourWheeler = int.parse(json['three_four_Wheeler']);

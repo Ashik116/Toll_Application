@@ -1,7 +1,13 @@
+//Flutter sdk-2.2.3
+//Dart sdk-2.13.4
+
+import 'dart:ui';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toll_plaza/DatabaseModule/Charsindur/previousReportCharsindurDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Charsindur/previousVIPReportCharsindurDataModule.dart';
@@ -16,48 +22,76 @@ import 'package:toll_plaza/DatabaseModule/Mohanonda/previousVIPReportMohanondaDa
 import 'package:toll_plaza/DatabaseModule/Mohanonda/todayReportMohanondaDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Mohanonda/todayVipPassReportMohanondaDataModule.dart';
 import 'package:toll_plaza/DesignModule/teestaPhotoView.dart';
-import 'package:toll_plaza/Pages/Netrokona/previousReportNetrokona.dart';
-import 'package:toll_plaza/Pages/Netrokona/todayreportNetrokona.dart';
 import 'package:toll_plaza/Provider/getData.dart';
 import 'package:toll_plaza/Provider/getMohanondaData.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 import 'package:toll_plaza/splashScreen.dart';
+
 import 'DatabaseModule/Netrokona/netrokonaTodayDataModule.dart';
 import 'DatabaseModule/Netrokona/previousNetrokonaData.dart';
 import 'DatabaseModule/Teesta/previousReportTeestaDataModule.dart';
 import 'DatabaseModule/Teesta/previousVIPReportTeestaDataModule.dart';
 import 'DatabaseModule/Teesta/todayReportTeestaDataModule.dart';
 import 'DatabaseModule/Teesta/todayVipPassReportTeestaDataModule.dart';
+import 'Provider/getCharsindurData.dart';
 
 Future<void> main() async {
   Provider.debugCheckInvalidValueType = null;
   WidgetsFlutterBinding.ensureInitialized();
+  // await NotificationWidget.init();
+  // NotificationWidget.showNotification(
+  //     id: 1, title: "Teesta Toll", body: "Check your Running Fund!");
+  // NotificationWidget.asshowNotification(
+  //     id: 2, title: "Mohanonda Toll", body: "Check your Running Fund!");
+  // NotificationWidget.eighthowNotification(
+  //     id: 3, title: "Teesta Toll ", body: "Check your Running Fund!");
+  // NotificationWidget.ninhowNotification(
+  //     id: 4, title: "Mohanonda Toll", body: "Check your Running Fund!");
   await Firebase.initializeApp();
-  runApp(
-      MultiProvider(providers: [
-        Provider<TodayReportChittagongDatabase>(create: (_) => TodayReportChittagongDatabase()),
-        Provider<PreviousReportChittagongDatabase>(create: (_) => PreviousReportChittagongDatabase()),
-        Provider<TodayReportManikganjDatabase>(create: (_) => TodayReportManikganjDatabase()),
-        Provider<PreviousReportManikganjDatabase>(create: (_) => PreviousReportManikganjDatabase()),
-        Provider<TodayReportNetrokonaDatabase>(create: (_) => TodayReportNetrokonaDatabase()),
-        Provider<PreviousReportNetrokonaDatabase>(create: (_) => PreviousReportNetrokonaDatabase()),
-        Provider<PreviousReportCharsindurDataModule>(create: (_) => PreviousReportCharsindurDataModule()),
-        Provider<PreviousVIPReportCharsindurDataModule>(create: (_) => PreviousVIPReportCharsindurDataModule()),
-        Provider<TodayReportCharsindurDataModule>(create: (_) => TodayReportCharsindurDataModule()),
-        Provider<TodayVipPassReportCharsindurDataModule>(create: (_) => TodayVipPassReportCharsindurDataModule()),
-        Provider<PreviousReportTeestaDataModule>(create: (_) => PreviousReportTeestaDataModule()),
-        Provider<PreviousVIPReportTeestaDataModule>(create: (_) => PreviousVIPReportTeestaDataModule()),
-        Provider<TodayReportTeestaDataModule>(create: (_) => TodayReportTeestaDataModule()),
-        Provider<TodayVipPassReportTeestaDataModule>(create: (_) => TodayVipPassReportTeestaDataModule()),
-        Provider<PreviousReportMohanondaDataModule>(create: (_) => PreviousReportMohanondaDataModule()),
-        Provider<PreviousVIPReportMohanondaDataModule>(create: (_) => PreviousVIPReportMohanondaDataModule()),
-        Provider<TodayReportMohanondaDataModule>(create: (_) => TodayReportMohanondaDataModule()),
-        Provider<TodayVipPassReportMohanondaDataModule>(create: (_) => TodayVipPassReportMohanondaDataModule()),
-        Provider<ThemeAndColorProvider>(create: (_) => ThemeAndColorProvider()),
-        ChangeNotifierProvider(create: (_) => GetData()),
-        ChangeNotifierProvider(create: (_) => GetMohanondaData()),
-      ],
-          child: MyApp()));
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+
+  runApp(MultiProvider(providers: [
+    Provider<TodayReportChittagongDatabase>(
+        create: (_) => TodayReportChittagongDatabase()),
+    Provider<PreviousReportChittagongDatabase>(
+        create: (_) => PreviousReportChittagongDatabase()),
+    Provider<TodayReportManikganjDatabase>(
+        create: (_) => TodayReportManikganjDatabase()),
+    Provider<PreviousReportManikganjDatabase>(
+        create: (_) => PreviousReportManikganjDatabase()),
+    Provider<TodayReportNetrokonaDatabase>(
+        create: (_) => TodayReportNetrokonaDatabase()),
+    Provider<PreviousReportNetrokonaDatabase>(
+        create: (_) => PreviousReportNetrokonaDatabase()),
+    Provider<PreviousReportDataModuleCharsindur>(
+        create: (_) => PreviousReportDataModuleCharsindur()),
+    Provider<PreviousVIPReportDataModuleCharsindur>(
+        create: (_) => PreviousVIPReportDataModuleCharsindur()),
+    Provider<TodayReportCharsindurDataModule1>(
+        create: (_) => TodayReportCharsindurDataModule1()),
+    Provider<TodayVipPassCharsindurReportDataModule>(
+        create: (_) => TodayVipPassCharsindurReportDataModule()),
+    Provider<PreviousReportTeestaDataModule>(
+        create: (_) => PreviousReportTeestaDataModule()),
+    Provider<PreviousVIPReportTeestaDataModule>(
+        create: (_) => PreviousVIPReportTeestaDataModule()),
+    Provider<TodayReportTeestaDataModule>(
+        create: (_) => TodayReportTeestaDataModule()),
+    Provider<TodayVipPassReportTeestaDataModule>(
+        create: (_) => TodayVipPassReportTeestaDataModule()),
+    Provider<PreviousReportMohanondaDataModule>(
+        create: (_) => PreviousReportMohanondaDataModule()),
+    Provider<PreviousVIPReportMohanondaDataModule>(
+        create: (_) => PreviousVIPReportMohanondaDataModule()),
+    Provider<TodayReportMohanondaDataModule>(
+        create: (_) => TodayReportMohanondaDataModule()),
+    Provider<TodayVipPassReportMohanondaDataModule>(
+        create: (_) => TodayVipPassReportMohanondaDataModule()),
+    Provider<ThemeAndColorProvider>(create: (_) => ThemeAndColorProvider()),
+    ChangeNotifierProvider(create: (_) => GetData()),
+    ChangeNotifierProvider(create: (_) => GetDataCharsindur()),
+    ChangeNotifierProvider(create: (_) => GetMohanondaData()),
+  ], child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -98,7 +132,7 @@ class _MyAppState extends State<MyApp> {
       else
         context.read<ThemeAndColorProvider>().setDarkTheme(false);
     } catch (e) {
-     // print("mainPage SharedPreferences: " + e.toString());
+      // print("mainPage SharedPreferences: " + e.toString());
     }
   }
 }

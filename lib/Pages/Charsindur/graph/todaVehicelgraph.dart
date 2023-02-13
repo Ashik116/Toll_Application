@@ -3,15 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toll_plaza/DatabaseModule/Charsindur/todayReportCharsindurDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Charsindur/todayVipPassReportCharsindurDataModule.dart';
+import 'package:toll_plaza/DatabaseModule/Teesta/todayVipPassReportTeestaDataModule.dart';
 import 'package:toll_plaza/DesignModule/indicator.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
-class TodayVehicleGraph extends StatefulWidget {
+class TodayVehicleGraphCharsindur1 extends StatefulWidget {
   @override
-  _TodayVehicleGraphState createState() => _TodayVehicleGraphState();
+  _TodayVehicleGraphCharsindur1State createState() =>
+      _TodayVehicleGraphCharsindur1State();
 }
 
-class _TodayVehicleGraphState extends State<TodayVehicleGraph> {
+class _TodayVehicleGraphCharsindur1State
+    extends State<TodayVehicleGraphCharsindur1> {
   int touchedIndex;
   var colorList = [
     Color(0xFFC3447A),
@@ -34,7 +37,7 @@ class _TodayVehicleGraphState extends State<TodayVehicleGraph> {
   @override
   Widget build(BuildContext context) {
     var data = Provider.of<TodayReportCharsindurDataModule1>(context);
-    var dataVip = Provider.of<TodayVipPassCharsindurReportDataModule>(context);
+    var dataVip = Provider.of<TodayVipPassReportTeestaDataModule>(context);
     return Card(
       margin: EdgeInsets.all(0),
       color: context.watch<ThemeAndColorProvider>().backgroundColor,
@@ -74,15 +77,15 @@ class _TodayVehicleGraphState extends State<TodayVehicleGraph> {
                   return Indicator(
                     color: colorList[index],
                     text: "VIP PASS",
-                    value: dataVip.totalYesterdayVehicle.toString(),
+                    value: dataVip.totalVehicle.toString(),
                     isSquare: true,
                   );
                 } else {
                   return Indicator(
                     color: colorList[index],
-                    text: data.yesterdayVehicleReportList[index].vehicleName,
-                    value: data.yesterdayVehicleReportList[index].totalVehicle
-                        .toString(),
+                    text: data.vehicleReportList[index].vehicleName,
+                    value:
+                        data.vehicleReportList[index].totalVehicle.toString(),
                     isSquare: true,
                   );
                 }
@@ -103,13 +106,13 @@ class _TodayVehicleGraphState extends State<TodayVehicleGraph> {
       String title;
       if (i == 13) {
         title = "VIP Pass";
-        value = (dataVip.totalYesterdayVehicle /
-                (data.totalYesterdayVehicle + dataVip.totalYesterdayVehicle)) *
+        value = (dataVip.totalVehicle /
+                (data.totalVehicle + dataVip.totalYesterdayVehicle)) *
             100;
       } else {
-        title = data.yesterdayVehicleReportList[i].vehicleName;
-        value = (data.yesterdayVehicleReportList[i].totalVehicle /
-                (data.totalYesterdayVehicle + dataVip.totalYesterdayVehicle)) *
+        title = data.vehicleReportList[i].vehicleName;
+        value = (data.vehicleReportList[i].totalVehicle /
+                (data.totalVehicle + dataVip.totalVehicle)) *
             100;
       }
       final isTouched = i == touchedIndex;

@@ -2,27 +2,30 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:toll_plaza/DatabaseModule/Charsindur/todayReportCharsindurDataModule.dart';
+import 'package:toll_plaza/DatabaseModule/Teesta/todayReportTeestaDataModule.dart';
 
+class TodayVipPassCharsindurReportDataModule extends ChangeNotifier {
+  int totalRevenue; //today
+  int totalVehicle; //today
 
-class TodayVipPassReportCharsindurDataModule extends ChangeNotifier {
-  int totalRevenue;
-  int totalVehicle;
   int totalYesterdayRevenue;
   int totalYesterdayVehicle;
 
-  List<VehicleReportList> vehicleReportList = <VehicleReportList>[];
-  List<VehicleReportList> yesterdayVehicleReportList = <VehicleReportList>[];
-  List<TodayReportCharsindurDataModule> dataList = <TodayReportCharsindurDataModule>[];
+  int totalAmount;
+
+  List<VehicleReportList> vehicleReportList = [];
+  List<VehicleReportList> yesterdayVehicleReportList = [];
+  List<TodayReportTeestaDataModule> dataList = [];
 
   fetchData(url) async {
     try {
       var response = await http.get(url);
-      var data = json.decode(response.body);
+      //var data = json.decode(response.body);
+      var data = json.decode(response.body)['data'] as List;
       dataList.clear();
       dataList.insert(
           0,
-          TodayReportCharsindurDataModule(
+          TodayReportTeestaDataModule(
               rickshawVan: 0,
               motorCycle: 0,
               threeFourWheeler: 0,
@@ -37,8 +40,22 @@ class TodayVipPassReportCharsindurDataModule extends ChangeNotifier {
               heavyTruck: 0,
               trailerLong: 0));
 
-      for (var d in data) {
-        var value = TodayReportCharsindurDataModule.fromJson(d);
+      dataList[0].motorCycle = data[0]['Rickshaw_Van'];
+      dataList[0].rickshawVan = data[0]['MotorCycle'];
+      dataList[0].threeFourWheeler = data[0]['three_four_Wheeler'];
+      dataList[0].sedanCar = data[0]['Sedan_Car'];
+      dataList[0].s4Wheeler = data[0]['4Wheeler'];
+      dataList[0].microBus = data[0]['Micro_Bus'];
+      dataList[0].miniBus = data[0]['Mini_Bus'];
+      dataList[0].agroUse = data[0]['Agro_Use'];
+      dataList[0].miniTruck = data[0]['Mini_Truck'];
+      dataList[0].bigBus = data[0]['Big_Bus'];
+      dataList[0].mediumTruck = data[0]['Medium_Truck'];
+      dataList[0].heavyTruck = data[0]['Heavy_Truck'];
+      dataList[0].trailerLong = data[0]['Heavy_Truck'];
+      totalAmount = data[0]['Total_amount'];
+      /*for (var d in data) {
+        var value = TodayReportTeestaDataModule.fromJson(d);
         if (value.rickshawVan == 1) {
           dataList[0].rickshawVan = dataList[0].rickshawVan + 1;
         } else if (value.motorCycle == 1) {
@@ -66,14 +83,13 @@ class TodayVipPassReportCharsindurDataModule extends ChangeNotifier {
         } else if (value.trailerLong == 1) {
           dataList[0].trailerLong = dataList[0].trailerLong + 1;
         }
-      }
-    } catch (e) {
+      }*/
 
-    }
+    } catch (e) {}
   }
 
   getYesterdayReportData(String url) async {
-    try{
+    try {
       await fetchData(url);
       yesterdayVehicleReportList.clear();
       yesterdayVehicleReportList.add(VehicleReportList(
@@ -144,17 +160,16 @@ class TodayVipPassReportCharsindurDataModule extends ChangeNotifier {
       totalYesterdayRevenue = 0;
       totalYesterdayVehicle = 0;
       for (var v in yesterdayVehicleReportList) {
-        totalYesterdayRevenue = totalYesterdayRevenue + v.totalVehicle * v.perVehicleRate;
+        totalYesterdayRevenue =
+            totalYesterdayRevenue + v.totalVehicle * v.perVehicleRate;
         totalYesterdayVehicle = totalYesterdayVehicle + v.totalVehicle;
       }
-    }catch(v){
-
-    }
+    } catch (e) {}
   }
 
   getTodayReportData(String url) async {
     try {
-     await fetchData(url);
+      await fetchData(url);
       vehicleReportList.clear();
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Rickshaw Van",
@@ -169,7 +184,7 @@ class TodayVipPassReportCharsindurDataModule extends ChangeNotifier {
       vehicleReportList.add(VehicleReportList(
           vehicleName: "ThreeFour Wheeler",
           totalVehicle: dataList[0].threeFourWheeler,
-          perVehicleRate: 15,
+          perVehicleRate: 20, //15,
           vehicleImage: "assets/images/three_four_wheeler.png"));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Sedan Car",
@@ -184,42 +199,42 @@ class TodayVipPassReportCharsindurDataModule extends ChangeNotifier {
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Micro Bus",
           totalVehicle: dataList[0].microBus,
-          perVehicleRate: 60,
+          perVehicleRate: 80, //60,
           vehicleImage: "assets/images/micro_bus.png"));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Mini Bus",
           totalVehicle: dataList[0].miniBus,
-          perVehicleRate: 75,
+          perVehicleRate: 80, //75,
           vehicleImage: "assets/images/mini_bus.png"));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Agro Use",
           totalVehicle: dataList[0].agroUse,
-          perVehicleRate: 90,
+          perVehicleRate: 135, //90,
           vehicleImage: "assets/images/agro_use.png"));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Mini Truck",
           totalVehicle: dataList[0].miniTruck,
-          perVehicleRate: 115,
+          perVehicleRate: 170, //115,
           vehicleImage: "assets/images/mini_truck.png"));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Big Bus",
           totalVehicle: dataList[0].bigBus,
-          perVehicleRate: 135,
+          perVehicleRate: 150, //135,
           vehicleImage: "assets/images/big_bus.png"));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "mediumTruck",
           totalVehicle: dataList[0].mediumTruck,
-          perVehicleRate: 150,
+          perVehicleRate: 200, //150,
           vehicleImage: "assets/images/medium_truck.png"));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Heavy Truck",
           totalVehicle: dataList[0].heavyTruck,
-          perVehicleRate: 300,
+          perVehicleRate: 260, //300,
           vehicleImage: "assets/images/heavy_truck.png"));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Trailer Long",
           totalVehicle: dataList[0].trailerLong,
-          perVehicleRate: 375,
+          perVehicleRate: 565, //375,
           vehicleImage: "assets/images/trailer_long.png"));
       totalRevenue = 0;
       totalVehicle = 0;
@@ -227,9 +242,7 @@ class TodayVipPassReportCharsindurDataModule extends ChangeNotifier {
         totalRevenue = totalRevenue + v.totalVehicle * v.perVehicleRate;
         totalVehicle = totalVehicle + v.totalVehicle;
       }
-    } catch (e) {
-
-    }
+    } catch (e) {}
     notifyListeners();
   }
 }

@@ -2,16 +2,17 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toll_plaza/DatabaseModule/Charsindur/todayReportCharsindurDataModule.dart';
-import 'package:toll_plaza/DatabaseModule/Charsindur/todayVipPassReportCharsindurDataModule.dart';
 import 'package:toll_plaza/DesignModule/indicator.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
-class TodayVehicleGraph extends StatefulWidget {
+class TodayRevenueGraphCharsindur1 extends StatefulWidget {
   @override
-  _TodayVehicleGraphState createState() => _TodayVehicleGraphState();
+  _TodayRevenueGraphCharsindur1State createState() =>
+      _TodayRevenueGraphCharsindur1State();
 }
 
-class _TodayVehicleGraphState extends State<TodayVehicleGraph> {
+class _TodayRevenueGraphCharsindur1State
+    extends State<TodayRevenueGraphCharsindur1> {
   int touchedIndex;
   var colorList = [
     Color(0xFFC3447A),
@@ -27,17 +28,16 @@ class _TodayVehicleGraphState extends State<TodayVehicleGraph> {
     Color(0xff955251),
     Color(0xff0072B5),
     Color(0xffFDAC53),
-    Color(0xff0da000),
     //Color(0xff66096B),
   ];
 
   @override
   Widget build(BuildContext context) {
     var data = Provider.of<TodayReportCharsindurDataModule1>(context);
-    var dataVip = Provider.of<TodayVipPassCharsindurReportDataModule>(context);
+    var themeAndColor = Provider.of<ThemeAndColorProvider>(context);
     return Card(
       margin: EdgeInsets.all(0),
-      color: context.watch<ThemeAndColorProvider>().backgroundColor,
+      color: themeAndColor.backgroundColor,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ListView(
@@ -68,24 +68,20 @@ class _TodayVehicleGraphState extends State<TodayVehicleGraph> {
             ListView.builder(
               shrinkWrap: true,
               primary: false,
-              itemCount: 14,
+              itemCount: 13,
               itemBuilder: (context, index) {
-                if (index == 13) {
-                  return Indicator(
-                    color: colorList[index],
-                    text: "VIP PASS",
-                    value: dataVip.totalYesterdayVehicle.toString(),
-                    isSquare: true,
-                  );
-                } else {
-                  return Indicator(
-                    color: colorList[index],
-                    text: data.yesterdayVehicleReportList[index].vehicleName,
-                    value: data.yesterdayVehicleReportList[index].totalVehicle
-                        .toString(),
-                    isSquare: true,
-                  );
-                }
+                int perVehicleRevenue =
+                    data.vehicleReportList[index].totalVehicle *
+                        data.vehicleReportList[index].perVehicleRate;
+                /*data.yesterdayVehicleReportList[index].totalVehicle *
+                        data.yesterdayVehicleReportList[index].perVehicleRate;*/
+                return Indicator(
+                  color: colorList[index],
+                  text: data.vehicleReportList[index].vehicleName,
+                  //text: data.yesterdayVehicleReportList[index].vehicleName,
+                  value: perVehicleRevenue.toString() + " Tk",
+                  isSquare: true,
+                );
               },
             ),
           ],
@@ -95,27 +91,20 @@ class _TodayVehicleGraphState extends State<TodayVehicleGraph> {
   }
 
   List<PieChartSectionData> showingSections() {
-    return List.generate(14, (i) {
-      var data = Provider.of<TodayReportCharsindurDataModule1>(context);
-      var dataVip =
-          Provider.of<TodayVipPassCharsindurReportDataModule>(context);
-      double value = 0.00;
-      String title;
-      if (i == 13) {
-        title = "VIP Pass";
-        value = (dataVip.totalYesterdayVehicle /
-                (data.totalYesterdayVehicle + dataVip.totalYesterdayVehicle)) *
-            100;
-      } else {
-        title = data.yesterdayVehicleReportList[i].vehicleName;
-        value = (data.yesterdayVehicleReportList[i].totalVehicle /
-                (data.totalYesterdayVehicle + dataVip.totalYesterdayVehicle)) *
-            100;
-      }
+    return List.generate(13, (i) {
       final isTouched = i == touchedIndex;
       final double fontSize = isTouched ? 20 : 0;
       final double radius = isTouched ? 60 : 50;
+      var data = Provider.of<TodayReportCharsindurDataModule1>(context);
 
+      int perVehicleRevenue = data.vehicleReportList[i].totalVehicle *
+          data.vehicleReportList[i].perVehicleRate;
+      /*int perVehicleRevenue = data.yesterdayVehicleReportList[i].totalVehicle *
+          data.yesterdayVehicleReportList[i].perVehicleRate;*/
+      double value = (perVehicleRevenue / data.totalAmount) * 100;
+      String title = data.vehicleReportList[i].vehicleName;
+      /*double value = (perVehicleRevenue / data.totalYesterdayRevenue) * 100;
+      String title = data.yesterdayVehicleReportList[i].vehicleName;*/
       return PieChartSectionData(
         color: colorList[i],
         value: value,
@@ -124,7 +113,7 @@ class _TodayVehicleGraphState extends State<TodayVehicleGraph> {
         titleStyle: TextStyle(
             fontSize: fontSize,
             fontWeight: FontWeight.bold,
-            color: context.watch<ThemeAndColorProvider>().secondTextColor),
+            color: context.watch<ThemeAndColorProvider>().thirdTextColor),
       );
     });
   }

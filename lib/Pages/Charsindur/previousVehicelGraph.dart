@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toll_plaza/DatabaseModule/Teesta/previousReportTeestaDataModule.dart';
 
-class PreviousVehicleGraphTeesta extends StatefulWidget {
+class PreviousVehicleGraphCharsindur extends StatefulWidget {
   @override
-  _PreviousVehicleGraphTeestaState createState() =>
-      _PreviousVehicleGraphTeestaState();
+  _PreviousVehicleGraphCharsindurState createState() =>
+      _PreviousVehicleGraphCharsindurState();
 }
 
-class _PreviousVehicleGraphTeestaState
-    extends State<PreviousVehicleGraphTeesta> {
+class _PreviousVehicleGraphCharsindurState
+    extends State<PreviousVehicleGraphCharsindur> {
   List<charts.Series<VehicleModel, String>> seriesList;
 
   bool animate = true;

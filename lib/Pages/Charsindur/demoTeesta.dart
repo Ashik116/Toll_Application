@@ -7,7 +7,7 @@ import 'package:toll_plaza/DatabaseModule/Charsindur/previousVIPReportCharsindur
 import 'package:toll_plaza/DatabaseModule/Charsindur/todayReportCharsindurDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Charsindur/todayVipPassReportCharsindurDataModule.dart';
 import 'package:toll_plaza/Pages/Charsindur/GraphCharsindur.dart';
-import 'package:toll_plaza/Pages/Charsindur/vipPassCharsindur.dart';
+import 'package:toll_plaza/Pages/Charsindur/previousvipclass.dart';
 import 'package:toll_plaza/Pages/Teesta/previousReportTeesta.dart';
 import 'package:toll_plaza/Pages/Teesta/reportSearch.dart';
 import 'package:toll_plaza/Pages/Teesta/todayReportTeesta.dart';
@@ -28,28 +28,28 @@ class _DemoTeestaState extends State<DemoTeesta> {
 
   getData() async {
     try {
-      await context.read<PreviousReportCharsindurDataModule>().getReport();
+      await context.read<PreviousReportDataModuleCharsindur>().getReport();
 
-      await context.read<PreviousVIPReportCharsindurDataModule>().getReport();
+      await context.read<PreviousVIPReportDataModuleCharsindur>().getReport();
 
       int time = int.parse(DateFormat.H().format(DateTime.now()).toString());
 
       if (time < 7) {
         //------- data get to api 12 am to 7 am ------------
         await context
-            .read<TodayReportCharsindurDataModule>()
+            .read<TodayReportCharsindurDataModule1>()
             .getTodayReportData("http://103.95.99.166/api/yesterday.php");
         await context
-            .read<TodayVipPassReportCharsindurDataModule>()
+            .read<TodayVipPassCharsindurReportDataModule>()
             .getTodayReportData(
                 "http://103.95.99.166/api/yesterdayvippass.php");
       } else {
         //------- data get to api 7 am to 12 am ------------
         await context
-            .read<TodayReportCharsindurDataModule>()
+            .read<TodayReportCharsindurDataModule1>()
             .getTodayReportData("http://103.95.99.166/api/today.php");
         await context
-            .read<TodayVipPassReportCharsindurDataModule>()
+            .read<TodayVipPassCharsindurReportDataModule>()
             .getTodayReportData("http://103.95.99.166/api/vippass.php");
       }
 
@@ -77,8 +77,8 @@ class _DemoTeestaState extends State<DemoTeesta> {
       return Container(
         color: providerThemeAndColor.backgroundColor,
         child: Center(
-          //child: Lottie.asset('assets/json/loading.json'),
-        ),
+            //child: Lottie.asset('assets/json/loading.json'),
+            ),
       );
     } else {
       return DefaultTabController(
@@ -127,7 +127,7 @@ class _DemoTeestaState extends State<DemoTeesta> {
               TodayReportTeesta(),
               PreviousReportTeesta(),
               GraphCharsindur(),
-              VipPassCharsindur(),
+              PreviousVipClassCharsindurUpdate(),
             ],
           ),
         ),
