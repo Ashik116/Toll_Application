@@ -5,11 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toll_plaza/Animation/loadingAnimation.dart';
+import 'package:toll_plaza/Pages/Charsindur/Charsindur%20User%20Page/charsindurHomePage.dart';
+import 'package:toll_plaza/Pages/Mohanonda/Mohanonda%20User%20Page/mohanondaHomePage.dart';
+import 'package:toll_plaza/Pages/Teesta/Teesta%20User%20Page/teestaHomePage.dart';
 import 'package:toll_plaza/Pages/homePage.dart';
 import 'package:toll_plaza/Provider/firebaseDatabase.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
 import 'Admin/adminDashboardNew.dart';
+import 'Bhangga/bhanggaHomePage.dart';
+import 'Dhaleshwari/dhaleshwariHomePage.dart';
 
 class LogInPage extends StatefulWidget {
   @override
@@ -210,6 +215,7 @@ class _LogInPageState extends State<LogInPage> {
         final CollectionReference userCollection =
             FirebaseFirestore.instance.collection('UserRoles');
         userCollection.get().then((value) {
+          print("----------data-fetched: login page");
           bool found = false;
           int i = 0;
           int length = value.size;
@@ -225,6 +231,11 @@ class _LogInPageState extends State<LogInPage> {
               await sharedPreferences.setBool(
                   'isMohanonda', element.data()['isMohanonda']);
               await sharedPreferences.setBool(
+                  'isBhanga', element.data()['isBhanga']);
+              await sharedPreferences.setBool(
+                  'isDhaleshwari', element.data()['isDhaleshwari']);
+              await sharedPreferences.setBool('isCharsindur', element.data()['isCharsindur']);
+              await sharedPreferences.setBool(
                   'isManikganj', element.data()['isManikganj']);
               await sharedPreferences.setBool(
                   'isChittagong', element.data()['isChittagong']);
@@ -234,9 +245,25 @@ class _LogInPageState extends State<LogInPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => AdminDashboardNew()));
-              } else {
-                Navigator.pushReplacement(context,
+              } else if(element.data()["isAdmin"]){
+                Navigator.push(context,
                     MaterialPageRoute(builder: (context) => HomePage()));
+              }else if(element.data()["isCharsindur"]){
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => CharsindurHomePage()));
+              }else if(element.data()["isTeesta"]){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => TeestaHomePage()));
+              }else if(element.data()["isMohanonda"]){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MohanondaHomePage()));
+              }
+              else if(element.data()["isDhaleshwari"]){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DhaleshwariHomePage()));
+              }else if(element.data()["isBhanga"]){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BhangaHomePage()));
               }
             }
             if (!found && i >= length) {

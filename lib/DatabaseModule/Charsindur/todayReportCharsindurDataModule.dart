@@ -134,7 +134,7 @@ class TodayReportCharsindurDataModule1 extends ChangeNotifier {
           vehicleName: "Motor Cycle",
           totalVehicle: dataList[0].motorCycle,
           perVehicleRate: 10,
-          vehicleImage: "assets/images/motor_cycle.png"
+          vehicleImage: "assets/images/motor_cycle2.png"
       ));
       yesterdayVehicleReportList.add(VehicleReportList(
           vehicleName: "ThreeFour Wheeler",
@@ -228,12 +228,12 @@ class TodayReportCharsindurDataModule1 extends ChangeNotifier {
           vehicleName: "Motor Cycle",
           totalVehicle: dataList[0].motorCycle,
           perVehicleRate: 10,
-          vehicleImage: "assets/images/motor_cycle.png"
+          vehicleImage: "assets/images/motor_cycle2.png"
       ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "ThreeFour Wheeler",
           totalVehicle: dataList[0].threeFourWheeler,
-          perVehicleRate: 20, //old 15
+          perVehicleRate: 15, //old 15
           vehicleImage: "assets/images/three_four_wheeler.png"
       ));
       vehicleReportList.add(VehicleReportList(
@@ -251,49 +251,49 @@ class TodayReportCharsindurDataModule1 extends ChangeNotifier {
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Micro Bus",
           totalVehicle: dataList[0].microBus,
-          perVehicleRate: 80, //old 60
+          perVehicleRate: 60, //old 60
           vehicleImage: "assets/images/micro_bus.png"
       ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Mini Bus",
           totalVehicle: dataList[0].miniBus,
-          perVehicleRate: 80, //old 75
+          perVehicleRate: 75, //old 75
           vehicleImage: "assets/images/mini_bus.png"
       ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Agro Use",
           totalVehicle: dataList[0].agroUse,
-          perVehicleRate: 135,//old 90
+          perVehicleRate: 90,//old 90
           vehicleImage: "assets/images/agro_use.png"
       ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Mini Truck",
           totalVehicle: dataList[0].miniTruck,
-          perVehicleRate: 170,//old 115
+          perVehicleRate: 115,//old 115
           vehicleImage: "assets/images/mini_truck.png"
       ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Big Bus",
           totalVehicle: dataList[0].bigBus,
-          perVehicleRate: 150,//old 135
+          perVehicleRate: 135,//old 135
           vehicleImage: "assets/images/big_bus.png"
       ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Medium Truck",
           totalVehicle: dataList[0].mediumTruck,
-          perVehicleRate: 200, //old 150
+          perVehicleRate: 150, //old 150
           vehicleImage: "assets/images/medium_truck.png"
       ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Heavy Truck",
           totalVehicle: dataList[0].heavyTruck,
-          perVehicleRate: 260,//old 300
+          perVehicleRate: 300,//old 300
           vehicleImage: "assets/images/heavy_truck.png"
       ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "Trailer Long",
           totalVehicle: dataList[0].trailerLong,
-          perVehicleRate: 565,//old 375
+          perVehicleRate: 375,//old 375
           vehicleImage: "assets/images/trailer_long.png"
       ));
       totalRevenue = 0;

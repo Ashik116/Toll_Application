@@ -15,14 +15,21 @@ import 'package:toll_plaza/DatabaseModule/Netrokona/netrokonaTodayDataModule.dar
 import 'package:toll_plaza/DatabaseModule/Netrokona/previousNetrokonaData.dart';
 import 'package:toll_plaza/DatabaseModule/Teesta/todayReportTeestaDataModule.dart';
 import 'package:toll_plaza/DesignModule/Navigation_drawer.dart';
+import 'package:toll_plaza/Pages/Bhangga/bhanggaHomePage.dart';
+import 'package:toll_plaza/Pages/Charsindur/Charsindur%20User%20Page/charsindurHomePage.dart';
 import 'package:toll_plaza/Pages/Chittagong/chittagongReportPage.dart';
+import 'package:toll_plaza/Pages/Dhaleshwari/dhaleshwariHomePage.dart';
 import 'package:toll_plaza/Pages/Manikganj/manikganjReportPage.dart';
 import 'package:toll_plaza/Pages/Mohanonda/mohanondaReportPage.dart';
 import 'package:toll_plaza/Pages/Netrokona/netrokonaReportPage.dart';
 import 'package:toll_plaza/Pages/Teesta/teestaReportPage.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
+import 'Admin/adminDashboardNew.dart';
+import 'Bhangga/Bhanga Repot/bhangaRepotPage.dart';
 import 'Charsindur/charsindurReportPage.dart';
+import 'Dhaleshwari/Report/reportPage.dart';
+import 'Regnum Charsindur/regnum_charsindurReportpage.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -201,15 +208,22 @@ class _HomePageState extends State<HomePage> {
 
     bool isAdmin = false;
     bool isCharsindur = false;
+    bool isRegnumCharsindur = false;
     bool isChittagong = false;
     bool isManikganj = false;
     bool isTeesta = false;
     bool isMohanonda = false;
+    bool isDhaleshwari = false;
+    bool isBhanga = false;
+
     try{
       isAdmin = sharedPreferences.getBool('isAdmin');
     }catch(e){}
     try{
       isCharsindur = sharedPreferences.getBool('isCharsindur');
+    }catch(e){}
+    try{
+      isRegnumCharsindur = sharedPreferences.getBool('isRegnumCharsindur');
     }catch(e){}
     try{
       isChittagong =sharedPreferences.getBool('isChittagong');
@@ -219,6 +233,9 @@ class _HomePageState extends State<HomePage> {
     }catch(e){}
     try{
       isTeesta =sharedPreferences.getBool('isTeesta');
+    }catch(e){}
+    try{
+      isDhaleshwari =sharedPreferences.getBool('isDhaleshwari');
     }catch(e){}
     try{
       isMohanonda =sharedPreferences.getBool('isMohanonda');
@@ -231,6 +248,29 @@ class _HomePageState extends State<HomePage> {
         isDark,
         isAdmin || isCharsindur,
         CharsindurUpdateReportPage(),
+      ),
+      items(
+        'Regnum Charsindur',
+        'assets/images/charsindur.jpg',
+        isDark,
+        isAdmin || isRegnumCharsindur,
+        RegnumCharsindurUpdateReportPage(),
+      ),
+      items(
+        'Dhaleshwari',
+        'assets/images/dhales.jpg',
+        isDark,
+        isAdmin ||
+            isDhaleshwari,
+        DhaleshwariReportPage(),
+      ),
+      items(
+        'Bhanga',
+        'assets/images/bhanga.jpg',
+        isDark,
+        isAdmin ||
+            isBhanga,
+        BhangaReportPage(),
       ),
       items(
         'Chittagong',
@@ -273,6 +313,14 @@ class _HomePageState extends State<HomePage> {
     isMohanonda,
         MohanondaReportPage(),
       ),
+
+      // items(
+      //   'Uploder',
+      //   'assets/admin.jpg',
+      //   isDark,
+      //   isAdmin,
+      //   AdminDashboardNew(),
+      // ),
     ];
     final _scrollController = ScrollController();
 
@@ -294,23 +342,8 @@ class _HomePageState extends State<HomePage> {
           "Toll Plaza",
           style: TextStyle(color: providerThemeAndColor.textColor),
         ),
-        // actions: [
-        //   GestureDetector(
-        //     onTap: () {
-        //       Navigator.push(
-        //           context, MaterialPageRoute(builder: (_) => AccouncePage()));
-        //     },
-        //     child: Container(
-        //       height: MediaQuery.of(context).size.height * 0.2,
-        //       width: MediaQuery.of(context).size.width * 0.2,
-        //       color: Colors.lime,
-        //       child: Image.asset(
-        //         "assets/money.png",
-        //         fit: BoxFit.fill,
-        //       ),
-        //     ),
-        //   )
-        // ],
+
+
       ),
       body: Container(
           color: providerThemeAndColor.backgroundColor,
@@ -336,42 +369,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Future<void> _onRefresh() async {
-  //   await Future.delayed(Duration(seconds: 2));
-  //
-  //   int time = int.parse(DateFormat.H().format(DateTime.now()).toString());
-  //
-  //   if (time < 8) {
-  //     //------- data get to api 12 am to 7 am ------------
-  //     await context
-  //         .read<TodayReportMohanondaDataModule>()
-  //         .getTodayReportData("http://103.145.118.20/api/api/yesterday.php");
-  //   } else {
-  //     //------- data get to api 7 am to 12 am ------------
-  //     await context
-  //         .read<TodayReportMohanondaDataModule>()
-  //         .getTodayReportData("http://103.145.118.20/api/api/today.php");
-  //   }
-  //   setState(() {});
-  // }
-  //
-  // Future<void> _onRefreshT() async {
-  //   await Future.delayed(Duration(seconds: 2));
-  //   int time = int.parse(DateFormat.H().format(DateTime.now()).toString());
-  //
-  //   if (time < 7) {
-  //     //------- data get to api 12 am to 7 am ------------
-  //     await context
-  //         .read<TodayReportTeestaDataModule>()
-  //         .getTodayReportData("http://103.182.219.34/api/api/yesterday.php");
-  //   } else {
-  //     //------- data get to api 7 am to 12 am ------------
-  //     await context
-  //         .read<TodayReportTeestaDataModule>()
-  //         .getTodayReportData("http://103.182.219.34/api/api/today.php");
-  //   }
-  //   setState(() {});
-  // }
 
   void darkSwitch() {
     setState(() {

@@ -28,7 +28,7 @@ class PreviousReportDataModuleCharsindur extends ChangeNotifier {
       dataList2.clear();
       var i = 1;
       for (var json in jsonData) {
-        var weeklyDate = DateFormat("yyyy-MM-dd")
+        var weeklyDate = DateFormat("dd-MM-yyyy")
             .format(DateTime.now().subtract(Duration(days: i)));
         if (json != null) {
           dataList2.add(PreviousReportDataModuleCharsindur.fromJson2(json));

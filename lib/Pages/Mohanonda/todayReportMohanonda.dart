@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +13,13 @@ class TodayReportMohanonda extends StatefulWidget {
 }
 
 class _TodayReportMohanondaState extends State<TodayReportMohanonda> {
+  Timer timer;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    timer = Timer.periodic(Duration(seconds: 1), (Timer t) => _onRefresh());
+  }
   @override
   Widget build(BuildContext context) {
     final providerThemeAndColor = Provider.of<ThemeAndColorProvider>(context);

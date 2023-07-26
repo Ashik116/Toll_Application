@@ -20,7 +20,6 @@ class _PreviousReportCharsindurUpdateState
   void initState() {
     var fetchData = Provider.of<GetDataCharsindur>(context, listen: false);
     fetchData.get_previosreportteesta();
-
     // TODO: implement initState
     super.initState();
   }

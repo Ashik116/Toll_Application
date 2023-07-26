@@ -66,6 +66,8 @@ class ThemeAndColorProvider extends ChangeNotifier{
   Color _barHighlighterColor = Colors.lightGreen.shade200;
   get barHighlighterColor => darkTheme ? Color.fromRGBO(15, 48, 29, 1) : _barHighlighterColor;
 
+
+
   Color _highlighterTextColor = Colors.green.shade900;
   get highlighterTextColor => darkTheme ? Colors.green.shade900 : _highlighterTextColor;
 

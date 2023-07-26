@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:toll_plaza/Animation/loadingAnimation.dart';
 import 'package:toll_plaza/DatabaseModule/Chittagong/winVehicleReportModule.dart';
 import 'package:toll_plaza/DatabaseModule/Chittagong/previousChittagongData.dart';
+import 'package:toll_plaza/Pages/Chittagong/todayReportChittagong.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
 
@@ -103,9 +104,49 @@ class _PreviousReportChittagongState extends State<PreviousReportChittagong> {
                               ),
                             ),
                             Expanded(
+                              flex: 3,
+                              child: Text(
+                                "Regular\n${previousReportData.regular}",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: providerThemeAndColor.secondTextColor,
+                                  fontWeight: FontWeight.w600,
+                                  //letterSpacing: 0.8
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 40,
+                              child: VerticalDivider(
+                                thickness: 2,
+                                color: providerThemeAndColor.backgroundColor,
+                              ),
+                            ),
+                            Expanded(
+                                flex: 2,
+                                child: Text(
+                                  "Ctrl+R\n${previousReportData.ctrlR}",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 16 ,
+                                    color: Colors.red[800],
+                                    fontWeight: FontWeight.w600,
+                                    //letterSpacing: 0.8,
+                                  ),
+                                )
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Expanded(
                                 flex: 3,
                                 child: Text(
-                                  "Regular\n${previousReportData.regular}",
+                                  "Axel2\n${previousReportData.axel2}",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 16,
@@ -123,13 +164,33 @@ class _PreviousReportChittagongState extends State<PreviousReportChittagong> {
                               ),
                             ),
                             Expanded(
+                              flex: 3,
+                              child: Text(
+                                "Axel3\n${previousReportData.axel3}",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: providerThemeAndColor.secondTextColor,
+                                  fontWeight: FontWeight.w600,
+                                  //letterSpacing: 0.8
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 40,
+                              child: VerticalDivider(
+                                thickness: 2,
+                                color: providerThemeAndColor.backgroundColor,
+                              ),
+                            ),
+                            Expanded(
                                 flex: 2,
                                 child: Text(
-                                  "Ctrl+R\n${previousReportData.ctrlR}",
+                                  "Axel4\n${previousReportData.axel4}",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.red[800],
+                                    fontSize: 16 ,
+                                    color: providerThemeAndColor.secondTextColor,
                                     fontWeight: FontWeight.w600,
                                     //letterSpacing: 0.8,
                                   ),
@@ -137,7 +198,68 @@ class _PreviousReportChittagongState extends State<PreviousReportChittagong> {
                             ),
                           ],
                         ),
-                      )
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                flex: 3,
+                                child: Text(
+                                  "Axel4\n${previousReportData.axel5}",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: providerThemeAndColor.thirdTextColor,
+                                    fontWeight: FontWeight.w600,
+                                    //letterSpacing: 0.8
+                                  ),
+                                )
+                            ),
+                            Container(
+                              height: 40,
+                              child: VerticalDivider(
+                                thickness: 2,
+                                color: providerThemeAndColor.backgroundColor,
+                              ),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: Text(
+                                "Axel6\n${previousReportData.axel6}",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: providerThemeAndColor.secondTextColor,
+                                  fontWeight: FontWeight.w600,
+                                  //letterSpacing: 0.8
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 40,
+                              child: VerticalDivider(
+                                thickness: 2,
+                                color: providerThemeAndColor.backgroundColor,
+                              ),
+                            ),
+                            Expanded(
+                                flex: 2,
+                                child: Text(
+                                  "Axel7\n${previousReportData.axel7}",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 16 ,
+                                    color: providerThemeAndColor.secondTextColor,
+                                    fontWeight: FontWeight.w600,
+                                    //letterSpacing: 0.8,
+                                  ),
+                                )
+                            ),
+                          ],
+                        ),
+                      ),
+
                     ],
                   ),
                 ),
@@ -149,3 +271,4 @@ class _PreviousReportChittagongState extends State<PreviousReportChittagong> {
     );
   }
 }
+

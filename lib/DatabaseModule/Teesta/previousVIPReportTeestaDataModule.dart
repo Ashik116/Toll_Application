@@ -29,9 +29,7 @@ class PreviousVIPReportTeestaDataModule extends ChangeNotifier {
             ));
         }
       });
-    } catch (e) {
-
-    }
+    } catch (e) {}
     notifyListeners();
   }
 }

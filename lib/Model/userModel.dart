@@ -6,8 +6,10 @@ class UserModel {
   bool isAdmin;
   bool isTeesta;
   bool isMohanonda;
+  bool isCharsindur;
   bool isChittagong;
   bool isManikganj;
+  bool isBhangga;
 
   List<UserModel> userList = [];
   
@@ -17,7 +19,9 @@ class UserModel {
     this.isAdmin,
     this.isTeesta,
     this.isMohanonda,
+    this.isCharsindur,
     this.isChittagong,
-    this.isManikganj
+    this.isManikganj,
+    this.isBhangga,
   });
 }

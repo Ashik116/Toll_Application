@@ -39,7 +39,7 @@ class _PreviousReportCharsindur2State extends State<PreviousReportCharsindur2> {
           fontSize: 16.0,
           initialLabelIndex: initialIndex,
           cornerRadius: 20.0,
-          activeBgColor: [providerThemeAndColor.toggleActiveColor],
+          activeBgColor:[Colors.black,providerThemeAndColor.toggleActiveColor],
           activeFgColor: Colors.white,
           inactiveBgColor: providerThemeAndColor.toggleInactiveColor,
           inactiveFgColor: Colors.white,

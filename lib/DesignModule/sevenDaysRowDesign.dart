@@ -28,30 +28,29 @@ class SevenDaysRowDesign extends StatefulWidget {
   final Color dividedColor;
   final Color backgroundColor;
 
-  SevenDaysRowDesign({
-    Key key,
-    @required this.date,
-    @required this.totalAmount,
-    this.rickshawVan,
-    this.motorcycle,
-    this.threeFourWheeler,
-    this.sedanCar,
-    this.fourWheeler,
-    this.microBus,
-    this.minibus,
-    this.agrouse,
-    this.miniTruck,
-    this.bigBus,
-    this.mediumTruck,
-    this.heavyTruck,
-    this.trailerLong,
-    this.fontWeight,
-    this.firstColumnFontColor,
-    this.backgroundColor,
-    this.secondColumnFontColor,
-    this.thirdColumnFontColor,
-    this.dividedColor
-  });
+  SevenDaysRowDesign(
+      {Key key,
+      @required this.date,
+      @required this.totalAmount,
+      this.rickshawVan,
+      this.motorcycle,
+      this.threeFourWheeler,
+      this.sedanCar,
+      this.fourWheeler,
+      this.microBus,
+      this.minibus,
+      this.agrouse,
+      this.miniTruck,
+      this.bigBus,
+      this.mediumTruck,
+      this.heavyTruck,
+      this.trailerLong,
+      this.fontWeight,
+      this.firstColumnFontColor,
+      this.backgroundColor,
+      this.secondColumnFontColor,
+      this.thirdColumnFontColor,
+      this.dividedColor});
 
   @override
   _SevenDaysRowDesignState createState() => _SevenDaysRowDesignState();
@@ -99,12 +98,22 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
     heavyTruck = widget.heavyTruck;
     trailerLong = widget.trailerLong;
 
-    _fontWeight = widget.fontWeight != null ? widget.fontWeight : FontWeight.normal;
-    _firstColumnFontColor = widget.firstColumnFontColor != null ? widget.firstColumnFontColor : context.read<ThemeAndColorProvider>().textColor;
-    _secondColumnFontColor = widget.secondColumnFontColor != null ? widget.secondColumnFontColor : context.read<ThemeAndColorProvider>().textColor;
-    _thirdColumnFontColor = widget.thirdColumnFontColor != null ? widget.thirdColumnFontColor : context.read<ThemeAndColorProvider>().textColor;
-    _dividedColor = widget.dividedColor != null ? widget.dividedColor : Colors.red;
-    _backgroundColor = widget.backgroundColor != null ? widget.backgroundColor : context.read<ThemeAndColorProvider>().backgroundColor;
+    _fontWeight =
+        widget.fontWeight != null ? widget.fontWeight : FontWeight.normal;
+    _firstColumnFontColor = widget.firstColumnFontColor != null
+        ? widget.firstColumnFontColor
+        : context.read<ThemeAndColorProvider>().textColor;
+    _secondColumnFontColor = widget.secondColumnFontColor != null
+        ? widget.secondColumnFontColor
+        : context.read<ThemeAndColorProvider>().textColor;
+    _thirdColumnFontColor = widget.thirdColumnFontColor != null
+        ? widget.thirdColumnFontColor
+        : context.read<ThemeAndColorProvider>().textColor;
+    _dividedColor =
+        widget.dividedColor != null ? widget.dividedColor : Colors.red;
+    _backgroundColor = widget.backgroundColor != null
+        ? widget.backgroundColor
+        : context.read<ThemeAndColorProvider>().backgroundColor;
   }
 
   @override
@@ -127,16 +136,13 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
           Row(
             children: [
               Expanded(
-                child: Text(
-                    date.toString(),
+                child: Text(date.toString(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 14,
                         color: themeAndColor.thirdTextColor,
                         fontWeight: FontWeight.bold,
-                        letterSpacing: .8
-                    )
-                ),
+                        letterSpacing: .8)),
                 flex: 3,
               ),
               Expanded(
@@ -160,8 +166,7 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                   fontSize: 16,
                                   color: themeAndColor.secondTextColor,
                                   fontWeight: FontWeight.w600,
-                                  letterSpacing: .8
-                              ),
+                                  letterSpacing: .8),
                             ),
                           ),
                         ),
@@ -181,7 +186,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                           secondColumnFontColor: themeAndColor.secondTextColor,
                           thirdColumnFontColor: themeAndColor.secondTextColor,
                           fontWeight: FontWeight.bold,
-                          backgroundColor: providerThemeAndColor.barHighlighterColor,
+                          backgroundColor:
+                              providerThemeAndColor.barHighlighterColor,
                           elevation: 0,
                           dividerColor: Colors.red.shade700,
                         ),
@@ -205,8 +211,7 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
                                       letterSpacing: .8),
-                                )
-                            ),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -220,8 +225,7 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
                                       letterSpacing: .8),
-                                )
-                            ),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -235,8 +239,7 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
                                       letterSpacing: .8),
-                                )
-                            ),
+                                )),
                           ],
                         ),
                       ),
@@ -258,10 +261,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -274,10 +275,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -290,10 +289,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                           ],
                         ),
                       ),
@@ -315,10 +312,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -331,10 +326,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -347,10 +340,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                           ],
                         ),
                       ),
@@ -372,10 +363,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -388,10 +377,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -404,10 +391,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                           ],
                         ),
                       ),
@@ -429,10 +414,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -445,10 +428,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -461,10 +442,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                           ],
                         ),
                       ),
@@ -486,10 +465,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -502,10 +479,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -518,10 +493,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                           ],
                         ),
                       ),
@@ -543,10 +516,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -559,10 +530,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -575,10 +544,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                           ],
                         ),
                       ),
@@ -600,10 +567,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -616,10 +581,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -632,10 +595,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                           ],
                         ),
                       ),
@@ -657,10 +618,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -673,10 +632,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -689,10 +646,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                           ],
                         ),
                       ),
@@ -714,10 +669,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -730,10 +683,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -746,10 +697,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                           ],
                         ),
                       ),
@@ -771,10 +720,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -787,10 +734,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -803,10 +748,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                           ],
                         ),
                       ),
@@ -828,10 +771,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -844,10 +785,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -860,10 +799,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                           ],
                         ),
                       ),
@@ -885,10 +822,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -901,10 +836,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                             CustomVerticalDivider(
                               dividerColor: Colors.green.shade900,
                             ),
@@ -917,10 +850,8 @@ class _SevenDaysRowDesignState extends State<SevenDaysRowDesign> {
                                       fontSize: 14,
                                       color: themeAndColor.secondTextColor,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: .8
-                                  ),
-                                )
-                            ),
+                                      letterSpacing: .8),
+                                )),
                           ],
                         ),
                       ),

@@ -21,9 +21,29 @@ class NavigationDrawer extends StatelessWidget {
   final BuildContext context;
   const NavigationDrawer(this.darkSwitch, this.snack, this.context);
 
+  Future<void> _showDialog() async {
+    return showDialog(context: (context), builder: (context){
+      return AlertDialog(
 
+        title: Text("Are you sure you want to LogOut?"),
+        actions: [
+          TextButton(onPressed: (){
+            Navigator.pop(context);
+          }, child: Text("No"),
+          ),
+          TextButton(onPressed: () async{
+            await FirebaseAuth.instance.signOut();
+            SharedPreferences sharedPreferences =
+               await  SharedPreferences.getInstance();
+            sharedPreferences.clear();
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>LogInPage()));
+          }, child: Text("Yes"),
+          ),
+        ],
+      );
 
-
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,14 +133,7 @@ class NavigationDrawer extends StatelessWidget {
                 ),
               ),
               onTap: () async {
-                await FirebaseAuth.instance.signOut();
-                SharedPreferences sharedPreferences =
-                    await SharedPreferences.getInstance();
-                sharedPreferences.clear();
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => LogInPage()),
-                    (route) => false);
+               await _showDialog();
               },
             ),
             Divider(

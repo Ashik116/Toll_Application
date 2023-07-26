@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +27,7 @@ class _TeestaReportPageState extends State<TeestaReportPage> {
 
   bool large;
   bool medium;
+  Timer timer;
 
   getData() async {
     try {

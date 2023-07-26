@@ -18,7 +18,7 @@ class GetDataCharsindur extends ChangeNotifier {
 
   Future<List> get_dateReport() async {
     final response = await http.get(
-        "http://103.95.99.139/api/api/previousdays.php?start_date=2021-06-10&end_date=2021-06-14");
+        "https://charsindur.report/api/api/previousdays.php?start_date=2021-06-10&end_date=2021-06-14");
     var data = json.decode(response.body.toString());
 
     teestaReportModel = CharsindurReportModel.fromJson(data);
@@ -32,7 +32,7 @@ class GetDataCharsindur extends ChangeNotifier {
     }*/
 
     final response = await http.get(
-        "http://103.95.99.139/api/api/search.php?start_date=${sDate}&end_date=${eDate}&class=${_class}&type=${cat}");
+        "https://charsindur.report/api/api/search.php?start_date=${sDate}&end_date=${eDate}&class=${_class}&type=${cat}");
     var data = json.decode(response.body.toString());
 
     //print(data);
@@ -43,7 +43,7 @@ class GetDataCharsindur extends ChangeNotifier {
 
   Future<List> get_previosreportteesta() async {
     final response =
-        await http.get("http://103.95.99.139/api/api/previousdays.php");
+        await http.get("https://charsindur.report/api/api/previousdays.php");
     var data = json.decode(response.body.toString());
 
     //print(data);
@@ -54,7 +54,7 @@ class GetDataCharsindur extends ChangeNotifier {
 
   Future<List> get_vippreviosreportteesta() async {
     final response =
-        await http.get("http://103.95.99.139/api/api/previousvippass.php");
+        await http.get("https://charsindur.report/api/api/previousvippass.php");
     var data = json.decode(response.body.toString());
 
     //print(data);
@@ -65,7 +65,7 @@ class GetDataCharsindur extends ChangeNotifier {
 
   Future<List> get_sevenDaysData() async {
     final response = await http
-        .get("http://103.95.99.139/api/api/sevendaysdatavehicledetails.php");
+        .get("https://charsindur.report/api/api/sevendaysdatavehicledetails.php");
     var data = json.decode(response.body.toString());
 
     //print(data);
@@ -76,7 +76,7 @@ class GetDataCharsindur extends ChangeNotifier {
 
   Future<List> get_sevenDaysVipPass() async {
     final response = await http.get(
-        "http://103.95.99.139/api/api/sevendaysdatavehicledetailsvippass.php");
+        "https://charsindur.report/api/api/sevendaysdatavehicledetailsvippass.php");
     var data = json.decode(response.body.toString());
 
     // print(data);

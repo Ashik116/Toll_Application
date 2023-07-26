@@ -105,7 +105,7 @@ class TodayVipPassReportTeestaDataModule extends ChangeNotifier {
           vehicleName: "Motor Cycle",
           totalVehicle: dataList[0].motorCycle,
           perVehicleRate: 10,
-          vehicleImage: "assets/images/motor_cycle.png"
+          vehicleImage: "assets/images/motor_cycle2.png"
       ));
       yesterdayVehicleReportList.add(VehicleReportList(
           vehicleName: "ThreeFour Wheeler",
@@ -198,7 +198,7 @@ class TodayVipPassReportTeestaDataModule extends ChangeNotifier {
           vehicleName: "Motor Cycle",
           totalVehicle: dataList[0].motorCycle,
           perVehicleRate: 10,
-          vehicleImage: "assets/images/motor_cycle.png"
+          vehicleImage: "assets/images/motor_cycle2.png"
       ));
       vehicleReportList.add(VehicleReportList(
           vehicleName: "ThreeFour Wheeler",

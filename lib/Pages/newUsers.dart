@@ -22,7 +22,10 @@ class _newUsersState extends State<newUsers> {
   bool isTeesta = false;
   bool isChittagong = false;
   bool isMohanonda = false;
+  bool isCharsindur = false;
   bool isManikganj = false;
+  bool isDhaleshwari = false;
+  bool isBhanga = false;
   String dropdownError = '';
   var site; //test
   String dropdownValue;
@@ -153,7 +156,7 @@ class _newUsersState extends State<newUsers> {
                                     elevation: 15,
                                     value: dropdownValue,
                                     style: TextStyle(color: Colors.black),
-                                    items: ['Mohanonda', 'Teesta','Chittagong','Manikganj','Admin'].map((val) {
+                                    items: ['Dhaleshwari','Bhanga','Mohanonda', 'Teesta','Chittagong','Manikganj','Charsindur','Admin'].map((val) {
                                       return DropdownMenuItem<String>(
                                         value: val,
                                         child: Center(child: Text(val),),
@@ -200,12 +203,19 @@ class _newUsersState extends State<newUsers> {
                                         }
                                         if (dropdownValue == 'Teesta') {
                                           isTeesta = true;
+                                        }if (dropdownValue == 'Dhaleshwari') {
+                                          isDhaleshwari= true;
+                                        } if (dropdownValue == 'Bhanga') {
+                                          isBhanga = true;
                                         }
                                         if (dropdownValue == 'Manikganj') {
                                           isManikganj = true;
                                         }
                                         if (dropdownValue == 'Mohanonda') {
                                           isMohanonda = true;
+                                        }
+                                        if (dropdownValue == 'Charsindur') {
+                                          isCharsindur = true;
                                         }
                                         if (dropdownValue == 'Chittagong') {
                                           isChittagong = true;
@@ -258,6 +268,9 @@ class _newUsersState extends State<newUsers> {
         'isAdmin': isAdmin,
         'isTeesta': isTeesta,
         'isMohanonda': isMohanonda,
+        'isCharsindur': isCharsindur,
+        'isDhaleshwari':isDhaleshwari,
+        'isBhanga':isBhanga,
         'isManikganj': isManikganj,
         'isChittagong': isChittagong,
         'isUploader': false,

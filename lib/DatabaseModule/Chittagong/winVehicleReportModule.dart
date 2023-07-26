@@ -20,12 +20,24 @@ class ShortReportModel {
   String total;
   String notOverload;
   String date;
+  String axel2;
+  String axel3;
+  String axel4;
+  String axel5;
+  String axel6;
+  String axel7;
   ShortReportModel({
     this.ctrlR,
     this.regular,
     this.total,
     this.notOverload,
-    this.date
+    this.date,
+    this.axel2,
+    this.axel3,
+    this.axel4,
+    this.axel5,
+    this.axel6,
+    this.axel7,
   });
 
   ShortReportModel.fromJson(Map<dynamic, dynamic> json) {
@@ -33,6 +45,12 @@ class ShortReportModel {
     regular = json['regular'];
     total = json['total'];
     notOverload = json['overld'];
+    axel2 = json['axel2'];
+    axel3 = json['axel3'];
+    axel4 = json['axel4'];
+    axel5 = json['axel5'];
+    axel6 = json['axel6'];
+    axel7 = json['axel7'];
   }
 
   Map<dynamic, dynamic> toJson() {
@@ -40,6 +58,12 @@ class ShortReportModel {
     data['ctrlR'] = this.ctrlR;
     data['regular'] = this.regular;
     data['total'] = this.total;
+    data['axel2'] = this.axel2;
+    data['axel3'] = this.axel3;
+    data['axel4'] = this.axel4;
+    data['axel5'] = this.axel5;
+    data['axel6'] = this.axel6;
+    data['axel7'] = this.axel7;
     return data;
   }
 }

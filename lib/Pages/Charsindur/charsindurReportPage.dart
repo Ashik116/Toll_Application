@@ -42,11 +42,11 @@ class _CharsindurUpdateReportPageState
       await context
           .read<TodayReportCharsindurDataModule1>()
           .getYesterdayVehicleData(
-              "http://103.95.99.139/api/api/yesterday.php"); //test
+              "https://charsindur.report/api/api/yesterday.php"); //test
       await context
           .read<TodayVipPassCharsindurReportDataModule>()
           .getYesterdayReportData(
-              "http://103.95.99.139/api/api/yesterdayvippass.php"); //test
+              "https://charsindur.report/api/api/yesterdayvippass.php"); //test
 
       int time = int.parse(DateFormat.H().format(DateTime.now()).toString());
 
@@ -54,19 +54,19 @@ class _CharsindurUpdateReportPageState
         //------- data get to api 12 am to 7 am ------------
         await context
             .read<TodayReportCharsindurDataModule1>()
-            .getTodayReportData("http://103.95.99.139/api/api/yesterday.php");
+            .getTodayReportData("https://charsindur.report/api/api/yesterday.php");
         await context
             .read<TodayVipPassCharsindurReportDataModule>()
             .getTodayReportData(
-                "http://103.95.99.139/api/api/yesterdayvippass.php");
+                "https://charsindur.report/api/api/yesterdayvippass.php");
       } else {
         //------- data get to api 7 am to 12 am ------------
         await context
             .read<TodayReportCharsindurDataModule1>()
-            .getTodayReportData("http://103.95.99.139/api/api/today.php");
+            .getTodayReportData("https://charsindur.report/api/api/today.php");
         await context
             .read<TodayVipPassCharsindurReportDataModule>()
-            .getTodayReportData("http://103.95.99.139/api/api/vippass.php");
+            .getTodayReportData("https://charsindur.report/api/api/vippass.php");
       }
 
       setState(() {

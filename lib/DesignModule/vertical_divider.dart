@@ -12,7 +12,7 @@ class CustomVerticalDivider extends StatelessWidget {
       height: 30,
       child: VerticalDivider(
         color: dividerColor,
-        thickness: 2,
+        thickness: 3,
         width: 5,
       ),
     );

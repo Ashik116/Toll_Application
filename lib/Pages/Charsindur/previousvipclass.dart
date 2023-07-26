@@ -55,7 +55,9 @@ class _PreviousVipClassCharsindurUpdateState
                                 child: Container(
                                   width: double.infinity,
                                   padding: EdgeInsets.all(10),
-                                  color: providerThemeAndColor.barColor,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(colors: [Colors.blue, Colors.green]),
+                                  ),
                                   child: Text(
                                     "Seven Days VIP Pass Data",
                                     style: TextStyle(

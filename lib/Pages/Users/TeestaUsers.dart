@@ -141,6 +141,7 @@ class _State extends State<TeestaUsers> {
                     isManikganj: element.data()['isManikganj'],
                     isChittagong: element.data()['isChittagong'],
                     isTeesta: element.data()['isTeesta'],
+                    isBhangga: element.data()['isBhangga'],
                   )
               );
             }

@@ -19,11 +19,14 @@ class _TodayVipPassCharsindurState extends State<TodayVipPassCharsindur> {
       Container(
         width: double.infinity,
         padding: EdgeInsets.all(10),
-        color: providerThemeAndColor.barColor,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [Colors.blue, Colors.green]),
+        ),
         child: Text(
           "Total VIP Pass: ${vehicleDataList.totalVehicle.toString()}",
           style: TextStyle(
-              color: providerThemeAndColor.secondTextColor,
+            color: Colors.red.shade900,
+              //color: providerThemeAndColor.secondTextColor,
               fontStyle: FontStyle.italic,
               fontWeight: FontWeight.bold,
               fontSize: 20),

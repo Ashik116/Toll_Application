@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toll_plaza/DatabaseModule/Bhanga/todayReportBhangaDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Charsindur/previousReportCharsindurDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Charsindur/previousVIPReportCharsindurDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Charsindur/todayReportCharsindurDataModule.dart';
@@ -22,18 +23,30 @@ import 'package:toll_plaza/DatabaseModule/Mohanonda/previousVIPReportMohanondaDa
 import 'package:toll_plaza/DatabaseModule/Mohanonda/todayReportMohanondaDataModule.dart';
 import 'package:toll_plaza/DatabaseModule/Mohanonda/todayVipPassReportMohanondaDataModule.dart';
 import 'package:toll_plaza/DesignModule/teestaPhotoView.dart';
+import 'package:toll_plaza/Provider/getBhangaData.dart';
 import 'package:toll_plaza/Provider/getData.dart';
 import 'package:toll_plaza/Provider/getMohanondaData.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 import 'package:toll_plaza/splashScreen.dart';
 
+import 'DatabaseModule/Bhanga/previousReportTeestaDataModule.dart';
+import 'DatabaseModule/Bhanga/previousVIPReportBhangaDataModule.dart';
+import 'DatabaseModule/Bhanga/todayVipPassReportBhangaDataModule.dart';
+import 'DatabaseModule/Dhaleshwari/todayReportDhaleshwariDataModule.dart';
+import 'DatabaseModule/Dhaleshwari/todayVipPassReportDhaleshwariDataModule.dart';
 import 'DatabaseModule/Netrokona/netrokonaTodayDataModule.dart';
 import 'DatabaseModule/Netrokona/previousNetrokonaData.dart';
+import 'DatabaseModule/Regnum Charsindur/previousReportregnumCharsindurDataModule.dart';
+import 'DatabaseModule/Regnum Charsindur/previousVIPReportDataModuleRegnumCharsindur.dart';
+import 'DatabaseModule/Regnum Charsindur/todayReportRegnumCharsindurDataModule.dart';
+import 'DatabaseModule/Regnum Charsindur/todayVIPPassReportRegnumCharsindurDataModule.dart';
 import 'DatabaseModule/Teesta/previousReportTeestaDataModule.dart';
 import 'DatabaseModule/Teesta/previousVIPReportTeestaDataModule.dart';
 import 'DatabaseModule/Teesta/todayReportTeestaDataModule.dart';
 import 'DatabaseModule/Teesta/todayVipPassReportTeestaDataModule.dart';
 import 'Provider/getCharsindurData.dart';
+import 'Provider/getDhaleshwariData.dart';
+import 'Provider/getRegnumCharsindurData.dart';
 
 Future<void> main() async {
   Provider.debugCheckInvalidValueType = null;
@@ -65,12 +78,20 @@ Future<void> main() async {
         create: (_) => PreviousReportNetrokonaDatabase()),
     Provider<PreviousReportDataModuleCharsindur>(
         create: (_) => PreviousReportDataModuleCharsindur()),
+    Provider<PreviousReportDataModuleRegnumCharsindur>(
+        create: (_) => PreviousReportDataModuleRegnumCharsindur()),
     Provider<PreviousVIPReportDataModuleCharsindur>(
         create: (_) => PreviousVIPReportDataModuleCharsindur()),
+    Provider<PreviousVIPReportDataModuleRegnumCharsindur>(
+        create: (_) => PreviousVIPReportDataModuleRegnumCharsindur()),
     Provider<TodayReportCharsindurDataModule1>(
         create: (_) => TodayReportCharsindurDataModule1()),
+    Provider<TodayReportRegnumCharsindurDataModule1>(
+        create: (_) => TodayReportRegnumCharsindurDataModule1()),
     Provider<TodayVipPassCharsindurReportDataModule>(
         create: (_) => TodayVipPassCharsindurReportDataModule()),
+    Provider<TodayVipPassRegnumCharsindurReportDataModule>(
+        create: (_) => TodayVipPassRegnumCharsindurReportDataModule()),
     Provider<PreviousReportTeestaDataModule>(
         create: (_) => PreviousReportTeestaDataModule()),
     Provider<PreviousVIPReportTeestaDataModule>(
@@ -85,11 +106,24 @@ Future<void> main() async {
         create: (_) => PreviousVIPReportMohanondaDataModule()),
     Provider<TodayReportMohanondaDataModule>(
         create: (_) => TodayReportMohanondaDataModule()),
+    Provider<TodayReportDhaleshwariDataModule>(create: (_) => TodayReportDhaleshwariDataModule()),
+    Provider<TodayVipPassReportDhaleshwariDataModule>(create: (_) => TodayVipPassReportDhaleshwariDataModule()),
     Provider<TodayVipPassReportMohanondaDataModule>(
         create: (_) => TodayVipPassReportMohanondaDataModule()),
+    Provider<TodayReportBhangaDataModule>(
+        create: (_) => TodayReportBhangaDataModule()),
+    Provider<TodayVipPassReportBhangaDataModule>(
+        create: (_) => TodayVipPassReportBhangaDataModule()),
+    Provider<PreviousReportBhangaDataModule>(
+        create: (_) => PreviousReportBhangaDataModule()),
+    Provider<PreviousVIPReportBhangaDataModule>(
+        create: (_) => PreviousVIPReportBhangaDataModule()),
     Provider<ThemeAndColorProvider>(create: (_) => ThemeAndColorProvider()),
     ChangeNotifierProvider(create: (_) => GetData()),
+    ChangeNotifierProvider(create: (_) => GetBhangaData()),
+    ChangeNotifierProvider(create: (_) => GetDhaleshwariData()),
     ChangeNotifierProvider(create: (_) => GetDataCharsindur()),
+    ChangeNotifierProvider(create: (_) => GetDataRegnumCharsindur()),
     ChangeNotifierProvider(create: (_) => GetMohanondaData()),
   ], child: MyApp()));
 }

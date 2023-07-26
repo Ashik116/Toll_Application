@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
+import 'package:toll_plaza/Pages/Users/CharsindurUsers.dart';
 import 'package:toll_plaza/Pages/newUsers.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
 
@@ -32,7 +33,7 @@ class _UsersState extends State<Users> {
   Widget build(BuildContext context) {
     final providerThemeAndColor = Provider.of<ThemeAndColorProvider>(context);
     return DefaultTabController(
-      length:3,
+      length:4,
       child: Scaffold(
         backgroundColor: providerThemeAndColor.backgroundColor,
         appBar: AppBar(
@@ -75,6 +76,7 @@ class _UsersState extends State<Users> {
             tabs: <Widget>[
               Tab(child: Text("Teesta", style: TextStyle(fontWeight: FontWeight.bold),),),
               Tab(child: Text("Mohanonda", style: TextStyle(fontWeight: FontWeight.bold),),),
+              Tab(child: Text("Charsindur", style: TextStyle(fontWeight: FontWeight.bold),),),
               Tab(child: Text("Admin", style: TextStyle(fontWeight: FontWeight.bold),),),
             ],
           ),
@@ -83,6 +85,7 @@ class _UsersState extends State<Users> {
           children: <Widget>[
             TeestaUsers(),
             MohanondaUsers(),
+            CharsindurUsers(),
             AdminUsers(),
           ],
         ),

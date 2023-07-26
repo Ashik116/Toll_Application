@@ -21,12 +21,18 @@ class PreviousReportChittagongDatabase extends ChangeNotifier {
           var weeklyDate = DateFormat("dd-MM-yyyy").format(DateTime.now().subtract(Duration(days: i)));
 
           if(data[weeklyDate] != null){
-            var dailyData = ShortReportModel.fromJson(data[weeklyDate]['short']);
+            var dailyData = ShortReportModel.fromJson(data[weeklyDate]['short1']);
             previousDataListChittagong.add(ShortReportModel(
                 total: dailyData.total,
                 regular: dailyData.regular,
                 ctrlR: dailyData.ctrlR,
                 notOverload: dailyData.notOverload,
+                axel2: dailyData.axel2,
+                axel3: dailyData.axel3,
+                axel4: dailyData.axel4,
+                axel5: dailyData.axel5,
+                axel6: dailyData.axel6,
+                axel7: dailyData.axel7,
                 date: weeklyDate));}
         }
       });

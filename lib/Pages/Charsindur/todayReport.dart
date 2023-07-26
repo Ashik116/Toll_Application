@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +15,14 @@ class TodayReportCharsindurUpdate extends StatefulWidget {
 
 class _TodayReportCharsindurUpdateState
     extends State<TodayReportCharsindurUpdate> {
+
+  Timer timer;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    timer = Timer.periodic(Duration(seconds: 1), (Timer t) => _onRefresh());
+  }
   @override
   Widget build(BuildContext context) {
     final providerThemeAndColor = Provider.of<ThemeAndColorProvider>(context);
@@ -22,43 +32,54 @@ class _TodayReportCharsindurUpdateState
         backgroundColor: providerThemeAndColor.backgroundColor,
         body: RefreshIndicator(
           onRefresh: _onRefresh,
-          child: Column(children: [
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(10),
-              color: providerThemeAndColor.barColor,
-              child: Text(
-                'Running Fund: ${vehicleDataList.totalAmount.toString()} tk',
-                style: TextStyle(
-                    color: providerThemeAndColor.secondTextColor,
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-                textAlign: TextAlign.center,
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+                Colors.lightBlue.shade200,
+                Colors.lightGreen.shade200
+              ]),
+            ),
+            child: Column(children: [
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [Colors.blue, Colors.green]),
+                ),
+                width: double.infinity,
+                padding: EdgeInsets.all(10),
+
+                child: Text(
+                  'Running Fund: ${vehicleDataList.totalAmount.toString()} tk',
+                  style: TextStyle(
+                      color: Colors.red.shade900,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
               ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Expanded(
-              child: ListView.builder(
-                  itemCount: vehicleDataList.vehicleReportList.length,
-                  itemBuilder: (context, index) {
-                    var vehicle = vehicleDataList.vehicleReportList[index];
-                    return VehicleReportViewingDesign(
-                      vehicleName: vehicle.vehicleName.toString(),
-                      vehicleImage: vehicle.vehicleImage.toString(),
-                      secondRowTitle: "Total Count",
-                      totalVehicle: vehicle.totalVehicle.toString(),
-                      perVehicleRate: vehicle.perVehicleRate.toString(),
-                      triadRowTitle: "Total Payment",
-                      totalPayment:
-                          (vehicle.totalVehicle * vehicle.perVehicleRate)
-                              .toString(),
-                    );
-                  }),
-            ),
-          ]),
+              SizedBox(
+                height: 5,
+              ),
+              Expanded(
+                child: ListView.builder(
+                    itemCount: vehicleDataList.vehicleReportList.length,
+                    itemBuilder: (context, index) {
+                      var vehicle = vehicleDataList.vehicleReportList[index];
+                      return VehicleReportViewingDesign(
+                        vehicleName: vehicle.vehicleName.toString(),
+                        vehicleImage: vehicle.vehicleImage.toString(),
+                        secondRowTitle: "Total Count",
+                        totalVehicle: vehicle.totalVehicle.toString(),
+                        perVehicleRate: vehicle.perVehicleRate.toString(),
+                        triadRowTitle: "Total Payment",
+                        totalPayment:
+                            (vehicle.totalVehicle * vehicle.perVehicleRate)
+                                .toString(),
+                      );
+                    }),
+              ),
+            ]),
+          ),
         ));
   }
 
@@ -70,12 +91,12 @@ class _TodayReportCharsindurUpdateState
       //------- data get to api 12 am to 7 am ------------
       await context
           .read<TodayReportCharsindurDataModule1>()
-          .getTodayReportData("http://103.95.99.139/api/api/yesterday.php");
+          .getTodayReportData("https://charsindur.report/api/api/yesterday.php");
     } else {
       //------- data get to api 7 am to 12 am ------------
       await context
           .read<TodayReportCharsindurDataModule1>()
-          .getTodayReportData("http://103.95.99.139/api/api/today.php");
+          .getTodayReportData("https://charsindur.report/api/api/today.php");
     }
     setState(() {});
   }

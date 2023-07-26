@@ -868,7 +868,7 @@ class _AdminDashboardStateNew extends State<AdminDashboardNew> {
             total++;
             axle7++;
           }
-          total1= total+3;
+          total1= total;
         }
       }
       print(ctrlRList);
@@ -916,7 +916,24 @@ class _AdminDashboardStateNew extends State<AdminDashboardNew> {
         "ctrlR": ctlR.toString(),
         "regular": regular.toString(),
         "total": total1.toString(),
-        "overld": overld.toString()
+        "overld": overld.toString(),
+      });
+      databaseReference
+          .child(_selectedBtnText.toString())
+          .child(date)
+          .child("short1")
+          .update({
+        "ctrlR": ctlR.toString(),
+        "regular": regular.toString(),
+        "total": total1.toString(),
+        "overld": overld.toString(),
+        "axel2": axle2.toString(),
+        "axel3": axle3.toString(),
+        "axel4": axle4.toString(),
+        "axel5": axle5.toString(),
+        "axel6": axle6.toString(),
+        "axel7": axle7.toString(),
+        "axelT": total.toString(),
       });
       if(_selectedBtnText == "chittagong2") {
         databaseReference

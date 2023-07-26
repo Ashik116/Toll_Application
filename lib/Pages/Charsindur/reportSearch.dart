@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:toll_plaza/Animation/searching.dart';
 import 'package:toll_plaza/DesignModule/searchReportview.dart';
 import 'package:toll_plaza/Provider/getCharsindurData.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
@@ -109,6 +110,7 @@ class _ReportSearchCharsindurState extends State<ReportSearchCharsindur> {
         ),
       ),
       body: Container(
+
         height: _height,
         width: _width,
         child: Column(
@@ -330,10 +332,30 @@ class _ReportSearchCharsindurState extends State<ReportSearchCharsindur> {
                 ],
               ),
             ),
+            Container(
+              child: Consumer<GetDataCharsindur>(
+                builder: (content, data, child) {
+                  return data.searchModel != null
+                      ? Container(
+                    child: Text(
+                      "Total $Select:-${data.searchModel.data.length.toString()}",style: TextStyle(
+                      color: Colors.deepOrange,fontSize: 18,fontWeight: FontWeight.bold,
+                    ),),
+                  )
+                      : Container();
+                },
+              ),
+            ),
             Expanded(child: Consumer<GetDataCharsindur>(
               builder: (content, data, child) {
                 return data.searchModel != null
                     ? Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: [
+                      Colors.lightBlue.shade200,
+                      Colors.lightGreen.shade200
+                    ]),
+                  ),
                         width: _width,
                         child: ListView.builder(
                             itemCount: data.searchModel.data.length,
@@ -377,7 +399,7 @@ class _ReportSearchCharsindurState extends State<ReportSearchCharsindur> {
                                     //       arguments: data.searchModel.data[index].imagase);},
                                     child: Image(
                                       image: NetworkImage(
-                                        "http://103.95.99.139/image/${data.searchModel.data[index].imagase}",
+                                        "https://charsindur.report/image/${data.searchModel.data[index].imagase}",
                                       ),
                                       fit: BoxFit.cover,
                                     ),
@@ -394,7 +416,7 @@ class _ReportSearchCharsindurState extends State<ReportSearchCharsindur> {
                                       .toString());
                             }),
                       )
-                    : Container();
+                    : searchAnimation();
               },
             ))
           ],

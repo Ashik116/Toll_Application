@@ -37,9 +37,10 @@ class _VehicleReportViewingDesignState extends State<VehicleReportViewingDesign>
   Widget build(BuildContext context) {
     final providerThemeAndColor = Provider.of<ThemeAndColorProvider>(context);
     return Card(
+
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       color: providerThemeAndColor.backgroundColor,
-      elevation: 5,
+      elevation: 2,
       child: Container(
         margin: EdgeInsets.all(5),
         width: double.infinity,

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:toll_plaza/Animation/searching.dart';
 import 'package:toll_plaza/DesignModule/searchReportview.dart';
 import 'package:toll_plaza/Provider/getMohanondaData.dart';
 import 'package:toll_plaza/ThemeAndColors/themeAndColors.dart';
@@ -322,6 +323,20 @@ class _MohanondaReportSearchState extends State<MohanondaReportSearch> {
                     ],
                   ),
                 ),
+                Container(
+                  child: Consumer<GetMohanondaData>(
+                    builder: (content, data, child) {
+                      return data.searchModel != null
+                          ? Container(
+                        child: Text(
+                          "Total $select:-${data.searchModel.data.length.toString()}",style: TextStyle(
+                          color: Colors.deepOrange,fontSize: 18,fontWeight: FontWeight.bold,
+                        ),),
+                      )
+                          : Container();
+                    },
+                  ),
+                ),
                 Expanded(child: Consumer<GetMohanondaData>(
                   builder: (content, data, child) {
                     return data.searchModel != null ?
@@ -364,7 +379,7 @@ class _MohanondaReportSearchState extends State<MohanondaReportSearch> {
                             );
                           }),
                     ) :
-                    Container();},
+                    searchAnimation();},
                 )
                 )
               ],

@@ -136,6 +136,7 @@ class _State extends State<MohanondaUsers> {
                     email: element.data()['email'],
                     isAdmin: element.data()['isAdmin'],
                     isMohanonda: element.data()['isMohanonda'],
+                    isCharsindur: element.data()['isCharsindur'],
                     isManikganj: element.data()['isManikganj'],
                     isChittagong: element.data()['isChittagong'],
                     isTeesta: element.data()['isTeesta'],
